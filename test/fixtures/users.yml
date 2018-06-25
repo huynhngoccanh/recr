@@ -1,0 +1,22 @@
+athlete_user:
+  email: "athlete@example.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  role: 1
+  profile: athlete (Athlete)
+
+high_school_coach_user:
+  email: high_school_coach@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  profile: high_school_coach (Coach)
+  role: 1
+
+college_coach_user:
+  email: college_coach@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  profile: college_coach (Coach)
+  role: 1
+
+admin:
+  email: admin@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  role: 2

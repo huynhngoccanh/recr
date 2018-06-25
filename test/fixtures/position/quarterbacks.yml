@@ -1,0 +1,35 @@
+qb_2013:
+  season: 2013
+  passing_yards: 180
+  passing_touchdowns: 8
+  rushing_yards: 80
+  rushing_touchdowns: 2
+  created_at: now
+  updated_at: now
+
+qb_2014:
+  season: 2014
+  passing_yards: 180
+  passing_touchdowns: 8
+  rushing_yards: 80
+  rushing_touchdowns: 2
+  created_at: now
+  updated_at: now
+
+qb_2015:
+  season: 2015
+  passing_yards: 180
+  passing_touchdowns: 8
+  rushing_yards: 80
+  rushing_touchdowns: 2
+  created_at: now
+  updated_at: now
+
+qb_2016:
+  season: 2016
+  passing_yards: 180
+  passing_touchdowns: 8
+  rushing_yards: 80
+  rushing_touchdowns: 2
+  created_at: now
+  updated_at: now

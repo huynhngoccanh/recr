@@ -1,0 +1,10 @@
+<div class="content">
+  <div class="container rb_grid clearfix">
+    <% @schools.results.in_groups_of(4, false) do |group| %>
+        <%= render partial: "result", collection: group, as: :school %>
+    <% end %>
+  </div>
+  <div class="container center_text pagination-wrap">
+    <%= paginate @schools, remote: true %>
+  </div>
+</div>

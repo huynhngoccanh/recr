@@ -1,0 +1,59 @@
+<div class="container">
+  <h1>Health</h1>
+  <br />
+
+  <h3>User Accounts by Type</h3>
+  <table>
+    <tr>
+      <th><p>Coaches | </p></th>
+      <th><p>Athletes | </p></th>
+      <th><p>Admins | </p></th>
+      <th><p>Total</p></th>
+    </tr>
+    <tr>
+      <td><p><%= User.where(profile_type: "Coach").count %></p></td>
+      <td><p><%= User.where(profile_type: "Athlete").count %></p></td>
+      <td><p><%= User.admin.count %></p></td>
+      <td><p><%= User.count %></td>
+    </tr>
+  </table>
+
+  <br />
+
+  <h3>Searchable Data</h3>
+  <table>
+    <tr>
+      <th><p>Data Model Name | </p></th>
+      <th><p>Indexed for Search | </p></th>
+      <th><p>Total</p></th>
+    </tr>
+
+    <tr>
+      <td><p>Athlete Profiles</p></td>
+      <td><p><%= Athlete.count %></p></td>
+      <td><p><%= Athlete.search("*").results.count %></p></td>
+    </tr>
+
+    <tr>
+      <td><p>High School Profiles</p></td>
+      <td><p><%= HighSchool.count %></p></td>
+      <td><p><%= HighSchool.search("*").results.count %></p></td>
+    </tr>
+
+    <tr>
+      <td><p>College Profiles</p></td>
+      <td><p><%= College.count %></p></td>
+      <td><p><%= College.search("*").results.count %></p></td>
+    </tr>
+
+    <tr>
+      <td><p>Highlights</p></td>
+      <td><p><%= Highlight.count %></p></td>
+      <td><p><%= Highlight.search("*").results.count %></p></td>
+    </tr>
+  </table>
+  <hr />
+
+  <%= button_to "Reindex All", reindex_path, data: {disable_with: "Reindexing Search Data..."} %>
+  <br />
+</div>

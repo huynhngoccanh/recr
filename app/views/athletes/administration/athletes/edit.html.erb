@@ -1,0 +1,9 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "athletes/layout/jumbotron", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "athletes/layout/navigation/administration_links", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= render "form" %>

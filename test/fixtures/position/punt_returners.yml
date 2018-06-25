@@ -1,0 +1,11 @@
+ #Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+#one:
+  #season: 1
+  #punt_return_yards: 1
+  #punt_return_touchdowns: 1
+
+#two:
+  #season: 1
+  #punt_return_yards: 1
+  #punt_return_touchdowns: 1

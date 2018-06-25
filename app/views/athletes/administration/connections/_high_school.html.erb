@@ -1,0 +1,6 @@
+<div>
+  <%= image_tag connection.college.logo.url %>
+  <p><%= connection.college.name %></p>
+
+  <%= link_to "Leave", athlete_connection_path(@athlete, :administration, connection), method: :delete, data: { confirm: "Are you sure?" }%>
+</div>

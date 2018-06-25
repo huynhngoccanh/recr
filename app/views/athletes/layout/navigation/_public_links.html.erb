@@ -1,0 +1,48 @@
+<ul class="athlete_nav">
+  <li>
+    <%= link_to athlete_connections_path(presenter.athlete), class: active?(:connections) do %>
+      <i class="fa fa-university"></i>Recruiting Board
+    <% end %>
+  </li>
+  <li>
+    <%= link_to athlete_stats_path(presenter.athlete), class: active?(:stats) do %>
+      <i class="fa fa-line-chart"></i>Stats
+    <% end %>
+  </li>
+  <li>
+    <%= link_to athlete_highlights_path(presenter.athlete), class: active?(:highlights) do %>
+      <i class="fa fa-film"></i>Highlights
+    <% end %>
+  </li>
+  <li>
+    <%= link_to athlete_articles_path(presenter.athlete), class: active?(:articles) do %>
+      <i class="fa fa-newspaper-o"></i>News
+    <% end %>
+  </li>
+  
+  <% if AthletePolicy.new(presenter.athlete, current_user).show_references? %>
+    <li>
+      <%= link_to athlete_references_path(presenter.athlete), class: active?(:references) do %>
+        <i class="fa fa-users"></i>References
+      <% end %>
+    </li>
+  <% end %>
+
+  <% if AthletePolicy.new(presenter.athlete, current_user).edit? %>
+    <li>
+      <%= link_to athlete_administration_connections_path(presenter.athlete) do %>
+        <i class="fa fa-edit"></i>Edit Profile
+      <% end %>
+    </li>
+  <% end %>
+  <br/>
+  
+  <% if current_user.present? && current_user.college_coach? && presenter.athlete.colleges.include?(current_user.profile.school) %>
+    <% college = current_user.profile.school %>
+    <% conversation = Conversation.where(athlete: presenter.athlete, organization: college).first_or_create %>
+    <%= link_to conversation_path(conversation), class: 'primary_btn' do %>
+      Messaging
+    <% end %>
+  <% end %>
+
+</ul>

@@ -1,0 +1,11 @@
+<div data-id="<%= reference.id %>" class="athlete_reference">
+    <h4><%= reference.name %></h4>
+    <p><%= reference.relationship %></p>
+    <p>Preferred Contact Method: <%= reference.contact_method %></p>
+    <% if reference.email.present? %>
+      <p>Email: <%= reference.email %></p>
+    <% end %>
+    <% if reference.phone_number.present? %>
+      <p>Phone: <%= reference.phone_number %></p>
+    <% end %>
+</div>

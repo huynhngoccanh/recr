@@ -1,0 +1,119 @@
+I"\(function() {
+  var filterConversationList, sendMessage, up_top_active_conversation;
+
+  $(document).on("turbolinks:load", function() {
+    var autocomplete, tags_options;
+    autocomplete = $("[data-behavior='conversation-partners-autocomplete']").autocomplete({
+      source: "/conversations/partners_autocomplete",
+      minlength: 0,
+      select: function(event, ui) {
+        $("#user_id").val(ui.item.name);
+        return $("[data-behavior='conversation-submit-button']").prop('disabled', false);
+      }
+    });
+    tags_options = {
+      maximumSelectionLength: 4
+    };
+    $('.top-filter .states').select2($.extend(tags_options, {
+      placeholder: "Filter by states"
+    })).on('select2:select select2:unselect', function() {
+      return filterConversationList({
+        states: $(this).val()
+      });
+    });
+    $('.top-filter .positions').select2($.extend(tags_options, {
+      placeholder: "Filter by poistions"
+    })).on('select2:select select2:unselect', function() {
+      return filterConversationList({
+        positions: $(this).val()
+      });
+    });
+    $('#name-filter').keyup(function() {
+      return filterConversationList({
+        name: $(this).val()
+      });
+    });
+    $('#send-msg').click(function() {
+      return sendMessage();
+    });
+    $('#message-body').keypress(function(e) {
+      if (e.keyCode === 13) {
+        return sendMessage();
+      }
+    });
+    $(".messages").animate({
+      scrollTop: $('.messages').prop("scrollHeight")
+    }, 1000);
+    $.get('/update_online_time');
+    return setInterval((function() {
+      $.get('/update_online_time');
+    }), 60 * 1000);
+  });
+
+  sendMessage = function() {
+    var msg;
+    msg = $('#message-body').val();
+    $('#message-body').val('');
+    App.chat.send_message(msg);
+    return up_top_active_conversation();
+  };
+
+  filterConversationList = function(hash) {
+    var contactsPanel;
+    contactsPanel = $('#contacts');
+    return contactsPanel.find('.contact').each(function(i, e) {
+      var position, state;
+      $(e).show();
+      if (hash.hasOwnProperty('name')) {
+        if (!$(e).data('name').toLowerCase().includes(hash['name'].toLowerCase())) {
+          $(e).hide();
+        }
+      }
+      if (hash.hasOwnProperty('states')) {
+        state = $(e).data('state');
+        if (hash['states'].length && !hash['states'].includes(state)) {
+          $(e).hide();
+        }
+      }
+      if (hash.hasOwnProperty('positions')) {
+        position = $(e).data('position');
+        if (hash['positions'].length && !hash['positions'].includes(position)) {
+          return $(e).hide();
+        }
+      }
+    });
+  };
+
+  this.apendToChatBox = function(data) {
+    var currentUser, messageHTML, messages;
+    messages = $('.messages ul');
+    currentUser = $('#frame').data('user-id');
+    if ($('.message-thread').length) {
+      if (data.user_id === parseInt(currentUser)) {
+        messageHTML = "<li class='clearfix message_right'><span class='message-author'>" + data.user_name + "</span><p>" + data.message + "</p></li>";
+      } else {
+        messageHTML = "<li class='clearfix'><span class='message-author'>" + data.user_name + "</span><p>" + data.message + "</p></li>";
+      }
+    } else {
+      if (data.user_id === parseInt(currentUser)) {
+        messageHTML = "<li class='replies'><a href='#'><img src='" + data.avatar + "'></a><p>" + data.message + "</p></li>";
+      } else {
+        messageHTML = "<li class='sent'><a href='/athletes/" + data.user_id + "/connections'><img src='" + data.avatar + "'/></a><p>" + data.message + "</p></li>";
+      }
+    }
+    messages.append(messageHTML);
+    return $(".messages").animate({
+      scrollTop: $('.messages').prop("scrollHeight")
+    }, 1000);
+  };
+
+  up_top_active_conversation = function() {
+    var active, list;
+    list = $('#contacts ul');
+    active = list.find('li.active');
+    list.prepend(active.clone());
+    return active.remove();
+  };
+
+}).call(this);
+:ET

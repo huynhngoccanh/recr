@@ -1,0 +1,3 @@
+<% @conversations.each do |conversation| %>
+  <%= link_to "Conversation #{conversation.id}", high_school_conversation_path(@high_school, conversation) %>
+<% end %>

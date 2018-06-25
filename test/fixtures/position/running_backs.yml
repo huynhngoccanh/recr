@@ -1,0 +1,37 @@
+rb_2013:
+  season: 2013
+  rushing_yards: 50
+  rushing_touchdowns: 4
+  receiving_yards: 70
+  receiving_touchdowns: 3
+  created_at: now
+  updated_at: now
+
+rb_2014:
+  season: 2014
+  rushing_yards: 50
+  rushing_touchdowns: 4
+  receiving_yards: 70
+  receiving_touchdowns: 3
+  created_at: now
+  updated_at: now
+
+rb_2015:
+  season: 2015
+  rushing_yards: 50
+  rushing_touchdowns: 4
+  receiving_yards: 70
+  receiving_touchdowns: 3
+  created_at: now
+  updated_at: now
+
+rb_2016:
+  season: 2016
+  rushing_yards: 50
+  rushing_touchdowns: 4
+  receiving_yards: 70
+  receiving_touchdowns: 3
+  created_at: now
+  updated_at: now
+
+

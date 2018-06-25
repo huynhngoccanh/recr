@@ -1,0 +1,9 @@
+college:
+  name: "Typical College"
+  division: 2
+  enrollment: 5000
+  team_record: "5-2"
+  mascot: "Otter"
+  offensive_schema: "We get the ball into their endzone!"
+  defensive_schema: "We don't let them breathe."
+  school_email: "college@example.com"

@@ -1,0 +1,183 @@
+.col-left{
+    float:left;
+    img{
+        height:255px;
+    }
+}
+.athleteInfo{
+    position:relative;
+    padding-left:50px;
+    height:255px;
+    width:500px;
+    h1{
+        @include font-size(4.0);
+        @include line-height(4.0);
+        max-width:100%;
+        margin:0 0 3px 0;
+    }
+    a{
+        color:#888;
+        &:hover{
+            text-decoration:underline;
+        }
+    }
+    a.primary_btn{
+        color:white;
+        &:hover{
+            text-decoration:none;
+        }
+    }
+    .athleteInfo_school, .athleteInfo_hometown{
+        display:block;
+        color:#888;
+        @include font-size(1.8);
+        @include line-height(2.4);
+    }
+    .athleteInfo_overview{
+        margin-top:20px;
+        li{
+            display:inline;
+            padding:0 10px;
+            @include font-size(1.8);
+            @include line-height(1.8);
+            border-right:1px solid #555;
+            &:first-child{
+                padding-left:0;
+            }
+            &:last-child{
+                border:none;
+            }
+        }
+    }
+    .primary_btn{
+        bottom:0;
+        padding-top:12px;
+        padding-bottom:12px;
+        @include font-size(1.6);
+        i{
+            margin-right:5px;
+        }
+
+    }
+}
+.athleteStats{
+    width:100%;
+    margin-top:25px;
+    .row{
+        border-top:3px solid white;
+        border-bottom:3px solid white;
+        margin-top:-3px;
+        &:first-child{
+            margin:0;
+        }
+    }
+    .col-1{
+        width:100%;
+        padding:60px 0;
+        text-align:center;
+        background:$green;
+        color:white;
+    }
+    .col-1-2{
+        width:50%;
+        float:left;
+        padding:60px 0;
+        //margin-left:-5px;
+        text-align:center;
+        background:$green;
+        color:white;
+        border-right:3px solid white;
+        &:last-child{
+            border:none;
+        }
+    }
+    .athleteStats_number{
+        display:block;
+        @include font-size(5.0);
+        @include line-height(5.0);
+        font-family:'Alfa Slab One', serif;
+        letter-spacing:1px;
+        //color:$green;
+    }
+    .athleteStats_category{
+        @include font-size(1.8);
+        @include line-height(1.8);
+        @include opacity(0.7);
+    }
+    .performanceStats{
+        margin-top:-3px;
+        .col-5{
+            width:20%;
+            float:left;
+            padding:20px 0;
+            text-align:center;
+            background:$green;
+            color:white;
+            border-right:3px solid white;
+            &:last-child{
+                border:none;
+            }
+        }
+        .athleteStats_number{
+            font-family:'Lato', sans-serif;
+            @include font-size(2.2);
+            @include line-height(3.0);
+            letter-spacing:0;
+            font-weight:900;
+        }
+        .athleteStats_category{
+            @include font-size(1.4);
+            @include line-height(1.4);
+        }
+    }
+    .statsNavigation{
+        margin-bottom:-3px;
+        ul{
+            padding-left:2px;
+            li{
+                display:inline;
+                margin:0 30px 0 0;
+                color:#bbb;
+                cursor:pointer;
+                @include transition(color 0.8s $easeOutExpo);
+            }
+        }
+    }
+    .statsNavigation_seasons{
+        border-bottom:1px solid #ddd;
+        padding-bottom:15px;
+        li{
+            @include font-size(1.8);
+            @include line-height(1.8);
+            font-weight:700;
+            &:hover{
+                color:$black;
+            }
+            &.active{
+                color:$black;
+            }
+            &.pending{
+              color:red;
+            }
+        }
+    }
+    .statsNavigation_positions{
+        position:relative;
+        padding:15px 0;
+        li{
+            @include font-size(1.6);
+            @include line-height(1.6);
+            font-weight:900;
+            &:hover{
+                color:$black;
+            }
+            &.active{
+                color:$black;
+            }
+        }
+    }
+}
+
+
+
+

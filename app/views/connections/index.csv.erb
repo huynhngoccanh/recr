@@ -1,0 +1,8 @@
+<%= CSV.generate_line @headers %>
+<% @athletes.each do |athlete| %>
+  <% line = ["#{athlete.first_name} #{athlete.last_name}", athlete.city, athlete.state,
+    athlete.school.try(:name), athlete.primary_position, athlete.height, athlete.weight,
+    athlete.phone_number, athlete.address.try(:full_address), athlete.user.try(:email),
+    athlete.avatar.url, athlete.gpa, athlete.hudl_url] %>
+  <%= CSV.generate_line(line) %>
+<% end %>

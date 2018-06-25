@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="field center_text">
+    <div class="col-1-3">
+      <p>1. Set up your profile</p>
+      <p><i class="fa fa-square-o fa-3x" aria-hidden="true"></i></p>
+    </div>
+    <div class="col-1-3">
+      <p>2. Get connected</p>
+      <p>
+      <i class="fa fa-square-o fa-3x" aria-hidden="true"></i>
+      </p>
+    </div>
+    <div class="col-1-3">
+      <p>3. Explore!</p>
+      <p>
+      <i class="fa fa-square-o fa-3x" aria-hidden="true"></i>
+      </p>
+    </div>
+  </div>
+
+  <div class="content center_text athletes_new">
+    <h1 class="max-width">Basic Profile Info</h1>
+    <p>We just need the basics so colleges can begin finding you right away.</p>
+    <p>Don't worry - you'll be able to extensively customize your profile later!</p>
+    <%= form_for @athlete, url: "/athletes/registrations", method: (@athlete.persisted? ? :put : :post) do |f| %>
+
+      <% if @athlete.errors.any? && !params[:dont_show_errors].present? %>
+        <ul>
+          <% @athlete.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <div class="field col-1">
+        <%= f.label :first_name, style: "display: none;"%>
+        <%= f.text_field :first_name, placeholder: "First Name" %>
+      </div>
+
+      <div class="field col-1">
+        <%= f.label :last_name, style: "display: none;"%>
+        <%= f.text_field :last_name, placeholder: "Last Name" %>
+      </div>
+
+      <br />
+
+      <div class="field col-1">
+        <div class="select-style"><%= f.select :primary_position, options_for_select(Position.abbreviations, selected: f.object.primary_position, include_blank: true), prompt: "Primary Position" %></div>
+      </div>
+
+      <div class="field col-1">
+        <div class="select-style"><%= f.select :jersey_number, options_for_select((0..99).to_a, selected: f.object.jersey_number, include_blank: true), prompt: "Jersey Number" %> </div>
+      </div>
+
+      <div class="field clearfix">
+
+        <div class="col-1-3">
+          <div class="select-style"><%= f.select :class_of, options_for_select(class_of_options), prompt: "Class Of" %></div>
+        </div>
+        <div class="col-1-3">
+          <div class="select-style"><%= f.select :height, options_for_select(human_height_options), prompt: "Height" %></div>
+        </div>
+        <div class="col-1-3">
+          <div class="select-style"><%= f.select :weight, options_for_select(human_weight_options), prompt: "Weight" %></div>
+        </div>
+      </div>
+      <br />
+      <div class="col-1">
+        <%= f.text_field :gpa, placeholder: "GPA" %>
+      </div>
+      <div class="field">
+        <%= f.check_box :display_gpa, class: "checkbox" %>
+        <%= f.label :display_gpa, "Display my GPA", class: "checkbox-label" %>
+      </div>
+
+      <%= f.submit "Create Profile", :class => 'primary_btn' %>
+    <% end %>
+
+    <div class="anchor_image"><%= image_tag('illustrations/green_game_01.jpg') %></div>
+
+  </div>
+</div>

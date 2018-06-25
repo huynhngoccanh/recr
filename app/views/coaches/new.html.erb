@@ -1,0 +1,6 @@
+<% if @school.coaches_without_profiles.any? %>
+  <%= render "form" %>
+<% else %>
+  <p>All the coaches in our system have their profiles set up.</p>
+  <p><%= link_to "Invite a new coach?", "#" %></p>
+<% end %>

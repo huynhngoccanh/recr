@@ -1,0 +1,51 @@
+<%= form_for [@school, @coach] do |f| %>
+  <% if @coach.errors.any? %>
+    <ul>
+      <% @coach.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @coach.persisted? %>
+    <h2>Coach Profile: <%= @coach.name %></h2>
+  <% else %>
+    <div>
+      <p>Who's coach profile is this?</p>
+      <%= f.select :user_id, options_from_collection_for_select(@school.coaches_without_profiles, 'id', 'name')  %>
+    </div>
+  <% end %>
+
+  <div>
+    <% if @coach.avatar.file.present? %>
+      <%= image_tag(@coach.avatar.url)%>
+      <label>
+        <p>
+        <%= f.check_box :remove_avatar %>
+        Remove Avatar
+        </p>
+      </label>
+    <% end %>
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+  </div>
+
+  <div>
+    <%= f.label :role_name %>
+    <%= f.text_field :role_name, placeholder: "Offensive line, Running Backs, etc..." %>
+  </div>
+
+  <div>
+    <%= f.label :bio %>
+    <%= f.text_area :bio, placeholder: "How did you get into football? What should athletes know about you? What's your favorite moment of your career so far? etc...", rows: 8 %>
+  </div>
+
+  <div>
+    <%= f.fields_for :phone_numbers do |pnf| %>
+      <%= render partial: "phone_numbers/fields", locals: {phone_number_form: pnf}  %>
+    <% end %>
+  </div>
+
+  <%= f.submit "Save Profile" %>
+<% end %>

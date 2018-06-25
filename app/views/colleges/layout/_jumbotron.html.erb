@@ -1,0 +1,22 @@
+<div class="athleteAvatar col-left">
+  <%= image_tag(@college.logo.url) %>
+</div>
+<div class="athleteInfo col-right">
+  <h1 class="athleteInfo_name"><%= @college.name %></h1>
+  <span class="athleteInfo_school"><%= @college.address&.city %>, <%= @college.address&.state %></span>
+  <div data-behavior="profile-connection">
+    <% if presenter.athlete_is_viewing? %>
+      <% if presenter.athlete_already_connected? %>
+        <%= link_to "Message", new_athlete_conversation_path(presenter.current_user.profile, college_id: @college.id), class: "primary_btn" %>
+      <% elsif presenter.athlete_can_connect? && @college.allow_connections? %>
+        <%= link_to "Connect", college_connections_path(@college), data: {method: :post}, class: "primary_btn" %>
+      <% end %>
+    <% end %>
+
+    <% if presenter.user_is_profile_owner? %>
+      <%= link_to [:edit, @college, :conversations], class: "primary_btn" do %>
+        <i class="fa fa-comments"></i>Messages
+      <% end %>
+    <% end %>
+  </div>
+</div>

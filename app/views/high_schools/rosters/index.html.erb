@@ -1,0 +1,28 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "high_schools/layout/jumbotron", locals: {presenter: @high_school_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "high_schools/layout/navigation/public_links", locals: {presenter: @high_school_profile_presenter} %>
+<% end %>
+
+<!-- avatar, name, primary position, height, and weight, "view athlete" -->
+<h3 class="dashboard_section-title">Roster</h3>
+<% @athletes.each do |athlete| %>
+
+    <div class="athlete_connection flex-center-v">
+      <div class="athlete_connection-thumb">
+        <%= link_to athlete_path(athlete) do %>
+          <%= image_tag athlete.avatar.url %>
+        <% end %>
+      </div>
+      <div class="athlete_connection-name">
+        <span><%= athlete.name %></span>
+        <div class="connection_info">
+            <span><%= athlete&.primary_position %> / <%= athlete.jersey_number %></span>
+            <span><%= human_height_display(athlete&.height) %></span>
+            <span><%= athlete&.weight %></span>
+        </div>
+      </div>
+    </div>
+<% end %>

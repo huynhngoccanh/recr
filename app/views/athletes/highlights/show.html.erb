@@ -1,0 +1,12 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "athletes/layout/jumbotron", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "athletes/layout/navigation/public_links", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= link_to [@highlightable, :highlights] do %>
+  <p><i class="fa fa-arrow-left" aria-hidden="true"></i> See All Highlights for <%= @highlightable.name %></p>
+<% end %>
+<%= render partial: "highlights/highlight", locals: {awesome_highlight: @highlight} %>

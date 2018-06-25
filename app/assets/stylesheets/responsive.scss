@@ -1,0 +1,692 @@
+.mobile-nav-btn-wrap{
+    position:fixed;
+    display:none;
+    right:30px;top:20px;
+    z-index: 30000;
+}
+#mobile-nav-btn {
+  width: 30px;
+  height: 22px;
+  cursor: pointer;
+}
+#mobile-nav-btn span {
+  height: 0px;
+  width: 30px;
+  border-top: 4px solid white;
+  position: absolute;
+  display: block;
+  content: '';
+  @include transform(rotate(0));
+  @include transition(transform 0.6s $easeOutExpo);
+}
+#mobile-nav-btn span:nth-child(1) {
+  top: 0px;
+}
+#mobile-nav-btn span:nth-child(2) {
+  top: 9px;
+}
+#mobile-nav-btn span:nth-child(3) {
+  bottom: 0px;
+}
+#mobile-nav-btn.active span:nth-child(1) {
+  top:9px;  
+  @include transform(rotate(-45deg));
+}
+#mobile-nav-btn.active span:nth-child(2) {
+  opacity:0;
+}
+#mobile-nav-btn.active span:nth-child(3) {
+  bottom:9px;     
+  @include transform(rotate(45deg));
+}
+
+.mobile-nav{
+  position:fixed;
+  top:-2.5%;
+  right:0;
+  height:105%;
+  width:250px;
+  overflow:hidden;
+  background:$green;
+  z-index:20000;
+  @include transform(translateX(250px));
+  @include transition(transform 0.8s $easeOutExpo);
+  &.open{
+    @include transform(translateX(0));
+  }
+  ul{
+    position:relative;
+    padding:40px 30px;
+  }
+  li{
+    position:relative;
+    font-size:18px;
+    line-height:24px;
+    margin-top:40px;
+    list-style:none;
+    a{
+      color:white;
+    }
+    &.light{
+        @include opacity(0.6);
+    }
+    &.active{
+      a{
+        color:black;
+      }
+    }
+  }
+}
+ 
+
+@media (max-width:1180px){
+    #about{
+        padding:200px 0 160px 0;
+        img{
+            max-width:529px;
+            margin-top:-70px;
+        }
+        h1.x_large{
+            @include font-size(6.0);
+            @include line-height(6.5);
+        }
+        h2.subheading{
+            margin-bottom:30px;
+        }
+        p{
+            @include font-size(2.0);
+            @include line-height(3.5);
+            color:white;
+            margin-top:40px;
+        }
+    }
+}
+
+@media (max-width:1024px){
+
+    .content{
+        padding-left:20px;
+        padding-right:20px;
+    }
+    .results-grid{
+        .container{
+            padding:0;
+        }
+    }
+    .col-1-5{
+        width:29.333333%;
+        float:left;
+        margin:0 2% 30px 2%;
+    }
+
+    #about{
+        padding:180px 0 140px 0;
+        img{
+            max-width:529px;
+            margin-top:-50px;
+        }
+        h1.x_large{
+            @include font-size(5.0);
+            @include line-height(5.5);
+        }
+        h2.subheading{
+            margin-bottom:30px;
+        }
+        p{
+            @include font-size(1.8);
+            @include line-height(3.3);
+            color:white;
+            margin-top:40px;
+        }
+    }
+}
+
+@media (max-width:800px){
+
+    .dashboard_section-title{
+        display:none;
+    }
+    .dashboardContent .col-right{
+        padding-top:15px;
+    }
+
+    .athleteInfo .primary_btn{
+        position:relative;
+        margin-top:20px;
+    }
+    .athleteInfo{
+        h1{
+            span{
+                display:inline;
+                @include font-size(4.0);
+                @include line-height(4.2);
+            }
+        }
+    }
+
+    .anchor_image{
+        margin-top:-50px;
+    }
+    #main{
+        padding-top:50px;
+    }
+    form{
+        padding:0 25px;
+        &.new_message, &.edit_highlight, &.edit_athlete, &.edit_stat, &.new_highlight, &.new_article, &.edit_article, &.new_reference, &.edit_reference{
+            padding:0;
+        }
+    }
+
+    .add_btn{
+        right:25px;
+        top:8px;
+    }
+
+    .hero{
+        height:500px;
+        .hero_text{
+            bottom:15%;
+        }
+        .primary_btn{
+            margin-top:40px;
+        }
+     }
+     .home_cta{
+        padding:160px 25px;
+        h2{
+            @include font-size(4.0);
+            @include line-height(4.8);
+            font-family:'Alfa Slab One', serif;
+            text-transform:uppercase;
+            letter-spacing:2px;
+            margin-bottom:10px;
+        }
+        p{
+            @include font-size(2.0);
+        }
+        .primary_btn{
+            margin-top:80px;
+        }
+     }
+
+    .search-header{
+        top:35px;
+        form{
+            padding:0;
+        }
+        .container{
+            padding:0 15px;
+        }
+    }
+    .results-grid{
+        padding-top:140px;
+    }
+    .schools .results-grid{
+        padding-top:140px;
+    }
+    form{
+        .select-style select{
+            @include font-size(1.5);
+        }
+    }
+    /* ––––––––––––––––––––––––––––––––––
+    SEARCH/FILTER FORM
+    –––––––––––––––––––––––––––––––––– */
+    .filter-form{
+        max-width:100%;
+        .col-1-2{
+            position:relative;
+            width:100%;
+            &:first-child{
+                padding-right:0;
+                margin-bottom:2%;
+            }
+            &:last-child{
+                padding-left:0;
+            }
+            .col-1-2{
+                width:49%;
+                margin-right:2%;
+                padding:5.5px 0;
+                margin-bottom:0;
+                &:last-child{
+                    margin-right:0;
+                }
+            }
+            input{
+                padding:15px 15px;
+            }
+            .select-style{
+                padding:0.5px 0;
+                font-size:14px;
+            }
+        }
+        .search_btn{
+            position:absolute;
+            top:8px;
+            right:15px;
+            font-size:18px;
+            border:none;
+            background:transparent;
+            cursor:pointer;
+            @include transition(opacity 0.8s $easeOutExpo);
+            &:focus{
+                outline:none;
+            }
+            &:hover{
+                @include opacity(0.5); 
+            }
+        }
+    }
+
+    .mobile-nav-btn-wrap{
+      display:block;
+    }
+    header{
+        position:fixed;
+        @include transform(translateY(-60px));
+        .logo_wrap{
+            position:relative;
+            height:100%;
+            overflow:hidden;
+            .logo{
+                left:30px;
+                @include opacity(0);
+                @include transform(translateY(-120px));
+            }
+            .logo_small{
+               left:30px;
+               @include opacity(1);
+               @include transform(translateY(60px));
+            }
+        }
+        // Nav
+        nav{
+            display:none;
+        }
+        // Account menu
+        .accountMenu{
+           display:none
+            // Current user menu
+            .userMenu{
+                display:none;
+            }
+            // Current user avatar
+            .userAvatar{
+               display:none;
+            }
+
+        }
+    }
+    // Profile Header (Dashboard)
+    .col-left{
+        float:left;
+        width:100%;
+        text-align:center;
+        img{
+            height:200px;
+        }
+    }
+    .athleteInfo{
+        padding-left:0;
+        padding-top:20px;
+        text-align:center;
+        height:auto;
+        width:100%;
+    }
+
+    .dashboardHeader{
+        padding-top:100px;
+    }
+    .dashboardContent{
+        padding:10px 0 60px 0;
+        min-height:auto;
+        .container{
+            padding:0;
+        }
+        .dashboardNav{
+            width:100%;
+            height:50px;
+            border-bottom:1px solid #ddd;
+            overflow-x:scroll;
+            float:none;
+            ul{
+                position:relative !important;
+                display:block;
+                margin:0 auto;
+                padding:0 20px;
+                li{
+                    float:left;
+                    border:none;
+                    width:auto;
+                    margin-right:30px;
+                    line-height:42px;
+                    text-align:left;
+                    &:last-child{
+                        margin-right:0;
+                    }
+                    a{
+                        padding:0;
+                    }
+                }
+                &.athlete_nav{
+                    width:720px;
+                }
+                 &.athlete_edit_nav{
+                    width:980px;
+                }
+                &.highschool_nav{
+                    width:600px;
+                }
+                &.highschool_edit_nav{
+                    width:600px;
+                }
+                 &.college_nav{
+                    width:550px;
+                }
+                 &.college_edit_nav{
+                    width:600px;
+                }
+            }
+            
+        }
+        .col-right{
+            width:100%;
+            padding:10px 25px 40px 25px;
+        }
+    }
+
+    .athleteStats .statsNavigation ul li{
+        margin-right:15px;
+    }
+    .athleteStats .athleteStats_category{
+         @include font-size(1.5);
+    }
+
+   .col-1-5{
+        width:31.333333%;
+        float:left;
+        margin:0 1% 30px 1%;
+    }
+    .col-1-3{
+        width:31.333333%;
+        float:left;
+        margin:0 1% 30px 1%;
+    }
+
+    #about{
+        padding:120px 0 120px 0;
+        overflow-x:hidden;
+        .col-1-2{
+            &:first-child{
+                width:60%;
+            }
+            &:last-child{
+                width:40%;
+            }
+        }
+        img{
+            min-width:400px;
+            margin-top:-20px;
+        }
+        h1.x_large{
+            @include font-size(4.0);
+            @include line-height(4.5);
+        }
+        h2.subheading{
+            margin-bottom:30px;
+            @include font-size(1.6);
+            @include line-height(2.0);
+        }
+        p{
+            @include font-size(1.8);
+            @include line-height(3.1);
+            color:white;
+            margin-top:40px;
+        }
+    }
+
+}
+
+@media (max-width:600px){
+
+    .filter-form{
+        max-width:100%;
+        .col-1{
+            position:relative;
+            margin-bottom:1%;
+            &:last-child{
+                margin-bottom:0;
+            }
+            .col-1-3{
+                width:32.666666%;
+                margin:0 1% 0 0 !important;
+                //padding:5.5px 0;
+                &:last-child{
+                    margin-right:0 !important;
+                    width:49.5%;
+                }
+                &:first-child{
+                    width:100%;
+                    margin-bottom:1% !important;
+                }
+                &:nth-child(2){
+                   width:49.5%;
+                }
+            }
+            input{
+                padding:15px 20px;
+                height:43px;
+            }
+
+        }
+    }
+
+     .athleteInfo{
+        padding-top:15px;
+        h1{
+            span{
+                display:inline;
+                @include font-size(3.0);
+                @include line-height(3.2);
+            }
+        }
+        .athleteInfo_name{
+            @include font-size(3.0);
+            @include line-height(3.2);
+        }
+    }
+    .col-left{
+        float:none;
+        width:100%;
+        text-align:center;
+        img{
+            height:180px;
+        }
+    }
+    .container{
+            padding:0 25px;
+        }
+    .col-1-5, .col-1-3{
+        width:48%;
+        float:left;
+        margin:0 1% 30px 1%;
+    }
+     .hero{
+        height:100vh;
+        min-height:auto;
+        .hero_text{
+            bottom:10%;
+            h1.large{
+                @include font-size(3.6);
+                @include line-height(4.4);
+            }
+        }
+        .primary_btn{
+            margin-top:40px;
+            @include font-size(1.6);
+        }
+     }
+     .home_cta{
+        padding:120px 25px;
+        h2{
+            @include font-size(3.6);
+            @include line-height(4.4);
+        }
+        p{
+            @include font-size(1.8);
+        }
+        .primary_btn{
+            margin-top:60px;
+            font-size:16px;
+        }
+     }
+
+     footer{
+        ul{
+            li{
+                margin:0 17px;
+            }
+        }
+        .social_links{
+            margin:0 auto 0 auto;
+            ul{
+                display:block;
+                margin-top:30px;
+            }
+        }
+    }
+
+    .schools .results-grid{
+        padding-top:175px;
+    }
+
+}
+
+
+@media (max-width:500px){
+    #about{
+        padding:100px 0 100px 0;
+        .col-1-2{
+            &:first-child{
+                width:100%;
+            }
+            &:last-child{
+                display:none
+            }
+        }
+        h1.x_large{
+            @include font-size(3.0);
+            @include line-height(3.5);
+        }
+        p{
+            @include font-size(1.8);
+            @include line-height(3.1);
+            color:white;
+            margin-top:40px;
+        }
+    }
+}
+
+
+
+@media (max-width:480px){
+
+    .athleteInfo{
+        padding-top:5px;
+        h1{
+            span{
+                display:inline;
+                @include font-size(2.0);
+                @include line-height(2.0);
+            }
+        }
+         .athleteInfo_name{
+            @include font-size(2.0);
+            @include line-height(2.0);
+         }
+    }
+
+    .athleteInfo .athleteInfo_school, .athleteInfo .athleteInfo_hometown{
+        @include font-size(1.5);
+        @include line-height(2.0);
+    }
+    .athleteInfo .athleteInfo_overview{
+        margin-top:20px;
+    }
+    .athleteInfo .athleteInfo_overview li{
+        @include font-size(1.5);
+        @include line-height(2.0);
+    }
+    .col-left{
+        float:none;
+        width:100%;
+        text-align:center;
+        img{
+            height:140px;
+        }
+    }
+   
+     .hero{
+        .hero_text{
+            bottom:10%;
+            h1.large{
+                @include font-size(3.0);
+                @include line-height(4.0);
+            }
+        }
+        .primary_btn{
+            margin-top:40px;
+            @include font-size(1.6);
+        }
+     }
+     .home_cta{
+        padding:80px 25px;
+        h2{
+            @include font-size(3.0);
+            @include line-height(3.6);
+        }
+        p{
+            @include font-size(1.8);
+        }
+        .primary_btn{
+            margin-top:40px;
+            font-size:16px;
+        }
+     }
+
+     form input, .select-style select, .select-style{
+        @include font-size(1.4);
+     }
+
+      footer{
+        ul{
+            li{
+                margin:0 12px;
+            }
+        }
+        .social_links{
+            margin:0 auto 0 auto;
+            ul{
+                display:block;
+                margin-top:30px;
+            }
+        }
+    }
+
+    .primary_btn{
+        display:inline-block;
+        padding:20px 40px;
+        font-size:16px;
+        font-weight:900;
+        text-transform:uppercase;
+        border:none;
+        background:$green;
+        color:white;
+        cursor:pointer;
+        @include transition(background 0.8s $easeOutExpo);
+        &:hover{
+            background:darken($green, 15%);
+        }
+    }
+}

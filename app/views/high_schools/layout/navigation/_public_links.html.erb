@@ -1,0 +1,29 @@
+<ul class="highschool_nav">
+  <li>
+    <%= link_to high_school_path(@high_school), class: active?(:high_schools) do %>
+      <i class="fa fa-bolt"></i>Info
+    <% end %>
+  </li>
+  <li>
+    <%= link_to high_school_roster_path(@high_school), class: active?(:rosters) do %>
+      <i class="fa fa-users"></i>Roster
+    <% end %>
+  </li>
+  <li>
+    <%= link_to high_school_connections_path(@high_school), class: active?(:connections) do %>
+      <i class="fa fa-university"></i>Commits
+    <% end %>
+  </li>
+  <li>
+    <%= link_to high_school_highlights_path(@high_school), class: active?(:highlights) do %>
+      <i class="fa fa-film"></i>Highlights
+    <% end %>
+  </li>
+  <% if HighSchoolPolicy.new(@high_school, current_user).edit? %>
+    <li>
+      <%= link_to edit_high_school_path(@high_school) do %>
+        <i class="fa fa-edit"></i>Edit
+      <% end %>
+    </li>
+  <% end %>
+</ul>

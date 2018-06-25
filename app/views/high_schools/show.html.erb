@@ -1,0 +1,58 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "high_schools/layout/jumbotron", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "high_schools/layout/navigation/public_links", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">Info</h3>
+<ul class="high_school_info">
+    <li>School: <br> <span><%= @high_school.name %></span></li>
+    <% if @high_school.head_coach %>
+        <li>Head Coach:<br> <span><%= @high_school.head_coach.name %></span></li>
+    <% end %>
+    <li>
+      Enrollment: <br>
+      <span>
+        <%= @high_school.enrollment %>
+      </span>
+    </li>
+    <li>
+      Mascot:  <br>
+      <span>
+        <%= @high_school.mascot %>
+      </span>
+    </li>
+    <% if @high_school.team_record %>
+      <li>
+        Team Record:  <br>
+        <span>
+          <%= @high_school.team_record %>
+        </span>
+      </li>
+    <% end %>
+    <% if @high_school.offensive_schema %>
+      <li>
+        Offensive Schema:  <br>
+        <span>
+          <%= @high_school.offensive_schema %>
+        </span>
+      </li>
+    <% end %>
+    <% if @high_school.defensive_schema %>
+      <li>
+        Defensive Schema:  <br>
+        <span>
+          <%= @high_school.defensive_schema %>
+        </span>
+      </li>
+    <% end %>
+    <li>
+      Contact:  <br>
+      <span>
+        <%= @high_school.school_email %>
+      </span>
+    </li>
+</ul>
+

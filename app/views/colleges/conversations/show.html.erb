@@ -1,0 +1,19 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "colleges/layout/jumbotron", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "colleges/layout/navigation/administration_links", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">My Messages</h3>
+<%= link_to '<i class="fa fa-chevron-left"></i>&nbsp; Back'.html_safe, edit_college_conversations_path(@college), :class => 'add_btn' %>
+
+<ul class="message-thread">
+  <%= render partial: "conversations/message", collection: @conversation.messages %>
+</ul>
+
+<%= form_for [@college, @conversation, @conversation.messages.new] do |f| %>
+  <%= f.text_area :body, placeholder: 'Type your reply here' %>
+  <%= f.submit "Send Message", :class =>  "primary_btn" %>
+<% end %>

@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: postgres
+  password: postgres
+
+development:
+  <<: *default
+  database: recuirting_board
+
+test:
+  <<: *default
+  database: recuirting_board_test
+
+production:
+  <<: *default
+  database: recuirting_board_production

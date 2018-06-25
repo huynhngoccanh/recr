@@ -1,0 +1,24 @@
+.coach-profile-form-container {
+  margin-top: 120px;
+  margin-bottom: 60px;
+}
+
+.coach-role-form {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  position: relative;
+}
+
+.coach-role-form__remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.coach-role-form {
+  input[type="radio"] {
+    width: auto;
+  }
+}

@@ -1,0 +1,25 @@
+<!-- <p>Adding <%= position.position_name.titlecase %> stats for <%= position.season %> season</p> -->
+<%= form_for [@athlete, stat] do |f| %>
+
+  <% if @stat.present? && @stat.errors.any? %>
+    <ul>
+      <% @stat.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.hidden_field :position_type, value: "#{position.class}" %>
+  <%= f.fields_for :position, position do |ff| %>
+    <%= ff.hidden_field :season, value: position.season %>
+    <% position.stat_attributes.each do |attribute| %>
+      <div class="col-1-2">
+        <span class="athleteStats_number"><%= ff.text_field attribute.to_sym, placeholder: "22", class: 'athleteStats_number' %></span>
+        <span class="athleteStats_category"><%=  attribute.titlecase %></span>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= f.submit 'Update Stats', :class => 'primary_btn' %>
+
+<% end %><!-- End form_for -->

@@ -1,0 +1,319 @@
+.dashboard-container{
+    max-width:800px;
+}
+.col-left{
+    position:relative;
+    float:left;
+}
+.col-right{
+    position:relative;
+    float:left;
+}
+.dashboardHeader{
+    width:100%;
+    padding:170px 0 50px 0;
+    background:$black;
+    color:white;
+    margin-top:-20px;
+
+}
+.dashboardContent{
+    padding:50px 0 120px 0;
+    min-height:600px;
+    .col-right{
+        width:500px;
+        padding-left:50px;
+    }
+}
+.athleteInfo{
+    h1{
+        span{
+            display:block;
+            @include font-size(4.0);
+            @include line-height(4.2);
+        }
+    }
+}
+.fa-heart{
+    font-size:15px;
+}
+.athlete_highlight-thumb{
+    iframe{
+        width:100%;
+    }
+}
+.dashboardNav{
+    position:relative;
+    width:200px;
+    ul{
+        display:block;
+        position:absolute;
+        top:0;
+        width:200px;
+    }
+    li{
+        display:block;
+        width:230px;
+        //background:#ebebeb;
+        border-bottom:1px solid #ddd;
+        @include font-size(1.6);
+        @include line-height(1.6);
+        text-transform:uppercase;
+        font-weight:900;
+        color:#bbb;
+        a{
+            display:block;
+            padding:15px 20px;
+            color:#bbb;
+            @include transition(color 0.8s $easeOutExpo);
+            &.active{
+                color:$black;
+            }
+            &:hover{
+                color:$black;
+            }
+
+        }
+        &:first-child{
+            a{
+                padding-top:2px;
+            }
+        }
+        i{
+            margin-right:10px;
+        }
+    }
+}
+.dashboard_section-title{
+    margin-bottom:10px;
+    margin-top:2px;
+}
+.edit-status{
+    position:fixed;
+    bottom:0;
+    left:0;
+    z-index:888;
+    width:100%;
+    height:50px;
+    background:rgba(255,255,255,0.9);
+    color:$green;
+    text-align:center;
+    line-height:50px;
+}
+.add_btn{
+    position:absolute;
+    top:3px;
+    right:0;
+    font-size:14px;
+    color:$green;
+    z-index:10;
+    i{
+        margin-left:4px;
+        font-size:12px;
+    }
+}
+.cancel_btn{
+    display:block;
+    text-align:center;
+    color:#bbb;
+    font-size:14px;
+    margin-top:10px;
+    @include transition(color 0.8s $easeOutExpo);
+    &:hover{
+        color:#888;
+    }
+}
+.delete_btn{
+    position:absolute;
+    top:14px;
+    right:0;
+    font-size:14px;
+    color:#bbb;
+    @include transition(color 0.8s $easeOutExpo);
+    i{
+        margin-left:4px;
+        font-size:12px;
+    }
+    &:hover{
+        color:#888;
+    }
+}
+
+/* –––––––––––––––––––––––––––––––
+
+Connections
+
+––––––––––––––––––––––––––––––– */
+.athlete_connection{
+    position:relative;
+    padding:50px 0;
+    border-bottom:1px solid #ddd;
+    &:last-child{
+        border:none;
+    }
+}
+.athlete_connection-thumb{
+    float:left;
+    margin-right:20px;
+    img{
+        width:100%;
+        max-width:80px;
+    }
+}
+.athlete_connection-name{
+    width:100%;
+    span{
+        display:block;
+        font-size:18px;
+        line-height:21px;
+        font-weight:700;
+    }
+    .connection_info{
+        span{
+            font-weight:400;
+            font-size:16px;
+        }
+    }
+    float:left;
+    .athlete_connection-level{
+        margin-top:8px;
+        width:100%;
+        li{
+            display:block;
+            float:left;
+            list-style:none;
+            margin-right:12px;
+            font-size:12px;
+            &:last-child{
+                //margin-right:0;
+            }
+        }
+        p{
+            line-height:18px;
+            color:#999;
+        }
+        form{
+            display:inline;
+            .secondary_btn{
+                margin-top:10px;
+                &.gray{
+                    background:#eee;
+                    color:#999;
+                    @include transition(all 0.8s $easeOutExpo);
+                    &:hover{
+                        color:$black;
+                        background:#ddd;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* –––––––––––––––––––––––––––––––
+
+Highlights
+
+––––––––––––––––––––––––––––––– */
+.athlete_highlight{
+    padding:50px 0;
+    border-bottom:1px solid #ddd;
+    .athlete_highlight{
+        padding:0;
+        border-bottom:none;
+    }
+    &:last-child{
+        border:none;
+    }
+    h4{
+        display:block;
+        width:100%;
+        max-width:300px;
+        font-size:20px;
+        line-height:24px;
+        font-weight:700;
+        padding:10px 0 5px 0;
+    }
+    p{
+        font-size:16px;
+        line-height:20px;
+        font-weight:300;
+        color:#999;
+    }
+}
+.athlete_highlight-thumb{
+    
+}
+
+
+/* –––––––––––––––––––––––––––––––
+
+Articles
+
+––––––––––––––––––––––––––––––– */
+.athlete_article{
+    position:relative;
+    padding:45px 0;
+    border-bottom:1px solid #ddd;
+    .athlete_article{
+        padding:0;
+        border-bottom:none;
+    }
+    &:last-child{
+        border:none;
+    }
+    h4{
+        display:block;
+        width:100%;
+        font-size:24px;
+        line-height:28px;
+        font-weight:700;
+        padding:10px 0 5px 0;
+    }
+    p{
+        font-size:16px;
+        line-height:20px;
+        color:#999;
+    }
+    .article_link{
+        color:$black;
+    }
+}
+
+
+/* –––––––––––––––––––––––––––––––
+
+References
+
+––––––––––––––––––––––––––––––– */
+.athlete_reference{
+    position:relative;
+    padding:45px 0;
+    border-bottom:1px solid #ddd;
+    .athlete_reference{
+        padding:0;
+        border-bottom:none;
+    }
+    &:last-child{
+        border:none;
+    }
+    h4{
+        display:block;
+        width:100%;
+        font-size:20px;
+        line-height:24px;
+        font-weight:700;
+        padding:10px 0 5px 0;
+    }
+    p{
+        font-size:16px;
+        line-height:20px;
+        color:#999;
+    }
+    .article_link{
+        color:$black;
+    }
+}
+
+
+

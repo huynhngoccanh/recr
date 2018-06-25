@@ -1,0 +1,43 @@
+I"Ö(function() {
+  this.StatCountUp = (function() {
+    function StatCountUp(item) {
+      this.item = $(item);
+      new CountUp(this.item.attr('id'), 0, this.item.data('value'), 0, 2).start();
+    }
+
+    return StatCountUp;
+
+  })();
+
+  this.Revealer = (function() {
+    function Revealer(item) {
+      var target;
+      this.item = $(item);
+      this.item.on("click", (function(_this) {
+        return function(event) {
+          event.preventDefault();
+          return target().toggle();
+        };
+      })(this));
+      target = (function(_this) {
+        return function() {
+          var id;
+          id = "#" + _this.item.data("target");
+          return $(id);
+        };
+      })(this);
+    }
+
+    return Revealer;
+
+  })();
+
+  $(document).on("turbolinks:load", function() {
+    $("[data-behavior='count-up']").each(function(index, element) {
+      return new StatCountUp($(element));
+    });
+    return new Revealer($("[data-behavior='revealer']"));
+  });
+
+}).call(this);
+:ET

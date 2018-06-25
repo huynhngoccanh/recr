@@ -1,0 +1,11 @@
+<div class="content">
+  <div class="container rb_grid clearfix">
+    <% @highlights.results.in_groups_of(4, false) do |group| %>
+        <%= render partial: "result", collection: group, as: :awesome_highlight %>
+    <% end %>
+  </div>
+  <div class="container center_text pagination-wrap">
+    <%= paginate @highlights, remote: true %>
+  </div>
+</div>
+

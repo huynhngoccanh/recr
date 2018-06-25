@@ -1,0 +1,5 @@
+<div id="coach_<%= coach.id %>" data-id="<%= coach.id %>">
+  <%= image_tag coach.avatar.url %>
+  <p><%= coach.name %></p>
+  <%= link_to "edit", [:edit, @school, coach] %>
+</div>

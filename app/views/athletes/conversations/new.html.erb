@@ -1,0 +1,20 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "athletes/layout/jumbotron", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "athletes/layout/navigation/administration_links", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<p>Compose a new message to <%= @organization.name %></p>
+<%= render @conversation.messages %>
+
+<%= form_for [@athlete, @conversation] do |f| %>
+  <%= f.hidden_field :organization_id %>
+  <%= f.hidden_field :organization_type %>
+  <%= f.fields_for :messages, @conversation.messages.new do |mf| %>
+    <%= mf.text_area :body %>
+  <% end %>
+
+  <%= f.submit "Send Message", :class => "primary_btn" %>
+<% end %>

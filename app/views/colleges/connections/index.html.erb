@@ -1,0 +1,14 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "colleges/layout/jumbotron", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "colleges/layout/navigation/public_links", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">Commits</h3>
+<% if @connections.none? %>
+  <p class="empty-section">This school has no commitments yet.</p>
+<% end %>
+<%= render partial: "colleges/connections/connection", collection: @connections %>
+<%= paginate @connections %>

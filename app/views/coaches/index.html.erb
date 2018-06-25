@@ -1,0 +1,6 @@
+<h3 class="dashboard_section-title">Coaches</h3>
+<% if @coaches.none? %>
+  <p class="empty-section">This school hasn't aded any coaches yet.</p>
+<% else %>
+  <%= render partial: "coaches/coach", collection: @coaches, as: :coach %>
+<% end %>

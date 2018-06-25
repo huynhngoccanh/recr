@@ -1,0 +1,71 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "colleges/layout/jumbotron", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "colleges/layout/navigation/public_links", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">Info</h3>
+<ul class="high_school_info">
+  <li>School: <br> <span><%= @college.name %></span></li>
+  <% if @college.head_coach %>
+    <li>Head Coach:<br> <span><%= @college.head_coach.name %></span></li>
+  <% end %>
+  <li>
+    Enrollment: <br>
+    <span>
+      <%= @college.enrollment %>
+    </span>
+  </li>
+  <li>
+    Division:  <br>
+    <span>
+      <%= @college.division%>
+    </span>
+  </li>
+  <% if @college.gpa_requirement.present? %>
+    <li>
+      GPA Requirement: <br />
+      <span>
+        <%= @college.gpa_requirement %>
+      </span>
+    </li>
+  <% end %>
+  <li>
+    Mascot:  <br>
+    <span>
+      <%= @college.mascot %>
+    </span>
+  </li>
+  <% if @college.team_record.present? %>
+    <li>
+      Team Record:  <br>
+      <span>
+        <%= @college.team_record %>
+      </span>
+    </li>
+  <% end %>
+  <% if @college.offensive_schema.present? %>
+    <li>
+      Offensive Schema:  <br>
+      <span>
+        <%= @college.offensive_schema %>
+      </span>
+    </li>
+  <% end %>
+  <% if @college.defensive_schema.present? %>
+    <li>
+      Defensive Schema:  <br>
+      <span>
+        <%= @college.defensive_schema %>
+      </span>
+    </li>
+  <% end %>
+  <li>
+    Contact:  <br>
+    <span>
+      <%= @college.school_email %>
+    </span>
+  </li>
+</ul>

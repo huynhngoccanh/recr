@@ -1,0 +1,12 @@
+<div class="col-1-5">
+  <%= link_to athlete_path(athlete) do %>
+    <%= image_tag(athlete.avatar.url) %>
+    <span class="athletes_name"><%= athlete.name %> / <%= athlete.primary_position %></span>
+    <!-- 
+    <span>
+        <%= athlete.state %>
+    </span>
+-->
+  <% end %>
+</div>
+

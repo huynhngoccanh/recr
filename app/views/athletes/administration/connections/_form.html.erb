@@ -1,0 +1,30 @@
+<div data-id="<%= connection.id %>" class="athlete_connection flex-center-v">
+  <%= link_to "Remove <i class='fa fa-close'></i>".html_safe, [connection.athlete, :administration, connection], method: :delete, :class => 'delete_btn', data: {confirm: "Are you sure you want to delete this connection?" } %>
+  <div class="athlete_connection-thumb">
+    <%= link_to connection.college do %>
+      <%= image_tag connection.college.image.url %>
+    <% end %>
+  </div>
+
+  <div class="athlete_connection-name">
+    <span>
+      <%= connection.college.name %>
+      <% if connection.college.is_a? Athlete %>
+        / <%= connection.college.primary_position %>
+    <% end %>
+    </span>
+    <div class="athlete_connection-level">
+      <%= form_for [connection.athlete, :administration, connection], data: {remote: true, realtime: "submit"} do |f| %>
+        <div>
+          <%= f.label :committed %>
+          <%= f.check_box :committed %>
+        </div>
+        <div>
+          <%= f.label :letter_of_intent_signed, "LOI Signed" %>
+          <%= f.check_box :letter_of_intent_signed %>
+        </div>
+        <%= f.submit "Save", style: "display:none;" %>
+      <% end %>
+    </div>
+  </div>
+</div>

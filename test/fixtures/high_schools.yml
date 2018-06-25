@@ -1,0 +1,8 @@
+high_school:
+  name: "Standard High School"
+  enrollment: 1499
+  team_record: "9-3"
+  mascot: "Penguin"
+  offensive_schema: "We get the ball into their endzone!"
+  defensive_schema: "We don't let them breathe."
+  school_email: "high_school@example.com"

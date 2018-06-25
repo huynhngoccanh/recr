@@ -1,0 +1,21 @@
+<div data-id="<%= awesome_highlight.id %>" class="athlete_highlight">
+  <!-- <%= link_to "Cancel", [highlightable, awesome_highlight], remote: true %> -->
+
+  <%= form_for [highlightable, :administration, awesome_highlight], data: {remote: true, realtime: "submit"} do |f| %>
+  <%= link_to "Delete <i class='fa fa-close'></i>".html_safe, [highlightable, :administration, awesome_highlight], method: :delete, :class => 'delete_btn', data: { confirm: "Are you sure?", remote: true } %>
+    <ul>
+      <% awesome_highlight.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <div class="athlete_highlight-thumb">
+        <%= awesome_highlight.embed_code.html_safe %>
+    </div>
+    <%= f.text_field :title, placeholder: "Title" %>
+    <%= f.text_area :description, placeholder: "Description" %>
+    <%= f.url_field :raw_url, placeholder: "YouTube URL" %>
+    <%= select_tag "highlight[tagged_positions][]", options_for_select(Position.abbreviations, selected: awesome_highlight.tagged_positions), multiple: true, placeholder: "Tag Positions", data: {behavior: "tagged-positions" } %>
+
+    <%= f.button "Update", :class => 'secondary_btn', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating..."} %>
+  <% end %>
+</div>

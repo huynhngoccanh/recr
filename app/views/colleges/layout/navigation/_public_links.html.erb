@@ -1,0 +1,25 @@
+<ul class="college_nav">
+  <li>
+    <%= link_to college_path(@college), class: active?(:colleges) do %>
+      <i class="fa fa-bolt"></i>Info
+    <% end %>
+  </li>
+  <li>
+    <%= link_to college_connections_path(@college), class: active?(:connections) do %>
+      <i class="fa fa-university"></i> <%= priveleged?(current_user, @college) ? "Recruiting Board" : "Commits"  %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to college_highlights_path(@college), class: active?(:highlights) do %>
+      <i class="fa fa-film"></i>Highlights
+    <% end %>
+  </li>
+  
+  <% if CollegePolicy.new(@college, current_user).edit? %>
+    <li>
+      <%= link_to college_administration_connections_path(@college) do %>
+        <i class="fa fa-edit"></i>Edit
+      <% end %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,13 @@
+high_school_coach:
+  first_name: HS
+  last_name: Coach
+  role: 1
+  role_name: "Head Coach"
+  bio: "He's witty, affectionate, helpful and perhaps a little too harsh. Which isn't out of the ordinary for someone with his position. He was born in an average family in a developing port. He lived happily until he was about 16 years old, but at that point things changed. He started playing football."
+
+college_coach:
+  first_name: College
+  last_name: Coach
+  role: 1
+  role_name: "Head Coach"
+  bio: "He's witty, affectionate, helpful and perhaps a little too harsh. Which isn't out of the ordinary for someone with his position. He was born in an average family in a developing port. He lived happily until he was about 16 years old, but at that point things changed. He started playing football."

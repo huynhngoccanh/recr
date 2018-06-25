@@ -1,0 +1,20 @@
+<div data-id="<%= connection.id %>" class="athlete_connection flex-center-v">
+  <div class="athlete_connection-thumb">
+    <%= image_tag connection.athlete.image.url%>
+  </div>
+  <div class="athlete_connection-name">
+    <span>
+      <%= link_to connection.athlete.name, athlete_path(connection.athlete) %>
+    </span>
+    <span>
+      <p>
+        Hails from <%= link_to connection.athlete.high_school.name, high_school_path(connection.athlete.high_school) %>
+      </p>
+    </span>
+    <span>
+      <p>
+        <%= connection.athlete.primary_position %> / Class of <%= connection.athlete.class_of %>
+      </p>
+    </span>
+  </div>
+</div>

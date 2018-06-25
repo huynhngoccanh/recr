@@ -1,0 +1,66 @@
+<div class="athleteAvatar col-left">
+  <%= image_tag(presenter.athlete.avatar) %>
+</div>
+<div class="athleteInfo col-right">
+  <h1 class="athleteInfo_name"><span><%= presenter.athlete.first_name %></span> <span><%= presenter.athlete.last_name %></span></h1>
+  <% if presenter.display_high_school? %>
+    <%= link_to high_school_path(presenter.athlete.high_school) do %>
+      <span class="athleteInfo_school">
+         <%= presenter.athlete.high_school.name %> <%= "(pending)" unless presenter.athlete.enrollment.high_school_approved? %>
+      </span>
+    <% end %>
+    <span class="athleteInfo_hometown"><%= presenter.athlete.high_school.full_address %></span>
+  <% end %>
+
+  <ul class="athleteInfo_overview">
+    <li><%= presenter.athlete.primary_position %></li>
+    <li><%= height_and_weight_display(presenter.athlete) %></li>
+    <li>Class of <%= presenter.athlete.class_of %></li>
+    <% if presenter.athlete.display_gpa? && presenter.athlete.gpa? %>
+    <li><%= presenter.athlete.gpa %> GPA</li>
+    <% end %>
+
+    <% if presenter.athlete.hudl_url.present? %>
+      <li>
+        <%= link_to "HUDL", presenter.athlete.hudl_url, target: "_blank" %>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if presenter.college_coach_is_viewing? %>
+    <div data-behavior="profile-connection">
+
+      <% if presenter.can_connect? %>
+        <%= form_for [current_user.profile.school, :administration, Connection.new] do |f| %>
+          <%= f.hidden_field :athlete_id, value: presenter.athlete.id %>
+          <%= f.submit "Connect", class: "primary_btn" %>
+        <% end %>
+      <% end %>
+
+      <% if presenter.already_connected? %>
+        <p>You are connected with this athlete.</p>
+      <% end %>
+
+      <% if presenter.conversation_allowed? %>
+        <%= link_to "Message", new_college_conversation_path(college_id: current_user.profile.school.id, athlete_id: @athlete), { class: "primary_btn position_static"} %>
+      <% end %>
+
+      <% if presenter.college_coach_is_viewing? %>
+        <%= link_to "Download csv", connections_path(format: :csv), { class: "primary_btn position_static" } %>
+      <% end %>
+
+      <% if presenter.can_request_transcript? %>
+        <%= form_tag transcript_requests_path, class: "button-form", remote: true do %>
+          <%= hidden_field_tag "[transcript_request][athlete_id]", presenter.athlete.id %>
+          <%= button_tag "Request Transcript", class: "primary_btn", data: {disable_with: "Processing...", behavior: "transcript-request-button" } %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if presenter.user_is_profile_owner? %>
+    <%= link_to [:edit, presenter.athlete, :conversations], class: "primary_btn" do %>
+      <i class="fa fa-comments"></i>Messages
+    <% end %>
+  <% end %>
+</div>

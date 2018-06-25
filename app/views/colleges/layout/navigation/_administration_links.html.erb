@@ -1,0 +1,27 @@
+<ul class="college_edit_nav">
+  <li>
+    <%= link_to college_administration_connections_path(@college), class: active?(:connections) do %>
+      <i class="fa fa-university"></i>Recruiting Board
+    <% end %>
+  </li>
+  <li>
+    <%= link_to college_administration_highlights_path(@college), class: active?(:highlights) do %>
+      <i class="fa fa-film"></i>Highlights
+    <% end %>
+  </li>
+  <li>
+    <%= link_to college_administration_affiliations_path(@college), class: active?(:affiliations) do %>
+      <i class="fa fa-smile-o"></i>Coaches
+    <% end %>
+  </li>
+  <li>
+    <%= link_to edit_college_path(@college), class: active?(:colleges) do %>
+      <i class="fa fa-bolt"></i>Basic Info
+    <% end %>
+  </li>
+  <li>
+    <%= link_to college_path(@college) do %>
+      <i class="fa fa-arrow-left"></i>Profile
+    <% end %>
+  </li>
+</ul>

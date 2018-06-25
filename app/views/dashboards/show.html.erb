@@ -1,0 +1,17 @@
+<div class="content app-dashboard">
+  <div>
+    <%= link_to "College Onboarding", new_college_onboarding_path, class: "primary_btn" %>
+    <%= link_to "High School Onboarding", new_high_school_onboarding_path, class: "primary_btn" %>
+    <%= link_to "Search Health", health_path, class: "primary_btn" %>
+  </div>
+  <hr />
+  <h2>At a Glance</h2>
+  <hr />
+  <h2>Sign in as User</h2>
+  <%= form_tag become_user_dashboard_path do %>
+    <%= label_tag :id, "User ID" %>
+    <%= text_field_tag :id, "", placeholder: "User Id" %>
+
+    <%= submit_tag "Sign in as User" %>
+  <% end %>
+</div>

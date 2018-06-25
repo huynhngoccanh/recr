@@ -1,0 +1,6 @@
+$("[data-behavior='stat-board-container']").html('<%= j render @stat_board %>');
+$("[data-behavior='count-up']").each(function(index, element) {
+  return new StatCountUp($(element));
+});
+
+  

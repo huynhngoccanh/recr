@@ -1,0 +1,8 @@
+<%= form_tag edit_athlete_stats_path(@athlete), method: :get, remote: true do %>
+  <%= select_tag "position", options_for_select(@stat_board.position_options) %>
+  <%= select_tag "season", options_for_select(@stat_board.season_options) %>
+  <%= submit_tag "Add Position", :class => 'primary_btn' %>
+<% end %>
+<% if @stat_board.cancelable? %>
+  <%= link_to "Cancel", edit_athlete_stats_path(@athlete), :class => 'cancel_btn', remote: true %>
+<% end %>

@@ -1,0 +1,5 @@
+<div class="notification-item">
+  <p>
+    <%= link_to display_name(notification.actor), actor_profile_path(notification.actor) %> <%= notification.action %> <%= notification.notifiable_type.to_s.humanize(capitalize: false) %>.
+  </p>
+</div>

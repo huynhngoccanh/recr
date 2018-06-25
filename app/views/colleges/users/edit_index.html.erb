@@ -1,0 +1,31 @@
+<h3 class="dashboard_section-title">Edit Users</h3>
+
+<%= link_to "Add User <i class='fa fa-plus'></i>".html_safe, "#", :class => 'add_btn', data: { behavior: "revealer", target: "new-user-form" }  %>
+
+<div id="new-user-form" style="<%= display_new_form?(@user) %>">
+  <%= form_for [@college, @user] do |f| %>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <br />
+    
+    <%= f.text_field :email, placeholder: 'Email' %>
+    <%= f.text_field :first_name,  placeholder: 'First Name'  %>
+    <%= f.text_field :last_name,  placeholder: 'Last Name' %>
+  
+    <div class="select-style">
+      <%= f.select :role, options_for_select(User.coach_roles), prompt: "Role" %>   
+    </div>
+
+    <%= f.submit "Invite User", :class => 'primary_btn' %>
+  <% end %>
+</div>
+
+<%= render partial: "form", collection: @users, as: :user %>
+
+<%= paginate @users %>
+
+
+

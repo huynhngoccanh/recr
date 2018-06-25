@@ -1,0 +1,57 @@
+<%= form_for @high_school, remote: true do |f| %>
+  <ul>
+    <% @high_school.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+
+  <div>
+    <div class="form-section">
+      <h3><b>School Details</b></h3>
+      <div class="field">
+        <%= f.text_field :name, placeholder: 'School Name' %>
+      </div>
+      <div class="field">
+        <%= image_tag(@high_school.logo_url) if @high_school.logo? %>
+        <%= f.file_field :logo %>
+        <%= f.hidden_field :logo_cache %>
+      </div>
+      <div class="field">
+        <%= f.label :mascot, style: "display: none;" %>
+        <%= f.text_field :mascot, placeholder: "Mascot"%>
+      </div>
+      <div class="field">
+        <%= f.label :enrollment, style: "display: none;" %>
+        <%= f.number_field :enrollment, placeholder: "Enrollment - ex: 1500" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :school_email, style: "display: none;" %>
+        <%= f.text_field :school_email, placeholder: "School/Athletic Dept Email"%>
+      </div>
+    </div>
+    <div class="form-section">
+      <h3><b>Coach Details</b></h3>
+      <div class="field">
+        <%= f.text_field :registration_coach_name, placeholder: 'Coach Name' %>
+      </div>
+
+      <div class="field">
+        <%= f.text_field :registration_coach_phone_number, placeholder: 'Coach Phone' %>
+      </div>
+    </div>
+    <div class="form-section">
+      <h3><b>School Location</b></h3>
+      <div class="field">
+        <%= f.fields_for :address do |address_form| %>
+          <%= render partial: "addresses/fields", locals: {address_form: address_form} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div>
+    <%= f.submit "Add & Enroll Me", :class => 'primary_btn' %>
+  </div>
+<% end %>
+
+<div class="anchor_image"><%= image_tag('illustrations/green_game_01.jpg') %></div>

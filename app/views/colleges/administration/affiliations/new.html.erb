@@ -1,0 +1,30 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "colleges/layout/jumbotron", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "colleges/layout/navigation/administration_links", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<div class="container">
+  <div>
+    <p>
+      <%= link_to "+ Invite New Coaches to Recruiting Board", [@college, :administration, :coach_invitations] %>
+    </p>
+  </div>
+
+  <div>
+    <h1>Invite a Coach</h1>
+  </div>
+
+  <% if @transfer&.errors&.any? %>
+    <p style="color:red;"w>
+      <%= @transfer.errors[:base].first %>
+    </p>
+  <% end %>
+
+  <%= form_for [@college, :administration, @affiliation] do |f| %>
+    <%= text_field_tag "affiliation[coach_email]", nil, { placeholder: "Coach Email" } %>
+    <%= f.submit "Invite Coach" %>
+  <% end %>
+</div>

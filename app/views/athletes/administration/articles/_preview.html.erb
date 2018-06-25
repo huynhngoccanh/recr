@@ -1,0 +1,7 @@
+<div data-id="<%= article.id %>">
+  <%= link_to "Edit", edit_athlete_administration_article_path(@athlete, article), remote: true %>
+  <% if article.persisted? %>
+    <%= link_to "Destroy", athlete_administration_article_path(@athlete, article), method: :delete, data: { confirm: "Are you sure?", remote: true } %>
+  <% end %>
+  <%= render article %>
+</div>

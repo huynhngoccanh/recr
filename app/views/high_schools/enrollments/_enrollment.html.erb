@@ -1,0 +1,4 @@
+<div data-id="<%= enrollment.id %>" class="athlete_connection flex-center-v">
+  <%= link_to "Remove <i class='fa fa-close'></i>".html_safe, [@high_school, enrollment], method: :delete, :class => 'delete_btn', data: {confirm: "Are you sure you want to delete this connection?", remote: true } %>
+  <%= render partial: "high_schools/enrollments/#{enrollment.status}", locals: {enrollment: enrollment} %>
+</div>

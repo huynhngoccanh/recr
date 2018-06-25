@@ -1,0 +1,22 @@
+<% if address_form.object.errors.any? %>
+  <ul>
+    <% address_form.object.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="field">
+  <%= address_form.text_field :line1, placeholder: 'Street Address' %>
+</div>
+<div class="field">
+  <%= address_form.text_field :city, placeholder: 'City' %>
+</div>
+<div class="field">
+  <div class="col-1">
+    <div class="select-style"><%= address_form.select :state, options_for_select(us_states, selected: address_form.object&.state ), include_blank: "State" %></div>
+  </div>
+</div>
+<div class="field">
+  <%= address_form.text_field :zip, placeholder: 'Zipcode' %>
+</div>

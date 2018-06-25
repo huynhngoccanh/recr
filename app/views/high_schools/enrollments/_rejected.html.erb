@@ -1,0 +1,18 @@
+<div class="athlete_connection-thumb">
+  <%= link_to enrollment.athlete do %>
+    <%= image_tag enrollment.athlete.image.url %>
+  <% end %>
+</div>
+
+<div class="athlete_connection-name">
+  <span>
+    <%= enrollment.athlete.name %> / <%= enrollment.athlete.primary_position %> / <%= enrollment.athlete.jersey_number %>
+    <p>Rejected - change your mind?</p>
+  </span>
+  <div class="athlete_connection-level">
+    <%= form_for [@high_school, enrollment], data: {remote: true, realtime: "submit"} do |f| %>
+      <%= f.hidden_field :high_school_approved, value: true %>
+      <%= f.submit "Approve", :class => 'secondary_btn gray' %>
+    <% end %>
+  </div>
+</div>

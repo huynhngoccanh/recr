@@ -1,0 +1,9 @@
+<div class="col-1-5">
+  <%= link_to school do %>
+    <%= image_tag(school.logo.url) %>
+
+    <span class="athletes_name"><%= school.name %></span>
+    <span><%= school.address&.city %>, <%= school.address&.state %></span>
+  <% end %>
+</div>
+

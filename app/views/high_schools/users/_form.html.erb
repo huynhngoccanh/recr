@@ -1,0 +1,39 @@
+<div data-id="<%= user.id %>" class="athlete_highlight">
+
+  <%= form_for [@high_school, user], remote: true do |f| %>
+  <%= link_to "Delete <i class='fa fa-close'></i>".html_safe, high_school_user_path(@high_school, user), method: :delete, :class => 'delete_btn', data: { confirm: "Are you sure?", remote: true } %>
+    <ul>
+      <% user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <br />
+    <p>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </p>
+    <p>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+    </p>
+    <p>
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+    </p>
+    <p>
+      <%= f.select :role, options_for_select(User.coach_roles, selected: f.object.role)%>
+      <%= f.label :role %>
+    </p>
+
+    <p>
+      Logins: <%= user.sign_in_count %>
+    </p>
+    <% if user.invitation_accepted_at %>
+      <p>
+        Invitation Accepted At: <%= user.invitation_accepted_at %>
+      </p>
+    <% end %>
+
+    <%= f.button "Update", :class => 'secondary_btn', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating..."} %>
+  <% end %>
+</div>

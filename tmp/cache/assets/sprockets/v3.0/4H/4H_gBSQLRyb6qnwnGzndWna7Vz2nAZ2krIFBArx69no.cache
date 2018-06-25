@@ -1,0 +1,14 @@
+I"—(function() {
+  $(document).on("turbolinks:load", function() {
+    if (!$("[data-behavior='orderable']").data('processed')) {
+      $("[data-behavior='orderable']").data('processed', true);
+      return $("[data-behavior='orderable']").sortable({
+        update: function() {
+          return $.post($(this).data("order-url"), $(this).sortable('serialize'));
+        }
+      });
+    }
+  });
+
+}).call(this);
+:ET

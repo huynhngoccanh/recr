@@ -1,0 +1,99 @@
+<div>
+  <%= form_for @high_school do |f| %>
+    <ul>
+      <% @high_school.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+
+    <h3><b>Basic Details</b></h3>
+    <div class="form-section">
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= image_tag(@high_school.logo_url) if @high_school.logo? %>
+        <%= f.file_field :logo %>
+        <%= f.hidden_field :logo_cache %>
+      </div>
+    </div>
+
+    <div class="form-section <%= "is_outlined" unless @high_school.transcript_requests_enabled? %>">
+      <% if @high_school.transcript_requests_enabled? %>
+        <p><%= fa_icon "check-square-o" %> Colleges can request transcripts</p>
+      <% else %>
+        <p><%= fa_icon "times" %> Transcript Requests disabled</p>
+        <p>Fill out these details and we will provide a "Request Transcript" button on your athlete's profiles that colleges can see. Clicking fires off an email to the counselor saying "Coach X from Y College has requested the transcript of Z athelete." When a college is serious, they need the athlete's transcript, so this will help your squad get recruited.</p>
+      <% end %>
+      <div class="field">
+        <h3><b>Counselor's Name</b></h3>
+        <%= f.text_field :counselor_name, placeholder: "Counselor's name" %>
+      </div>
+
+      <div class="field">
+        <h3><b>Counselor's Email</b></h3>
+        <%= f.text_field :counselor_email, placeholder: "Counselor's email" %>
+      </div>
+
+      <div class="field">
+        <h3><b>Counselor's Phone Number</b></h3>
+        <%= f.number_field :counselor_phone_number, placeholder: "Counselor's phone #" %>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="field">
+        <h3><b>School Email</b></h3>
+        <%= f.text_field :school_email, placeholder: "Where can athletes email you?" %>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="field">
+        <h3><b>Team Record</b></h3>
+        <%= f.text_field :team_record, placeholder: "Team Record" %>
+      </div>
+
+      <div class="field">
+        <h3><b>Mascot</b></h3>
+        <%= f.text_field :mascot, placeholder: "Mascot" %>
+      </div>
+
+      <div class="field">
+        <h3><b>Enrollment</b></h3>
+        <%= f.number_field :enrollment, placeholder: "Mascot" %>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3><b>School Location</b></h3>
+      <div class="field">
+        <%= f.fields_for :address do |address_form| %>
+          <%= render partial: "addresses/fields", locals: {address_form: address_form} %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-section">
+      <h3>Athletic Department</h3>
+      <%= f.fields_for :phone_numbers do |pnf| %>
+        <%= render partial: "phone_numbers/fields", locals: { phone_number_form: pnf} %>
+      <% end %>
+    </div>
+
+    <div class="form-section">
+      <h3><b>Type of Offense</b></h3>
+      <div class="field">
+        <%= f.text_area :offensive_schema, placeholder: 'Description of the offense you run.', rows: 8 %>
+      </div>
+      <h3><b>Type of Defense</b></h3>
+      <div class="field">
+        <%= f.text_area :defensive_schema, placeholder: 'Description of the defense you run.', rows: 8 %>
+      </div>
+    </div>
+    <div>
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

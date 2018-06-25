@@ -1,0 +1,26 @@
+<div class="container">
+<h2 style="text-align: center;">Accept Invitation</h2>
+<br />
+<p style="text-align: center;">
+  Welcome to Recruiting Board. First, you'll need to set your password, and then we'll get you all set up so you can find the college team you'll be really happy with.
+</p>
+  <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
+    <%= devise_error_messages! %>
+    <%= f.hidden_field :invitation_token %>
+
+    <p><%= label_tag "Email" %><br />
+    <%= text_field_tag "email", nil, value: resource.email, disabled: true %>
+    </p>
+
+    <% if f.object.class.require_password_on_accepting %>
+      <p><%= f.label :password %><br />
+      <%= f.password_field :password %></p>
+
+      <p><%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %></p>
+    <% end %>
+
+    <p><%= f.submit t("devise.invitations.edit.submit_button") %></p>
+    <br />
+  <% end %>
+</div>

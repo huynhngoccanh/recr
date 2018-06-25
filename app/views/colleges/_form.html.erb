@@ -1,0 +1,101 @@
+<div>
+  <%= form_for @college, html: {multipart: true} do |f| %>
+    <ul>
+      <% @college.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+
+    <%= f.hidden_field :finish_onboarding, value: params[:finish_onboarding] || f.object.finish_onboarding %>
+
+    <div>
+      <div class="form-section">
+        <h3><b>Name and Logo</b></h3>
+        <div class="field">
+          <%= f.text_field :name, placeholder: 'School Name' %>
+        </div>
+        <div class="field">
+          <div class="form-image-thumb flex-center-v">
+            <% if @college.logo.url.present? %>
+              <%= image_tag(@college.logo.url)%>
+              <!--
+              <label>
+                  <%= f.check_box :remove_logo %>
+                  Remove Logo
+              </label>
+            -->
+            <% end %>
+            <%= f.file_field :logo %>
+            <%= f.hidden_field :logo_cache %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="field">
+          <h3><b>School Email</b></h3>
+          <%= f.text_field :school_email, placeholder: "Where can athletes email you?" %>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="field">
+          <h3><b>Team Record</b></h3>
+          <%= f.text_field :team_record, placeholder: "Mascot" %>
+        </div>
+
+        <div class="field">
+          <h3><b>Mascot</b></h3>
+          <%= f.text_field :mascot, placeholder: "Mascot" %>
+        </div>
+
+        <div class="field">
+          <h3><b>Enrollment</b></h3>
+          <%= f.number_field :enrollment, placeholder: "Mascot" %>
+        </div>
+
+        <div class="field">
+          <h3><b>Division</b></h3>
+          <div class="select-style"><%= f.select :division, options_for_select([2, 3], selected: f.object.division), placeholder: "Mascot" %></div>
+        </div>
+        <div class="field">
+          <%= f.text_field :gpa_requirement, placeholder: "GPA Requirement" %>
+        </div>
+        <div class="field">
+          <%= f.check_box :allow_connections %>
+          <%= f.label :allow_connections, "Allow athletes to send connection requests" %>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3><b>School Location</b></h3>
+        <div class="field">
+          <%= f.fields_for :address do |address_form| %>
+            <%= render partial: "addresses/fields", locals: {address_form: address_form} %>
+          <% end %>
+        </div>
+        <h3>Athletic Department</h3>
+        <div class="field">
+          <%= f.fields_for :phone_numbers do |pnf| %>
+            <%= render partial: "phone_numbers/fields", locals: { phone_number_form: pnf} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3><b>Type of Offense</b></h3>
+      <div class="field">
+        <%= f.text_area :offensive_schema, placeholder: 'Description of the offense you run.', rows: 8 %>
+      </div>
+      <h3><b>Type of Defense</b></h3>
+      <div class="field">
+        <%= f.text_area :defensive_schema, placeholder: 'Description of the defense you run.', rows: 8 %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.submit "Update", :class => 'primary_btn' %>
+    </div>
+  <% end %>
+</div>

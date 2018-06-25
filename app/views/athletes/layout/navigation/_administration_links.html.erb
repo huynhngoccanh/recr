@@ -1,0 +1,37 @@
+<ul class="athlete_edit_nav">
+  <li>
+    <%= link_to athlete_administration_connections_path(presenter.athlete), class: active?(:connections) do %>
+      <i class="fa fa-university"></i>Recruitment
+    <% end %>
+  </li>
+  <li>
+    <%= link_to edit_athlete_stats_path(presenter.athlete), class: active?(:stats) do %>
+      <i class="fa fa-line-chart"></i>Stats
+    <% end %>
+  </li>
+  <li>
+    <%= link_to athlete_administration_highlights_path(presenter.athlete), class: active?(:highlights) do %>
+      <i class="fa fa-film"></i>Highlights
+    <% end %>
+  </li>
+  <li>
+    <%= link_to athlete_administration_articles_path(presenter.athlete), class: active?(:articles) do %>
+      <i class="fa fa-newspaper-o"></i>News
+    <% end %>
+  </li>
+  <li>
+    <%= link_to athlete_administration_references_path(presenter.athlete), class: active?(:references) do %>
+      <i class="fa fa-users"></i>References
+    <% end %>
+  </li>
+  <li>
+    <%= link_to edit_athletes_administration_athlete_path(presenter.athlete), class: active?(:athletes) do %>
+      <i class="fa fa-bolt"></i>Basic Info
+    <% end %>
+  </li>
+  <li>
+    <%= link_to athlete_path(presenter.athlete) do %>
+      <i class="fa fa-arrow-left"></i>Profile
+    <% end %>
+  </li>
+</ul>

@@ -1,0 +1,15 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "high_schools/layout/jumbotron", locals: {presenter: @high_school_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "high_schools/layout/navigation/public_links", locals: {presenter: @high_school_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">Commits</h3>
+<%= render partial: "high_schools/connections/connection", collection: @connections %>
+<%= paginate @connections %>
+
+<% unless @connections.any? %>
+  <p class="empty-section">No athletes here have committed to a school yet</p>
+<% end %>

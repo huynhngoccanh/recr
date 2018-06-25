@@ -1,0 +1,14 @@
+<div data-id="<%= connection.id %>" class="athlete_connection flex-center-v">
+  <%= link_to "Remove <i class='fa fa-close'></i>".html_safe, [connection.college, :administration, connection], method: :delete, :class => 'delete_btn', data: {confirm: "Are you sure you want to delete this connection?" } %>
+  <div class="athlete_connection-thumb">
+    <%= link_to connection.athlete do %>
+      <%= image_tag connection.athlete.image.url %>
+    <% end %>
+  </div>
+
+  <div class="athlete_connection-name">
+    <span>
+      <%= connection.athlete.name %> / <%= connection.athlete.primary_position %>
+    </span>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <div data-highlight-like-id="<%= awesome_highlight.id %>">
+    <% if current_user.liked? awesome_highlight %>
+      <%= link_to unlike_highlight_path(awesome_highlight), method: :post, remote: true do %>
+        <p> <i class="fa fa-heart fa-2x" aria-hidden="true" style="color: red;"></i> <%= awesome_highlight.cached_votes_up unless awesome_highlight.cached_votes_up == 0 %> </p>
+      <% end %>
+    <% else %>
+      <%= link_to like_highlight_path(awesome_highlight), method: :post, remote: true do %>
+        <p> <i class="fa fa-heart fa-2x" aria-hidden="true"></i> <%= awesome_highlight.cached_votes_up unless awesome_highlight.cached_votes_up == 0  %> </p>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "colleges/layout/jumbotron", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "colleges/layout/navigation/administration_links", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">Edit Basic Info</h3>
+<%= render "form" %>

@@ -1,0 +1,4 @@
+athlete_enrollment:
+  athlete: athlete
+  high_school: high_school
+  high_school_approved: true

@@ -1,0 +1,13 @@
+<%= form_for [highlightable, :administration, @highlight]  do |f| %>
+  <ul>
+    <% @highlight.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  <%= f.text_field :title, placeholder: "Title" %>
+  <%= f.text_field :description, placeholder: "Description" %>
+  <%= f.text_field :raw_url, placeholder: "YouTube URL" %>
+  <%= select_tag "highlight[tagged_positions][]", options_for_select(Position.abbreviations, selected: @highlight.tagged_positions), multiple: true, placeholder: "Tag Positions", data: {behavior: "tagged-positions"} %>
+
+  <%= f.submit 'Add Video', :class => 'primary_btn' %>
+<% end %>

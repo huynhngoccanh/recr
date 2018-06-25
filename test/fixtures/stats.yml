@@ -1,0 +1,43 @@
+athlete_stat_qb_2013:
+  athlete: athlete
+  position: qb_2013 (Position::Quarterback)
+
+athlete_stat_qb_2014:
+  athlete: athlete
+  position: qb_2014 (Position::Quarterback)
+
+athlete_stat_qb_2015:
+  athlete: athlete
+  position: qb_2015 (Position::Quarterback)
+
+athlete_stat_qb_2016:
+  athlete: athlete
+  position: qb_2016 (Position::Quarterback)
+
+athlete_stat_rb_2013:
+  athlete: athlete
+  position: rb_2013 (Position::RunningBack)
+
+athlete_stat_rb_2014:
+  athlete: athlete
+  position: rb_2014 (Position::RunningBack)
+
+athlete_stat_rb_2015:
+  athlete: athlete
+  position: rb_2015 (Position::RunningBack)
+
+athlete_stat_rb_2016:
+  athlete: athlete
+  position: rb_2016 (Position::RunningBack)
+
+athlete_stat_c_2013:
+  athlete: athlete
+  position: c_2013 (Position::Center)
+
+athlete_stat_c_2015:
+  athlete: athlete
+  position: c_2015 (Position::Center)
+
+athlete_stat_c_2016:
+  athlete: athlete
+  position: c_2016 (Position::Center)

@@ -1,0 +1,24 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "colleges/layout/jumbotron", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "colleges/layout/navigation/administration_links", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<div class="container">
+  <div>
+    <p>
+      <%= link_to "+ Invite New Coaches to Recruiting Board", [@college, :administration, :coach_invitations] %>
+    </p>
+
+    <p>
+      <%= link_to "+ Invite Coaches Already on Recruiting Board", new_college_administration_affiliation_path(@college) %>
+    </p>
+  </div>
+
+  <div class="coach-list">
+    <h1>Your Lineup</h1>
+    <%= render partial: "colleges/administration/coaches/role_form", collection: @coaches, as: :coach  %>
+  </div>
+</div>

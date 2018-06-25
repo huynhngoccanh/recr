@@ -1,0 +1,26 @@
+<div class="search-header">
+    <div class="container">
+
+      <%= form_tag athletes_path, :class => 'filter-form', method: :get, data: {remote: true, realtime: "submit"} do %>
+        <div class="clearfix">
+          <div class="col-1">
+            <%= text_field_tag :q, params[:q], placeholder: "Who are you looking for?"%>
+            <%= button_tag "<i class='fa fa-search'></i>".html_safe, :class => 'search_btn' %>
+          </div>
+
+          <div class="col-1 clearfix">
+            <div class="select-style col-1-4"><%= select_tag "positions", options_for_select(Position.abbreviations, selected: params[:positions]), prompt: "All Positions" %></div>
+            <div class="select-style col-1-4"><%= select_tag "state", options_for_select(Address.us_states, selected: params[:state]), prompt: "All States" %></div>
+            <div class="select-style col-1-4"><%= select_tag "gpa", options_for_select(Gpa.select_options, selected: params[:gpa]), prompt: "Minimum GPA" %></div>
+            <div class="select-style col-1-4"><%= select_tag "class_of", options_for_select(class_of_options, selected: params[:class_of]), prompt: "Class Of" %></div>
+          </div>
+        </div>
+      <% end %>
+
+  </div>
+</div>
+
+<div id="athlete-search-results" class="results-grid">
+  <%= render partial: "results" %>
+</div>
+

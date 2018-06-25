@@ -1,0 +1,62 @@
+I"µ(function() {
+  document.addEventListener("turbolinks:load", function() {
+    if (!$("[data-behavior='athlete-enrollment-select']").data('processed')) {
+      $("[data-behavior='athlete-enrollment-select']").data('processed', true);
+      $("[data-behavior='athlete-enrollment-select']").select2({
+        placeholder: 'Select an Option',
+        allowClear: true,
+        ajax: {
+          url: $("[data-behavior='athlete-enrollment-select']").data('url'),
+          dataType: 'json',
+          delay: 250,
+          data: function(params) {
+            return {
+              term: params.term
+            };
+          },
+          processResults: function(data, params) {
+            console.log(data);
+            return {
+              results: data
+            };
+          },
+          cache: true
+        },
+        minimumInputLength: 0,
+        escapeMarkup: function(markup) {
+          return markup;
+        },
+        templateResult: function(highSchool) {
+          return highSchool.name || "Searching...";
+        },
+        templateSelection: function(highSchool) {
+          return highSchool.name;
+        }
+      });
+      $("[data-behavior='athlete-enrollment-select']").on('select2:select', function(event) {
+        window.evnt = event;
+        if (event.params.data.id === -1) {
+          console.log("reveal new hs form");
+          $("[data-behavior='athlete-enrollment-search']").hide();
+          return $("[data-behavior='athlete-enrollment-add-high-school']").show();
+        } else {
+          return console.log("enable submit button");
+        }
+      });
+      $("[data-behavior='athlete-enrollment-cancel']").on('click', function(event) {
+        event.preventDefault();
+        $("[data-behavior='athlete-enrollment-search']").show();
+        $("[data-behavior='athlete-enrollment-add-high-school']").hide();
+        return $("[data-behavior='athlete-enrollment-select']").val(null).trigger('change');
+      });
+      return $("#new_high_school").on("ajax:success", function(e, data, status, xhr) {
+        e.preventDefault();
+        return console.log(data);
+      }).on("ajax:error", function(e, data, status, xhr) {
+        return console.log(data);
+      });
+    }
+  });
+
+}).call(this);
+:ET

@@ -1,0 +1,24 @@
+<% if connection.persisted? && (connection.status == "deciding") %>
+  <div>
+    <p>Connection:</p>
+    <%= form_for connection, url: profile_connection_path(connection), remote: true do |f| %>
+      <%= f.hidden_field connection.connectee_approved, value: true %>
+      <%= f.submit "Approve", :class => 'secondary_btn' %>
+    <% end %>
+    <%= form_for connection, url: profile_connection_path(connection), remote: true do |f| %>
+      <%= f.hidden_field connection.connectee_approved, value: false %>
+      <%= f.submit "Reject", :class => 'secondary_btn' %>
+    <% end %>
+  </div>
+<% elsif connection.persisted? %>
+  <p>Connection Status: <%= connection.status.capitalize %></p>
+<% else %>
+
+
+<% if connection.fully_approved? && connection.connectee.is_a?(Athlete) %>
+  <% unless connection.connectee.seniority == "freshman" %>
+    <%= link_to "Message", new_athlete_conversation_path(college_id: connection.college.id, athlete_id: connection.athlete.id), class: "primary_btn" %>
+  <% end %>
+<% end %>
+
+

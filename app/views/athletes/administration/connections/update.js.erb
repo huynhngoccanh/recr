@@ -1,0 +1,2 @@
+$("[data-id='<%= @connection.id %>']").html('<%= j render partial: "form", locals: {connection: @connection } %>');
+window.animateSave($("[data-id='<%= @connection.id %>']"));

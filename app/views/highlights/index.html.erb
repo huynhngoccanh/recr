@@ -1,0 +1,6 @@
+<h3 class="dashboard_section-title">Highlights</h3>
+<% if @highlights.none? %>
+  <p class="empty-section">No videos have been added yet, but stay tuned!</p>
+<% end %>
+<%= render partial: "highlight", collection: @highlights, as: :awesome_highlight %>
+<%= paginate @highlights %>

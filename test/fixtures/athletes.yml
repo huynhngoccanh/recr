@@ -1,0 +1,8 @@
+athlete:
+  first_name: Athletic
+  last_name: Athlete
+  jersey_number: 10
+  height: 60
+  weight: 150
+  primary_position: QB
+  class_of: 2017

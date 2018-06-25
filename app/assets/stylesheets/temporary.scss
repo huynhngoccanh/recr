@@ -1,0 +1,19 @@
+// athletes#edit
+
+.navbar__padding {
+  padding:100px 0 20px 0;
+  margin-top:-20px;
+  @include box-shadow(0 0 4px rgba(0,0,0,0.25));
+  background:white;
+  //margin-bottom:50px;
+}
+
+.new_invitation {
+  max-width: 100%;
+}
+
+.button-form {
+  margin: 0 auto 0 auto !important;
+  max-width: 100%;
+  text-align: left;
+}

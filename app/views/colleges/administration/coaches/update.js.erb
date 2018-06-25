@@ -1,0 +1,2 @@
+$("[data-coach-id='<%= @coach.id %>']").html('<%= j render partial: "colleges/administration/coaches/role_form", locals: {coach: @coach} %>');
+$("[data-coach-id='<%= @coach.id %>']").effect("highlight", {color: "#20af64"}, 1000);

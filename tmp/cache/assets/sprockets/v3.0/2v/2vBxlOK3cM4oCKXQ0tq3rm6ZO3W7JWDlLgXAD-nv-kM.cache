@@ -1,0 +1,31 @@
+I"w(function() {
+  jQuery(document).on('turbolinks:load', function() {
+    var $new_message_body, $new_message_form;
+    $new_message_form = $('#new_message');
+    $new_message_body = $new_message_form.find('#message-body');
+    if (App.chat) {
+      App.cable.subscriptions.remove(App.chat);
+    }
+    if ($new_message_form.length > 0) {
+      return App.chat = App.cable.subscriptions.create({
+        channel: "ChatChannel",
+        conversation_id: $('#frame').data('conversation-id')
+      }, {
+        connected: function() {
+          return console.log('connnected');
+        },
+        disconnected: function() {},
+        received: function(data) {
+          return apendToChatBox(data);
+        },
+        send_message: function(message) {
+          return this.perform('send_message', {
+            message: message
+          });
+        }
+      });
+    }
+  });
+
+}).call(this);
+:ET

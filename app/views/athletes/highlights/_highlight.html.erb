@@ -1,0 +1,10 @@
+<div data-id="<%= awesome_highlight.id %>" class="athlete_highlight">
+    <div class="athlete_highlight-thumb">
+        <%= awesome_highlight.embed_code.html_safe %>
+    </div>
+
+    <%= render partial: "highlights/votes/like", locals: {awesome_highlight: awesome_highlight} %>
+
+    <h4><%= awesome_highlight.title %></h4>
+    <p><%= awesome_highlight.description %></p>
+</div>

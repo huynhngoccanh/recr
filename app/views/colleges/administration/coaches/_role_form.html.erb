@@ -1,0 +1,15 @@
+<div class="coach-role-form" data-coach-id="<%= coach.id %>">
+  <h3><%= coach.name %></h3>
+  <%= link_to "Remove Affiliation", college_administration_affiliation_path(@college, coach.affiliation), method: :delete, class: "coach-role-form__remove", data: {confirm: "Are you sure you want to remove this coach's affiliation with your school?"} %>
+  <%= form_for [@college, :administration, coach], data: {remote: true, realtime: true} do |f| %>
+    <div>
+      <%= f.radio_button :role, "head_coach", checked: f.object.head_coach? %>
+      <%= f.label :role, "Head Coach" %>
+    </div>
+
+    <div>
+      <%= f.radio_button :role, "standard", checked: f.object.standard? %>
+      <%= f.label :role, "Standard" %>
+    </div>
+  <% end %>
+</div>

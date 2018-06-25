@@ -1,0 +1,17 @@
+ #Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+#one:
+  #season: 1
+  #kicks_attempted: 1
+  #kicks_made: 1
+  #longest_kick: 1
+  #touchbacks: 1
+  #yards_per_attempt: 1
+
+#two:
+  #season: 1
+  #kicks_attempted: 1
+  #kicks_made: 1
+  #longest_kick: 1
+  #touchbacks: 1
+  #yards_per_attempt: 1

@@ -1,0 +1,53 @@
+<% if @contact_info_needed %>
+  <div class="contact_info_letter content">
+    <p>Dear <%= @athlete.name %>,</p>
+    <p>We've been talking with coaches and learned how to increase your chances of getting recruited.</p>
+    <br />
+    <p>Coaches aren't directly allowed to ask athletes they're interested in for some information, like:</p>
+    <ul>
+      <li>Your phone number</li>
+      <li>Your address</li>
+    </ul>
+    <br />
+    <p>
+      Thing is, they need this info to talk with you and actually advance you through the recruiting process for their school.
+    </p>
+    <br />
+    <p>So - if you add it here, we'll automatically send it to every Coach that connects with you right off the bat.</p>
+    <br />
+    <p>This will put you ahead of the pack.</p>
+    <br />
+    <p>Thanks,</p>
+    <p>Recruiting Board</p>
+
+  <%= form_for @athlete, url: athletes_administration_contact_info_path(id: @athlete.id), method: :put do |f| %>
+
+    <p>Phone Number</p>
+    <%= f.fields_for :phone_number do |phone_number_form| %>
+      <%= render partial: "phone_numbers/fields", locals: {phone_number_form: phone_number_form} %>
+    <% end %>
+
+    <p>Address</p>
+    <%= f.fields_for :address do |address_form| %>
+      <%= render partial: "addresses/fields", locals: {address_form: address_form} %>
+    <% end %>
+
+    <%= f.submit %>
+  <% end %>
+  </div>
+<% end %>
+
+
+<div class="content center_text">
+  <div class="container max-width-960">
+    <div class="recent-activity">
+      <h1>Recent Activity</h1>
+      <% if @notifications.none? %>
+        <p class="empty-section">There is no recent activity.</p>
+      <% else %>
+        <%= render @notifications %>
+      <% end %>
+    </div>
+  </div>
+  <div class="anchor_image"><%= image_tag('illustrations/green_game_01.jpg') %></div>
+</div>

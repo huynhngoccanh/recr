@@ -1,0 +1,6 @@
+$("[data-id='<%= @highlight.id %>']").html('<%= j render partial: "form", locals: {awesome_highlight: @highlight, highlightable: @highlightable } %>');
+window.animateSave($("[data-id='<%= @highlight.id %>']"));
+$("[data-behavior='tagged-positions']").select2({
+  width: "450px",
+  placeholder: "Tag Positions"
+});

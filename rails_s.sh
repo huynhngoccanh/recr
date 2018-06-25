@@ -1,0 +1,1 @@
+docker-compose up -d && docker attach recruitingboard_web_1

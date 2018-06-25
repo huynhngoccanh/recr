@@ -1,0 +1,20 @@
+c_2013:
+  season: 2013
+  pancakes: 6
+  sacks_allowed: 1
+  created_at: now
+  updated_at: now
+
+c_2015:
+  season: 2015
+  pancakes: 6
+  sacks_allowed: 1
+  created_at: now
+  updated_at: now
+
+c_2016:
+  season: 2016
+  pancakes: 6
+  sacks_allowed: 1
+  created_at: now
+  updated_at: now

@@ -1,0 +1,51 @@
+<div class="athleteStats">
+  <div class="statsNavigation">
+    <ul class="statsNavigation_seasons"> <!-- Seasons stats navigation -->
+      <% @stat_board.seasons.each do |season| %>
+        <%= link_to athlete_stats_path(@athlete, position: @stat_board.selected_position.name, season: season.year ), remote: true do %>
+          <li class="<%= "active" if season.active? %>"><%= season.year %></li>
+        <% end %>
+      <% end %>
+    </ul>
+    <ul class="statsNavigation_positions"> <!-- Positions stats navigation -->
+      <% @stat_board.positions.each do | position | %>
+        <%= link_to athlete_stats_path(@athlete, position: position.name), remote: true do %>
+          <li class="<%= "active" if position.active? %>"><%= position.abbreviation %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <!-- Load primary position stats by default -->
+  <div class="gameStats" data-behavior="resultsDisplay">
+    <%= render partial: "athletes/stats/position", locals: { position: @stat_board.result } %>
+  </div>
+
+  <div class="performanceStats" data-behavior="performanceStats">
+    <!-- Strength and Speed stats -->
+    <div class="row clearfix small-stats">
+      <div class="col-5">
+        <span class="athleteStats_number"><%= @athlete.bench_press.present? ? @athlete.bench_press : "N/A" %></span>
+        <span class="athleteStats_category">Bench</span>
+      </div>
+      <div class="col-5">
+        <span class="athleteStats_number"><%= @athlete.deadlift.present? ? @athlete.deadlift : "N/A" %></span>
+        <span class="athleteStats_category">Deadlift</span>
+      </div>
+      <div class="col-5">
+        <span class="athleteStats_number"><%= @athlete.squat.present? ? @athlete.squat : "N/A" %></span>
+        <span class="athleteStats_category">Squat</span>
+      </div>
+      <div class="col-5">
+        <span class="athleteStats_number"><%= @athlete.forty_yard_dash.present? ? @athlete.forty_yard_dash : "N/A" %></span>
+        <span class="athleteStats_category">40 yd</span>
+      </div>
+      <div class="col-5">
+        <span class="athleteStats_number"><%= @athlete.hundred_yard_dash.present? ? @athlete.hundred_yard_dash : "N/A" %></span>
+        <span class="athleteStats_category">100 yd</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- End .athleteStats -->
+

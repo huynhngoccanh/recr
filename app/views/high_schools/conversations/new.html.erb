@@ -1,0 +1,11 @@
+<p>Compose a new message to <%= @athlete.name %></p>
+<%= render @conversation.messages %>
+
+<%= form_for [@high_school, @conversation] do |f| %>
+  <%= f.hidden_field :athlete_id %>
+  <%= f.fields_for :messages, @conversation.messages.new do |mf| %>
+    <%= mf.text_area :body %>
+  <% end %>
+
+  <%= f.submit "Send Message" %>
+<% end %>

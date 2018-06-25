@@ -1,0 +1,50 @@
+#home{
+    padding:0;
+    min-height:100%;
+ }
+ .hero{
+    position:relative;
+    width:100%;
+    height:100%;
+    height:100vh;
+    max-height:1020px;
+    min-height:700px;
+    background:#101010;
+    background:#101010;
+    background-size:cover;
+    .container{
+        height:100%;
+        //max-width:1280px;
+        background:url('home/hero.png') no-repeat bottom right;
+        background-size:cover;
+    }
+    .hero_text{
+        position:absolute;
+        width:100%;
+        max-width:620px;
+        bottom:15%;
+        color:white;
+    }
+    .primary_btn{
+        margin-top:40px;
+    }
+ }
+ .home_cta{
+    padding:200px 0;
+    background:url(home/play.jpg) no-repeat center;
+    h2{
+        @include font-size(4.0);
+        @include line-height(4.8);
+        font-family:'Alfa Slab One', serif;
+        text-transform:uppercase;
+        letter-spacing:2px;
+        margin-bottom:10px;
+    }
+    p{
+        @include font-size(2.0);
+    }
+    .primary_btn{
+        margin-top:80px;
+    }
+ }
+

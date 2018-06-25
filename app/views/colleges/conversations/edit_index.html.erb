@@ -1,0 +1,18 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "colleges/layout/jumbotron", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "colleges/layout/navigation/administration_links", locals: {presenter: @college_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">My Messages</h3>
+<ul class="message-list">
+  <% unless @conversations&.any? %>
+    <p>Hey - looks like you don't have any conversations going.</p>
+    <p>How about <%= link_to "posting a highlight?", college_administration_highlights_path(@college) %></p>
+  <% end %>
+  <% @conversations.each do |conversation| %>
+    <%= link_to "Conversation with #{conversation.athlete.name}", college_conversation_path(@college, conversation) %>
+  <% end %>
+</ul>

@@ -1,0 +1,4 @@
+<%= form_for [@high_school, enrollment], data: {remote: true, realtime: "submit"} do |f| %>
+  <%= f.hidden_field :high_school_approved, value: false%>
+  <%= f.submit "Reject", :class => 'secondary_btn' %>
+<% end %>

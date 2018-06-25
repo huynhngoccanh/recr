@@ -1,0 +1,19 @@
+I"†(function() {
+  $(document).on("change", "[data-realtime]", function() {
+    if ($(this).data('remote')) {
+      return $(this).trigger("submit.rails");
+    } else {
+      return this.submit();
+    }
+  });
+
+  window.animateSave = function(element) {
+    return element.css({
+      backgroundColor: '#20af64'
+    }).animate({
+      backgroundColor: "white"
+    }, 500);
+  };
+
+}).call(this);
+:ET

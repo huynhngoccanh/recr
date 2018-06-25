@@ -1,0 +1,44 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "athletes/layout/jumbotron", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "athletes/layout/navigation/administration_links", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">Edit My References</h3>
+<%= link_to "Add reference <i class='fa fa-plus'></i>".html_safe, "#", :class => 'add_btn', data: { behavior: "revealer", target: "new-reference-form" } %>
+
+<div>
+  <p>Suggested Reference:</p>
+  <ul>
+    <li>Guidance Counselor - if a college is serious about recruiting you, they're going to need to verify your GPA.</li>
+    <li>Make it easy on them, get onto the team you want!</li>
+  </ul>
+</div>
+
+<div id="new-reference-form" style="<%= display_new_form?(@reference) %>">
+  <%= form_for [@athlete, :administration, @reference] do |f| %>
+    <ul>
+      <% @reference.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <%= f.text_field :name, placeholder: "Name" %>
+    <%= f.text_field :relationship, placeholder: "What's you're relationship?" %>
+    <p>
+      <%= f.label :contact_method, "Preferred Contact Method:" %>
+      <%= f.select :contact_method, options_for_select(Reference::CONTACT_METHODS, placeholder: "Preferred contact method") %>
+    </p>
+    <%= f.email_field :email, placeholder: "Email" %>
+    <%= f.fields_for :phone_numbers, @reference.phone_numbers.build do |pnf| %>
+      <%= render partial: "phone_numbers/fields", locals: { phone_number_form: pnf} %>
+    <% end %>
+
+    <%= f.submit 'Add Reference', :class => 'primary_btn' %>
+  <% end %>
+</div>
+
+<%= render partial: "preview", collection: @references, as: :reference %>
+
+<%= paginate @references if @references %>

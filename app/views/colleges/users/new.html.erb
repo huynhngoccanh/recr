@@ -1,0 +1,19 @@
+<%= form_for [@college, @user] do |f| %>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <br />
+         
+    <%= f.text_field :email %>  
+    <%= f.text_field :first_name %>   
+    <%= f.text_field :last_name %>
+  
+   <div class="select-style">
+      <%= f.select :role, options_for_select(User.coach_roles, selected: f.object.role)%>
+    </div>
+
+    <%= f.button "Update", :class => 'secondary_btn' %>
+<% end %>
+

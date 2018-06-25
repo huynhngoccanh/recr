@@ -1,0 +1,15 @@
+<div class="athlete_connection-thumb">
+  <%= link_to enrollment.athlete do %>
+    <%= image_tag enrollment.athlete.image.url %>
+  <% end %>
+</div>
+
+<div class="athlete_connection-name">
+  <span><%= enrollment.athlete.name %> <%= " / #{enrollment.athlete.primary_position}" %> </span>
+  <div class="athlete_connection-level">
+
+    <%= render partial: "high_schools/enrollments/approval_button", locals: {enrollment: enrollment} %>
+    <%= render partial: "high_schools/enrollments/rejection_button", locals: {enrollment: enrollment} %>
+
+  </div>
+</div>

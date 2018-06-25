@@ -1,0 +1,6 @@
+<!-- messages alert -->
+<% if Notification.where(recipient: current_user).unread.any? %>
+  <div class="messageCountAlert">
+    <%= Notification.where(recipient: current_user).unread.count %>
+  </div>
+<% end %>

@@ -1,0 +1,95 @@
+<div class="field center_text">
+  <%= form_for @onboarding do |f| %>
+    <h1>High School Onboarding</h1>
+
+
+    <%= f.fields_for :high_school, @onboarding.high_school do |cf| %>
+      <br />
+      <h3>General Info</h3>
+
+      <% if @onboarding.high_school.errors.any? %>
+        <ul>
+          <% @onboarding.high_school.errors.full_messages.each do |msg| %>
+            <li>
+              <%= msg %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <div class="field col-1">
+        <%= cf.text_field :name, placeholder: "School Name" %>
+      </div>
+      <div class="field col-1">
+        <%= cf.text_field :mascot, placeholder: "Mascot"%>
+      </div>
+      <div class="field col-1">
+        <%= cf.number_field :enrollment, placeholder: "Enrollment"%>
+      </div>
+      <div class="field col-1">
+        <%= cf.text_field :school_email, placeholder: "School Email"%>
+      </div>
+
+    <% end %>
+
+    <%= f.fields_for :address, @onboarding.address do |address_form| %>
+      <br />
+      <h3>Address</h3>
+      <%= render partial: "addresses/fields", locals: {address_form: address_form} %>
+    <% end %>
+
+    <br />
+
+    <h3>Coach Profile</h3>
+    <%= f.fields_for :coach, @onboarding.coach do |cf| %>
+      <% if @onboarding.coach.errors.any? %>
+        <ul>
+          <% @onboarding.coach.errors.full_messages.each do |msg| %>
+            <li>
+              <%= msg %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <div class="field col-1">
+        <%= cf.text_field :first_name, placeholder: "First name" %>
+      </div>
+      <div class="field col-1">
+        <%= cf.text_field :last_name, placeholder: "Last name" %>
+      </div>
+      <div class="field col-1">
+        <%= cf.text_field :role_name, placeholder: "Role name - ex: offensive coordinator" %>
+      </div>
+      <div class="field col-1">
+        <div class="select-style"><%= cf.select :role, options_for_select(Coach.roles.keys.to_a), prompt: "Role" %></div>
+      </div>
+    <% end %>
+
+    <br />
+
+    <h3>Coach Account</h3>
+    <%= f.fields_for :user, @onboarding.user do |uf| %>
+      <% if @onboarding.user.errors.any? %>
+        <ul>
+          <% @onboarding.user.errors.full_messages.each do |msg| %>
+            <li>
+              <%= msg %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+      <div class="field col-1">
+        <%= uf.text_field :email, placeholder: "Email" %>
+      </div>
+      <div class="field col-1">
+        <%= uf.password_field :password, placeholder: "Password", autocomplete: "off" %>
+      </div>
+      <div class="field col-1">
+        <%= uf.password_field :password_confirmation, placeholder: "Confirm password", autocomplete: "off" %>
+      </div>
+    <% end %>
+    <%= f.submit "Onboard" %>
+  <% end %>
+  <br />
+</div>

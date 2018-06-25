@@ -1,0 +1,20 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "high_schools/layout/jumbotron", locals: {presenter: @high_school_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "high_schools/layout/navigation/administration_links", locals: {presenter: @high_school_profile_presenter} %>
+<% end %>
+
+
+<h3 class="dashboard_section-title">Edit Highlights</h3>
+
+<%= link_to "Add Video <i class='fa fa-plus'></i>".html_safe, "#", :class => 'add_btn', data: { behavior: "revealer", target: "new-highlight-form" } %>
+
+<div id="new-highlight-form" style="<%= display_new_form?(@highlight) %>">
+  <%= render partial: "new_form", locals: {highlightable: @highlightable} %>
+</div>
+
+<%= render partial: "form", collection: @highlights, as: :awesome_highlight, locals: {highlightable: @highlightable} %>
+
+<%= paginate @highlights if @highlights%>

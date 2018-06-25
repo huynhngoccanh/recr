@@ -1,0 +1,14 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "athletes/layout/jumbotron", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "athletes/layout/navigation/public_links", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">My Recruitment</h3>
+<% if @connections.none? %>
+  <p class="empty-section">This athlete hasn't connected with any schools yet.</p>
+<% end %>
+<%= render partial: "connection", collection: @connections, as: :connection %>
+<%= paginate @connections %>

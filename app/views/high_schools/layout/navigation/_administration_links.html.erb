@@ -1,0 +1,32 @@
+<ul class="highschool_edit_nav">
+  <li>
+    <%= link_to edit_high_school_path(@high_school), class: active?(:high_schools) do %>
+      <i class="fa fa-bolt"></i>Info
+    <% end %>
+  </li>
+  <li>
+    <%= link_to edit_high_school_enrollments_path(@high_school), class: active?(:enrollments) do %>
+      <i class="fa fa-university"></i>Roster
+    <% end %>
+  </li>
+  <li>
+    <%= link_to summary_high_school_administration_athlete_invitations_path(@high_school), class: active?(:athlete_invitations) do %>
+      <i class="fa fa-envelope"></i>Invite Players
+    <% end %>
+  </li>
+  <li>
+    <%= link_to high_school_administration_affiliations_path(@high_school), class: active?(:affiliations) do %>
+      <i class="fa fa-smile-o"></i>Coaches
+    <% end %>
+  </li>
+  <li>
+    <%= link_to high_school_administration_highlights_path(@high_school), class: active?(:highlights) do %>
+      <i class="fa fa-film"></i>Highlights
+    <% end %>
+  </li>
+  <li>
+    <%= link_to high_school_path(@high_school) do %>
+      <i class="fa fa-arrow-left"></i>Profile
+    <% end %>
+  </li>
+</ul>

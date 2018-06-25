@@ -1,0 +1,9 @@
+<div class="athleteAvatar col-left">
+  <%= image_tag(@high_school.logo.url) %>
+</div>
+<div class="athleteInfo col-right">
+  <h1 class="athleteInfo_name"><%= @high_school.name%></h1>
+  <ul class="athleteInfo_overview">
+    <li><%= @high_school.address&.city %>, <%= @high_school.address&.state %></li>
+  </ul>
+</div>

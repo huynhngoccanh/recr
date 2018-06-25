@@ -1,0 +1,15 @@
+ #Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+#one:
+  #season: 1
+  #receiving_yards: 1
+  #receiving_touchdowns: 1
+  #yards_after_catches: 1
+  #catches: 1
+
+#two:
+  #season: 1
+  #receiving_yards: 1
+  #receiving_touchdowns: 1
+  #yards_after_catches: 1
+  #catches: 1

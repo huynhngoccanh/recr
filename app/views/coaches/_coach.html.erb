@@ -1,0 +1,6 @@
+<div data-id="<%= coach.id %>">
+  <%= link_to [@school, coach] do %>
+    <%= image_tag coach.avatar.url %>
+    <p><%= coach.name %></p>
+  <% end %>
+</div>

@@ -1,0 +1,9 @@
+<div class="col-1-3">
+  <%= link_to [awesome_highlight.highlightable, awesome_highlight] do %>
+    <%= image_tag awesome_highlight.thumbnail_medium %>
+    <span class="athletes_name"><%= awesome_highlight.title %></span>
+    <span><%= awesome_highlight.highlightable.name %> / <%= awesome_highlight.positions.join(", ")%></span><br>
+    <span><%= awesome_highlight.city %>, <%= awesome_highlight.state %> <br></span>
+    <span> <%= "#{pluralize(awesome_highlight.cached_votes_up, "like")}" unless awesome_highlight.cached_votes_up == 0 %> </span>
+    <% end %>
+</div>

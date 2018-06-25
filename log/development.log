@@ -1,0 +1,1846 @@
+  [1m[35m (128.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (91.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3536689403289313110);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseCreateUsers (20160315201919)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class DeviseCreateUsers < ActiveRecord::Migration[4.2] (called from load at /home/mic-02/.rbenv/versions/2.3.1/bin/rake:23)
+  [1m[35m (100.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "profile_type" character varying, "profile_id" integer, "role" integer DEFAULT 4, "completed_registration_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (46.0ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_profile_type_and_profile_id" ON "users"  ("profile_type", "profile_id")[0m
+  [1m[35m (77.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (36.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160315201919"]]
+  [1m[35m (22.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAthletes (20160318191445)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (129.3ms)[0m  [1m[35mCREATE TABLE "athletes" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "height" integer, "weight" integer, "avatar" character varying, "primary_position" character varying, "jersey_number" integer, "bench_press" integer, "deadlift" integer, "squat" integer, "forty_yard_dash" float, "hundred_yard_dash" float, "inspirational_quote" text, "class_of" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160318191445"]]
+  [1m[35m (15.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateHighSchools (20160318200308)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (100.0ms)[0m  [1m[35mCREATE TABLE "high_schools" ("id" serial primary key, "name" character varying, "logo" text, "added_by_id" integer, "offensive_schema" text, "defensive_schema" text, "enrollment" integer, "team_record" character varying, "mascot" character varying, "school_email" character varying, "registration_coach_name" character varying, "registration_coach_phone_number" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160318200308"]]
+  [1m[35m (15.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateColleges (20160318200830)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (120.9ms)[0m  [1m[35mCREATE TABLE "colleges" ("id" serial primary key, "name" character varying, "logo" text, "added_by_id" integer, "offensive_schema" text, "defensive_schema" text, "division" integer NOT NULL, "enrollment" integer, "team_record" character varying, "mascot" character varying, "school_email" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160318200830"]]
+  [1m[35m (24.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReferences (20160318201154)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (91.7ms)[0m  [1m[35mCREATE TABLE "references" ("id" serial primary key, "athlete_id" integer, "relationship" character varying, "name" character varying, "contact_method" character varying, "email" character varying, "phone_number" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_42b777af15"
+FOREIGN KEY ("athlete_id")
+  REFERENCES "athletes" ("id")
+)[0m
+  [1m[35m (45.2ms)[0m  [1m[35mCREATE  INDEX  "index_references_on_athlete_id" ON "references"  ("athlete_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160318201154"]]
+  [1m[35m (24.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateConnections (20160318221805)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (59.5ms)[0m  [1m[35mCREATE TABLE "connections" ("id" serial primary key, "athlete_id" integer, "college_id" integer, "athlete_approved" boolean, "college_approved" boolean, "committed" boolean DEFAULT 'f', "letter_of_intent_signed" boolean DEFAULT 'f', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e6c74fea21"
+FOREIGN KEY ("athlete_id")
+  REFERENCES "athletes" ("id")
+, CONSTRAINT "fk_rails_14259ab53e"
+FOREIGN KEY ("college_id")
+  REFERENCES "colleges" ("id")
+)[0m
+  [1m[35m (45.0ms)[0m  [1m[35mCREATE  INDEX  "index_connections_on_athlete_id" ON "connections"  ("athlete_id")[0m
+  [1m[35m (36.5ms)[0m  [1m[35mCREATE  INDEX  "index_connections_on_college_id" ON "connections"  ("college_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160318221805"]]
+  [1m[35m (24.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateNotifications (20160406212800)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (121.8ms)[0m  [1m[35mCREATE TABLE "notifications" ("id" serial primary key, "recipient_id" integer, "actor_id" integer, "read_at" timestamp, "completed" boolean DEFAULT 'f', "action" character varying, "notifiable_id" integer, "notifiable_type" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160406212800"]]
+  [1m[35m (23.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStats (20160506172031)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (93.1ms)[0m  [1m[35mCREATE TABLE "stats" ("id" serial primary key, "athlete_id" integer, "position_type" character varying, "position_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_cfb8b1a451"
+FOREIGN KEY ("athlete_id")
+  REFERENCES "athletes" ("id")
+)[0m
+  [1m[35m (51.5ms)[0m  [1m[35mCREATE  INDEX  "index_stats_on_athlete_id" ON "stats"  ("athlete_id")[0m
+  [1m[35m (51.9ms)[0m  [1m[35mCREATE  INDEX  "index_stats_on_position_type_and_position_id" ON "stats"  ("position_type", "position_id")[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160506172031"]]
+  [1m[35m (22.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateQuarterbacks (20160506173001)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (42.4ms)[0m  [1m[35mCREATE TABLE "quarterbacks" ("id" serial primary key, "season" integer, "passing_yards" integer, "passing_touchdowns" integer, "rushing_yards" integer, "rushing_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160506173001"]]
+  [1m[35m (22.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRunningBacks (20160509193702)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (53.4ms)[0m  [1m[35mCREATE TABLE "running_backs" ("id" serial primary key, "season" integer, "rushing_yards" integer, "rushing_touchdowns" integer, "receiving_yards" integer, "receiving_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509193702"]]
+  [1m[35m (31.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateWideReceivers (20160509195014)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (54.4ms)[0m  [1m[35mCREATE TABLE "wide_receivers" ("id" serial primary key, "season" integer, "receiving_yards" integer, "receiving_touchdowns" integer, "yards_after_catches" integer, "catches" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509195014"]]
+  [1m[35m (20.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTightEnds (20160509195317)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (54.4ms)[0m  [1m[35mCREATE TABLE "tight_ends" ("id" serial primary key, "season" integer, "receiving_yards" integer, "catches" integer, "receiving_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509195317"]]
+  [1m[35m (21.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFullbacks (20160509200816)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (68.4ms)[0m  [1m[35mCREATE TABLE "fullbacks" ("id" serial primary key, "season" integer, "receiving_yards" integer, "receiving_touchdowns" integer, "rushing_yards" integer, "rushing_touchdowns" integer, "pancakes" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509200816"]]
+  [1m[35m (6.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDefensiveTackles (20160509202756)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE TABLE "defensive_tackles" ("id" serial primary key, "season" integer, "sacks" integer, "interceptions" integer, "forced_fumbles" integer, "tackles" integer, "pass_breakups" integer, "tackles_for_loss" integer, "defensive_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509202756"]]
+  [1m[35m (20.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDefensiveEnds (20160509203104)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (44.1ms)[0m  [1m[35mCREATE TABLE "defensive_ends" ("id" serial primary key, "season" integer, "sacks" integer, "interceptions" integer, "forced_fumbles" integer, "tackles" integer, "pass_breakups" integer, "tackles_for_loss" integer, "defensive_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509203104"]]
+  [1m[35m (39.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateNoseTackles (20160509203237)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (47.4ms)[0m  [1m[35mCREATE TABLE "nose_tackles" ("id" serial primary key, "season" integer, "sacks" integer, "interceptions" integer, "forced_fumbles" integer, "tackles" integer, "pass_breakups" integer, "tackles_for_loss" integer, "defensive_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509203237"]]
+  [1m[35m (6.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateInsideLinebackers (20160509203715)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (36.2ms)[0m  [1m[35mCREATE TABLE "inside_linebackers" ("id" serial primary key, "season" integer, "sacks" integer, "interceptions" integer, "forced_fumbles" integer, "tackles" integer, "pass_breakups" integer, "tackles_for_loss" integer, "defensive_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509203715"]]
+  [1m[35m (17.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOutsideLinebackers (20160509204048)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (38.5ms)[0m  [1m[35mCREATE TABLE "outside_linebackers" ("id" serial primary key, "season" integer, "sacks" integer, "interceptions" integer, "forced_fumbles" integer, "tackles" integer, "pass_breakups" integer, "tackles_for_loss" integer, "defensive_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509204048"]]
+  [1m[35m (16.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMiddleLinebackers (20160509204215)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (48.9ms)[0m  [1m[35mCREATE TABLE "middle_linebackers" ("id" serial primary key, "season" integer, "sacks" integer, "interceptions" integer, "forced_fumbles" integer, "tackles" integer, "pass_breakups" integer, "tackles_for_loss" integer, "defensive_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509204215"]]
+  [1m[35m (16.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFreeSafeties (20160509204417)
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (49.2ms)[0m  [1m[35mCREATE TABLE "free_safeties" ("id" serial primary key, "season" integer, "sacks" integer, "interceptions" integer, "forced_fumbles" integer, "tackles" integer, "pass_breakups" integer, "tackles_for_loss" integer, "defensive_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509204417"]]
+  [1m[35m (15.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStrongSafeties (20160509204523)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (48.6ms)[0m  [1m[35mCREATE TABLE "strong_safeties" ("id" serial primary key, "season" integer, "sacks" integer, "interceptions" integer, "forced_fumbles" integer, "tackles" integer, "pass_breakups" integer, "tackles_for_loss" integer, "defensive_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509204523"]]
+  [1m[35m (15.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePunters (20160509204731)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (58.8ms)[0m  [1m[35mCREATE TABLE "punters" ("id" serial primary key, "season" integer, "punts" integer, "yards_per_attempt" integer, "longest_punt" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509204731"]]
+  [1m[35m (47.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePuntReturners (20160509204952)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (50.3ms)[0m  [1m[35mCREATE TABLE "punt_returners" ("id" serial primary key, "season" integer, "punt_return_yards" integer, "punt_return_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509204952"]]
+  [1m[35m (14.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateKickers (20160509205250)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (50.6ms)[0m  [1m[35mCREATE TABLE "kickers" ("id" serial primary key, "season" integer, "kicks_attempted" integer, "kicks_made" integer, "longest_kick" integer, "touchbacks" integer, "yards_per_attempt" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509205250"]]
+  [1m[35m (13.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateKickReturners (20160509205512)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.5ms)[0m  [1m[35mCREATE TABLE "kick_returners" ("id" serial primary key, "season" integer, "kick_return_yards" integer, "kick_return_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509205512"]]
+  [1m[35m (24.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCenters (20160509205924)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.4ms)[0m  [1m[35mCREATE TABLE "centers" ("id" serial primary key, "season" integer, "pancakes" integer, "sacks_allowed" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509205924"]]
+  [1m[35m (13.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGuards (20160509210059)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (51.1ms)[0m  [1m[35mCREATE TABLE "guards" ("id" serial primary key, "season" integer, "pancakes" integer, "sacks_allowed" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509210059"]]
+  [1m[35m (13.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLeftGuards (20160509210158)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (51.9ms)[0m  [1m[35mCREATE TABLE "left_guards" ("id" serial primary key, "season" integer, "pancakes" integer, "sacks_allowed" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509210158"]]
+  [1m[35m (23.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRightGuards (20160509210328)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.5ms)[0m  [1m[35mCREATE TABLE "right_guards" ("id" serial primary key, "season" integer, "pancakes" integer, "sacks_allowed" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509210328"]]
+  [1m[35m (12.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTackles (20160509210434)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (42.4ms)[0m  [1m[35mCREATE TABLE "tackles" ("id" serial primary key, "season" integer, "pancakes" integer, "sacks_allowed" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509210434"]]
+  [1m[35m (12.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLeftTackles (20160509210552)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (52.8ms)[0m  [1m[35mCREATE TABLE "left_tackles" ("id" serial primary key, "season" integer, "pancakes" integer, "sacks_allowed" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509210552"]]
+  [1m[35m (12.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRightTackles (20160509210702)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (44.7ms)[0m  [1m[35mCREATE TABLE "right_tackles" ("id" serial primary key, "season" integer, "pancakes" integer, "sacks_allowed" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509210702"]]
+  [1m[35m (13.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCornerbacks (20160509211158)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (52.7ms)[0m  [1m[35mCREATE TABLE "cornerbacks" ("id" serial primary key, "season" integer, "sacks" integer, "interceptions" integer, "forced_fumbles" integer, "tackles" integer, "pass_breakups" integer, "tackles_for_loss" integer, "defensive_touchdowns" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160509211158"]]
+  [1m[35m (12.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAddresses (20160518225245)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (103.7ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" serial primary key, "line1" character varying, "line2" character varying, "city" character varying, "state" character varying, "zip" character varying, "country" character varying, "lat" float, "lng" float, "formatted_address" character varying, "owner_type" character varying, "owner_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (36.5ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_owner_type_and_owner_id" ON "addresses"  ("owner_type", "owner_id")[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160518225245"]]
+  [1m[35m (11.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateHighlights (20160524211539)
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (103.6ms)[0m  [1m[35mCREATE TABLE "highlights" ("id" serial primary key, "title" character varying, "description" character varying, "raw_url" character varying, "thumbnail_url" character varying, "tagged_positions" text[] DEFAULT '{}', "highlightable_type" character varying, "highlightable_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (56.8ms)[0m  [1m[35mCREATE  INDEX  "index_highlights_on_highlightable_type_and_highlightable_id" ON "highlights"  ("highlightable_type", "highlightable_id")[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160524211539"]]
+  [1m[35m (11.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateArticles (20160525195309)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (105.5ms)[0m  [1m[35mCREATE TABLE "articles" ("id" serial primary key, "title" character varying, "description" character varying, "raw_url" character varying, "athlete_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_a620381b11"
+FOREIGN KEY ("athlete_id")
+  REFERENCES "athletes" ("id")
+)[0m
+  [1m[35m (45.7ms)[0m  [1m[35mCREATE  INDEX  "index_articles_on_athlete_id" ON "articles"  ("athlete_id")[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160525195309"]]
+  [1m[35m (10.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCoaches (20160528194750)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (126.3ms)[0m  [1m[35mCREATE TABLE "coaches" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "role" integer DEFAULT 0, "role_name" character varying, "bio" text, "avatar" character varying, "position" integer DEFAULT 0, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160528194750"]]
+  [1m[35m (18.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateConversations (20160601203238)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (99.2ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" serial primary key, "organization_type" character varying, "organization_id" integer, "athlete_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_6712d87d6f"
+FOREIGN KEY ("athlete_id")
+  REFERENCES "athletes" ("id")
+)[0m
+  [1m[35m (45.0ms)[0m  [1m[35mCREATE  INDEX  "index_conversations_on_organization_type_and_organization_id" ON "conversations"  ("organization_type", "organization_id")[0m
+  [1m[35m (37.2ms)[0m  [1m[35mCREATE  INDEX  "index_conversations_on_athlete_id" ON "conversations"  ("athlete_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160601203238"]]
+  [1m[35m (17.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMessages (20160601203626)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (93.2ms)[0m  [1m[35mCREATE TABLE "messages" ("id" serial primary key, "user_id" integer, "conversation_id" integer, "body" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_273a25a7a6"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_7f927086d2"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "conversations" ("id")
+)[0m
+  [1m[35m (35.1ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_user_id" ON "messages"  ("user_id")[0m
+  [1m[35m (37.1ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_conversation_id" ON "messages"  ("conversation_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160601203626"]]
+  [1m[35m (16.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseInvitableAddToUsers (20160606043248)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class DeviseInvitableAddToUsers < ActiveRecord::Migration[4.2] (called from load at /home/mic-02/.rbenv/versions/2.3.1/bin/rake:23)
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD "invitation_token" character varying[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "invitation_created_at" timestamp[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "invitation_sent_at" timestamp[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "invitation_accepted_at" timestamp[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD "invitation_limit" integer[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD "invited_by_type" character varying[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD "invited_by_id" integer[0m
+  [1m[35m (225.3ms)[0m  [1m[35mALTER TABLE "users" ADD "invitations_count" integer DEFAULT 0[0m
+  [1m[35m (35.3ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_invitations_count" ON "users"  ("invitations_count")[0m
+  [1m[35m (37.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_invitation_token" ON "users"  ("invitation_token")[0m
+  [1m[35m (57.1ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_invited_by_id" ON "users"  ("invited_by_id")[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160606043248"]]
+  [1m[35m (15.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddsLastModifiedByToNotifiableModels (20160607135859)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "connections" ADD "last_modified_by_id" integer[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "stats" ADD "last_modified_by_id" integer[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160607135859"]]
+  [1m[35m (12.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ActsAsVotableMigration (20160622195231)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class ActsAsVotableMigration < ActiveRecord::Migration[4.2] (called from load at /home/mic-02/.rbenv/versions/2.3.1/bin/rake:23)
+  [1m[35m (92.1ms)[0m  [1m[35mCREATE TABLE "votes" ("id" serial primary key, "votable_type" character varying, "votable_id" integer, "voter_type" character varying, "voter_id" integer, "vote_flag" boolean, "vote_scope" character varying, "vote_weight" integer, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (46.7ms)[0m  [1m[35mCREATE  INDEX  "index_votes_on_voter_id_and_voter_type_and_vote_scope" ON "votes"  ("voter_id", "voter_type", "vote_scope")[0m
+  [1m[35m (36.7ms)[0m  [1m[35mCREATE  INDEX  "index_votes_on_votable_id_and_votable_type_and_vote_scope" ON "votes"  ("votable_id", "votable_type", "vote_scope")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160622195231"]]
+  [1m[35m (13.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddsCachedVotesToHighlights (20160622195338)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (155.1ms)[0m  [1m[35mALTER TABLE "highlights" ADD "cached_votes_total" integer DEFAULT 0[0m
+  [1m[35m (152.0ms)[0m  [1m[35mALTER TABLE "highlights" ADD "cached_votes_score" integer DEFAULT 0[0m
+  [1m[35m (153.2ms)[0m  [1m[35mALTER TABLE "highlights" ADD "cached_votes_up" integer DEFAULT 0[0m
+  [1m[35m (142.0ms)[0m  [1m[35mALTER TABLE "highlights" ADD "cached_votes_down" integer DEFAULT 0[0m
+  [1m[35m (141.9ms)[0m  [1m[35mALTER TABLE "highlights" ADD "cached_weighted_score" integer DEFAULT 0[0m
+  [1m[35m (131.7ms)[0m  [1m[35mALTER TABLE "highlights" ADD "cached_weighted_total" integer DEFAULT 0[0m
+  [1m[35m (111.3ms)[0m  [1m[35mALTER TABLE "highlights" ADD "cached_weighted_average" float DEFAULT 0.0[0m
+  [1m[35m (35.3ms)[0m  [1m[35mCREATE  INDEX  "index_highlights_on_cached_votes_total" ON "highlights"  ("cached_votes_total")[0m
+  [1m[35m (56.9ms)[0m  [1m[35mCREATE  INDEX  "index_highlights_on_cached_votes_score" ON "highlights"  ("cached_votes_score")[0m
+  [1m[35m (36.9ms)[0m  [1m[35mCREATE  INDEX  "index_highlights_on_cached_votes_up" ON "highlights"  ("cached_votes_up")[0m
+  [1m[35m (36.9ms)[0m  [1m[35mCREATE  INDEX  "index_highlights_on_cached_votes_down" ON "highlights"  ("cached_votes_down")[0m
+  [1m[35m (36.9ms)[0m  [1m[35mCREATE  INDEX  "index_highlights_on_cached_weighted_score" ON "highlights"  ("cached_weighted_score")[0m
+  [1m[35m (36.8ms)[0m  [1m[35mCREATE  INDEX  "index_highlights_on_cached_weighted_total" ON "highlights"  ("cached_weighted_total")[0m
+  [1m[35m (46.9ms)[0m  [1m[35mCREATE  INDEX  "index_highlights_on_cached_weighted_average" ON "highlights"  ("cached_weighted_average")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160622195338"]]
+  [1m[35m (17.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePhoneNumbers (20160706193054)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (89.5ms)[0m  [1m[35mCREATE TABLE "phone_numbers" ("id" serial primary key, "digits" character varying, "owner_type" character varying, "owner_id" integer, "info" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (36.9ms)[0m  [1m[35mCREATE  INDEX  "index_phone_numbers_on_owner_type_and_owner_id" ON "phone_numbers"  ("owner_type", "owner_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160706193054"]]
+  [1m[35m (13.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEnrollments (20160830012728)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (63.8ms)[0m  [1m[35mCREATE TABLE "enrollments" ("id" serial primary key, "athlete_id" integer, "high_school_id" integer, "high_school_approved" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_4d07551144"
+FOREIGN KEY ("athlete_id")
+  REFERENCES "athletes" ("id")
+, CONSTRAINT "fk_rails_810847d2eb"
+FOREIGN KEY ("high_school_id")
+  REFERENCES "high_schools" ("id")
+)[0m
+  [1m[35m (35.2ms)[0m  [1m[35mCREATE  INDEX  "index_enrollments_on_athlete_id" ON "enrollments"  ("athlete_id")[0m
+  [1m[35m (37.3ms)[0m  [1m[35mCREATE  INDEX  "index_enrollments_on_high_school_id" ON "enrollments"  ("high_school_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160830012728"]]
+  [1m[35m (13.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAffiliations (20160830183825)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (93.7ms)[0m  [1m[35mCREATE TABLE "affiliations" ("id" serial primary key, "coach_id" integer, "organization_type" character varying, "organization_id" integer, "organization_approved" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b08d9357a9"
+FOREIGN KEY ("coach_id")
+  REFERENCES "coaches" ("id")
+)[0m
+  [1m[35m (56.5ms)[0m  [1m[35mCREATE  INDEX  "index_affiliations_on_coach_id" ON "affiliations"  ("coach_id")[0m
+  [1m[35m (37.3ms)[0m  [1m[35mCREATE  INDEX  "index_affiliations_on_organization_type_and_organization_id" ON "affiliations"  ("organization_type", "organization_id")[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160830183825"]]
+  [1m[35m (12.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayNameAndRemoveForeignKeyConstraintFromMessages (20160919161342)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "messages" ADD "display_name" character varying[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "messages" DROP CONSTRAINT "fk_rails_273a25a7a6"[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160919161342"]]
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddGpaToAthletes (20161011140647)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "athletes" ADD "gpa" decimal(3,2)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "athletes" ADD "display_gpa" boolean[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161011140647"]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddGpaRequirementToColleges (20161011140715)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "colleges" ADD "gpa_requirement" decimal(3,2)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161011140715"]]
+  [1m[35m (4.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTranscriptInfoToHighSchools (20161122223116)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "high_schools" ADD "counselor_name" character varying[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "high_schools" ADD "counselor_email" character varying[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "high_schools" ADD "counselor_phone_number" character varying[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161122223116"]]
+  [1m[35m (11.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddHudlLinkToAthletes (20161212201954)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "athletes" ADD "hudl_url" character varying[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161212201954"]]
+  [1m[35m (4.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAllowConnectionsOptionToColleges (20170201172403)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (97.4ms)[0m  [1m[35mALTER TABLE "colleges" ADD "allow_connections" boolean DEFAULT 't'[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170201172403"]]
+  [1m[35m (9.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddOmniauthToUsers (20180109202459)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "users" ADD "provider" character varying[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "users" ADD "uid" character varying[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20180109202459"]]
+  [1m[35m (11.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddLastOnlineAtToUser (20180110041953)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "users" ADD "last_online_at" timestamp[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20180110041953"]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-06-04 03:57:39.779650"], ["updated_at", "2018-06-04 03:57:39.779650"]]
+  [1m[35m (9.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3536689403289313110)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "high_schools" DISABLE TRIGGER ALL;ALTER TABLE "athletes" DISABLE TRIGGER ALL;ALTER TABLE "colleges" DISABLE TRIGGER ALL;ALTER TABLE "references" DISABLE TRIGGER ALL;ALTER TABLE "connections" DISABLE TRIGGER ALL;ALTER TABLE "notifications" DISABLE TRIGGER ALL;ALTER TABLE "quarterbacks" DISABLE TRIGGER ALL;ALTER TABLE "running_backs" DISABLE TRIGGER ALL;ALTER TABLE "wide_receivers" DISABLE TRIGGER ALL;ALTER TABLE "tight_ends" DISABLE TRIGGER ALL;ALTER TABLE "fullbacks" DISABLE TRIGGER ALL;ALTER TABLE "defensive_tackles" DISABLE TRIGGER ALL;ALTER TABLE "defensive_ends" DISABLE TRIGGER ALL;ALTER TABLE "nose_tackles" DISABLE TRIGGER ALL;ALTER TABLE "inside_linebackers" DISABLE TRIGGER ALL;ALTER TABLE "outside_linebackers" DISABLE TRIGGER ALL;ALTER TABLE "middle_linebackers" DISABLE TRIGGER ALL;ALTER TABLE "free_safeties" DISABLE TRIGGER ALL;ALTER TABLE "strong_safeties" DISABLE TRIGGER ALL;ALTER TABLE "punters" DISABLE TRIGGER ALL;ALTER TABLE "punt_returners" DISABLE TRIGGER ALL;ALTER TABLE "kickers" DISABLE TRIGGER ALL;ALTER TABLE "kick_returners" DISABLE TRIGGER ALL;ALTER TABLE "centers" DISABLE TRIGGER ALL;ALTER TABLE "guards" DISABLE TRIGGER ALL;ALTER TABLE "left_guards" DISABLE TRIGGER ALL;ALTER TABLE "right_guards" DISABLE TRIGGER ALL;ALTER TABLE "tackles" DISABLE TRIGGER ALL;ALTER TABLE "left_tackles" DISABLE TRIGGER ALL;ALTER TABLE "right_tackles" DISABLE TRIGGER ALL;ALTER TABLE "cornerbacks" DISABLE TRIGGER ALL;ALTER TABLE "addresses" DISABLE TRIGGER ALL;ALTER TABLE "articles" DISABLE TRIGGER ALL;ALTER TABLE "coaches" DISABLE TRIGGER ALL;ALTER TABLE "messages" DISABLE TRIGGER ALL;ALTER TABLE "conversations" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "stats" DISABLE TRIGGER ALL;ALTER TABLE "votes" DISABLE TRIGGER ALL;ALTER TABLE "highlights" DISABLE TRIGGER ALL;ALTER TABLE "phone_numbers" DISABLE TRIGGER ALL;ALTER TABLE "enrollments" DISABLE TRIGGER ALL;ALTER TABLE "affiliations" DISABLE TRIGGER ALL[0m
+  [1m[35m (20.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "conversations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mselect MAX("id") from "conversations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT min_value FROM "public"."conversations_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "colleges"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "colleges" ("name", "division", "enrollment", "team_record", "mascot", "offensive_schema", "defensive_schema", "school_email", "created_at", "updated_at", "id") VALUES ('Typical College', 2, 5000, '5-2', 'Otter', 'We get the ball into their endzone!', 'We don''t let them breathe.', 'college@example.com', '2018-06-04 03:57:48.738444', '2018-06-04 03:57:48.738444', 718964484)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "colleges"[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "references"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "references"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."references_id_seq"[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "enrollments"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "enrollments" ("high_school_approved", "created_at", "updated_at", "id", "athlete_id", "high_school_id") VALUES ('t', '2018-06-04 03:57:48.746860', '2018-06-04 03:57:48.746860', 611703988, 3900196, 179264526)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "enrollments"[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "addresses"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "addresses" ("line1", "city", "state", "country", "zip", "formatted_address", "created_at", "updated_at", "id", "owner_type", "owner_id") VALUES ('1 Selma Ave', 'Webster Groves', 'MO', 'USA', '63119', '1 Selma Ave, Webster Groves, MO 63119', '2018-06-04 03:57:48.752044', '2018-06-04 03:57:48.752044', 1067509126, 'College', 718964484)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "addresses" ("line1", "city", "state", "country", "zip", "formatted_address", "created_at", "updated_at", "id", "owner_type", "owner_id") VALUES ('100 Selma Ave', 'Webster Groves', 'MO', 'USA', '63119', '100 Selma Ave, Webster Groves, MO 63119', '2018-06-04 03:57:48.752044', '2018-06-04 03:57:48.752044', 704881815, 'HighSchool', 179264526)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "addresses"[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "connections"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "connections" ("athlete_approved", "college_approved", "letter_of_intent_signed", "committed", "created_at", "updated_at", "id", "athlete_id", "college_id") VALUES ('t', 't', 'f', 'f', '2018-06-04 03:57:48.757721', '2018-06-04 03:57:48.757721', 558303765, 3900196, 718964484)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "connections"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "strong_safeties"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "strong_safeties"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT min_value FROM "public"."strong_safeties_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "punt_returners"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "punt_returners"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT min_value FROM "public"."punt_returners_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "fullbacks"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "fullbacks"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."fullbacks_id_seq"[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "outside_linebackers"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "outside_linebackers"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."outside_linebackers_id_seq"[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "right_tackles"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "right_tackles"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."right_tackles_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "centers"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "centers" ("season", "pancakes", "sacks_allowed", "created_at", "updated_at", "id") VALUES (2013, 6, 1, 'now', 'now', 35993429)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "centers" ("season", "pancakes", "sacks_allowed", "created_at", "updated_at", "id") VALUES (2015, 6, 1, 'now', 'now', 726045287)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "centers" ("season", "pancakes", "sacks_allowed", "created_at", "updated_at", "id") VALUES (2016, 6, 1, 'now', 'now', 844088287)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "centers"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "defensive_ends"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "defensive_ends"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT min_value FROM "public"."defensive_ends_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "running_backs"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "running_backs" ("season", "rushing_yards", "rushing_touchdowns", "receiving_yards", "receiving_touchdowns", "created_at", "updated_at", "id") VALUES (2013, 50, 4, 70, 3, 'now', 'now', 505436969)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "running_backs" ("season", "rushing_yards", "rushing_touchdowns", "receiving_yards", "receiving_touchdowns", "created_at", "updated_at", "id") VALUES (2014, 50, 4, 70, 3, 'now', 'now', 4509324)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "running_backs" ("season", "rushing_yards", "rushing_touchdowns", "receiving_yards", "receiving_touchdowns", "created_at", "updated_at", "id") VALUES (2015, 50, 4, 70, 3, 'now', 'now', 927202847)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "running_backs" ("season", "rushing_yards", "rushing_touchdowns", "receiving_yards", "receiving_touchdowns", "created_at", "updated_at", "id") VALUES (2016, 50, 4, 70, 3, 'now', 'now', 776646567)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "running_backs"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "left_tackles"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "left_tackles"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT min_value FROM "public"."left_tackles_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "kick_returners"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect MAX("id") from "kick_returners"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT min_value FROM "public"."kick_returners_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "middle_linebackers"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect MAX("id") from "middle_linebackers"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."middle_linebackers_id_seq"[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "guards"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect MAX("id") from "guards"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."guards_id_seq"[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "right_guards"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect MAX("id") from "right_guards"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."right_guards_id_seq"[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "left_guards"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect MAX("id") from "left_guards"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."left_guards_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "free_safeties"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "free_safeties"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."free_safeties_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "defensive_tackles"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect MAX("id") from "defensive_tackles"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT min_value FROM "public"."defensive_tackles_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "nose_tackles"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "nose_tackles"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT min_value FROM "public"."nose_tackles_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "wide_receivers"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "wide_receivers"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."wide_receivers_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "inside_linebackers"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect MAX("id") from "inside_linebackers"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."inside_linebackers_id_seq"[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "tackles"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect MAX("id") from "tackles"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."tackles_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "quarterbacks"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "quarterbacks" ("season", "passing_yards", "passing_touchdowns", "rushing_yards", "rushing_touchdowns", "created_at", "updated_at", "id") VALUES (2013, 180, 8, 80, 2, 'now', 'now', 801653172)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "quarterbacks" ("season", "passing_yards", "passing_touchdowns", "rushing_yards", "rushing_touchdowns", "created_at", "updated_at", "id") VALUES (2014, 180, 8, 80, 2, 'now', 'now', 833410073)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "quarterbacks" ("season", "passing_yards", "passing_touchdowns", "rushing_yards", "rushing_touchdowns", "created_at", "updated_at", "id") VALUES (2015, 180, 8, 80, 2, 'now', 'now', 111928452)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "quarterbacks" ("season", "passing_yards", "passing_touchdowns", "rushing_yards", "rushing_touchdowns", "created_at", "updated_at", "id") VALUES (2016, 180, 8, 80, 2, 'now', 'now', 530756924)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "quarterbacks"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "kickers"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect MAX("id") from "kickers"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."kickers_id_seq"[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "tight_ends"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect MAX("id") from "tight_ends"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."tight_ends_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "cornerbacks"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "cornerbacks"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."cornerbacks_id_seq"[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "punters"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "punters"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."punters_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "messages"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."messages_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "articles"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "articles" ("title", "description", "raw_url", "created_at", "updated_at", "id", "athlete_id") VALUES ('Completely Awesome Article', 'One of, if not *the* best article ever written.', 'http://bit.ly/IqT6zt', '2018-06-04 03:57:48.814998', '2018-06-04 03:57:48.814998', 19769223, 3900196)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "articles"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "coaches"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "coaches" ("first_name", "last_name", "role", "role_name", "bio", "created_at", "updated_at", "id") VALUES ('HS', 'Coach', 1, 'Head Coach', 'He''s witty, affectionate, helpful and perhaps a little too harsh. Which isn''t out of the ordinary for someone with his position. He was born in an average family in a developing port. He lived happily until he was about 16 years old, but at that point things changed. He started playing football.', '2018-06-04 03:57:48.819873', '2018-06-04 03:57:48.819873', 706170480)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "coaches" ("first_name", "last_name", "role", "role_name", "bio", "created_at", "updated_at", "id") VALUES ('College', 'Coach', 1, 'Head Coach', 'He''s witty, affectionate, helpful and perhaps a little too harsh. Which isn''t out of the ordinary for someone with his position. He was born in an average family in a developing port. He lived happily until he was about 16 years old, but at that point things changed. He started playing football.', '2018-06-04 03:57:48.819873', '2018-06-04 03:57:48.819873', 644468115)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "coaches"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "athletes"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "athletes" ("first_name", "last_name", "jersey_number", "height", "weight", "primary_position", "class_of", "created_at", "updated_at", "id") VALUES ('Athletic', 'Athlete', 10, 60, 150, 'QB', 2017, '2018-06-04 03:57:48.824757', '2018-06-04 03:57:48.824757', 3900196)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mselect MAX("id") from "athletes"[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "notifications"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "notifications"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT min_value FROM "public"."notifications_id_seq"[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "phone_numbers"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "phone_numbers"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT min_value FROM "public"."phone_numbers_id_seq"[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "high_schools"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "high_schools" ("name", "enrollment", "team_record", "mascot", "offensive_schema", "defensive_schema", "school_email", "created_at", "updated_at", "id") VALUES ('Standard High School', 1499, '9-3', 'Penguin', 'We get the ball into their endzone!', 'We don''t let them breathe.', 'high_school@example.com', '2018-06-04 03:57:48.834393', '2018-06-04 03:57:48.834393', 179264526)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "high_schools"[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "highlights"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "highlights" ("title", "description", "raw_url", "created_at", "updated_at", "id", "highlightable_type", "highlightable_id") VALUES ('Completely Awesome Video', 'Probably the best football video ever', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2018-06-04 03:57:48.839857', '2018-06-04 03:57:48.839857', 569836226, 'Athlete', 3900196)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mselect MAX("id") from "highlights"[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "affiliations"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "affiliations" ("organization_type", "organization_approved", "created_at", "updated_at", "id", "coach_id", "organization_id") VALUES ('HighSchool', 't', '2018-06-04 03:57:48.845876', '2018-06-04 03:57:48.845876', 638121974, 706170480, 179264526)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "affiliations" ("organization_type", "organization_approved", "created_at", "updated_at", "id", "coach_id", "organization_id") VALUES ('College', 't', '2018-06-04 03:57:48.845876', '2018-06-04 03:57:48.845876', 480054703, 644468115, 718964484)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "affiliations"[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "stats"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 455915807, 3900196, 'Position::Quarterback', 801653172)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 88616126, 3900196, 'Position::Quarterback', 833410073)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 844045353, 3900196, 'Position::Quarterback', 111928452)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 726027669, 3900196, 'Position::Quarterback', 530756924)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 717529986, 3900196, 'Position::RunningBack', 505436969)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 882914851, 3900196, 'Position::RunningBack', 4509324)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 61277878, 3900196, 'Position::RunningBack', 927202847)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 447633170, 3900196, 'Position::RunningBack', 776646567)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 761506224, 3900196, 'Position::Center', 35993429)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 67112092, 3900196, 'Position::Center', 726045287)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "stats" ("created_at", "updated_at", "id", "athlete_id", "position_type", "position_id") VALUES ('2018-06-04 03:57:48.851737', '2018-06-04 03:57:48.851737', 487152928, 3900196, 'Position::Center', 844088287)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "stats"[0m
+  [1m[36mFixture Delete (0.8ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "role", "created_at", "updated_at", "id", "profile_type", "profile_id") VALUES ('athlete@example.com', '$2a$10$7X1wl8aEUT88dCb.x2S.r.9dsVk6TNQCCkzIuCcyFNfXNXPtMwOcW', 1, '2018-06-04 03:57:48.860156', '2018-06-04 03:57:48.860156', 809460748, 'Athlete', 3900196)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "role", "created_at", "updated_at", "id", "profile_type", "profile_id") VALUES ('high_school_coach@example.com', '$2a$10$qZrZ7x14helS2IqXdc8Ze.CWpYwS9MvJThHIxdKA000qXS9ISTTCq', 1, '2018-06-04 03:57:48.860156', '2018-06-04 03:57:48.860156', 912547608, 'Coach', 706170480)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "role", "created_at", "updated_at", "id", "profile_type", "profile_id") VALUES ('college_coach@example.com', '$2a$10$Kojbnu53Ub0p0w0ijA8Gvefv6Irio8H5UZnjzpaQZL5fafI.rrnzi', 1, '2018-06-04 03:57:48.860156', '2018-06-04 03:57:48.860156', 200726649, 'Coach', 644468115)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "role", "created_at", "updated_at", "id") VALUES ('admin@example.com', '$2a$10$yGrTZO1nWNyoz2uMYVck8eQbYZ5BrGkvwXv3TTwGkzxr07QBgGITe', 2, '2018-06-04 03:57:48.860156', '2018-06-04 03:57:48.860156', 135138680)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect MAX("id") from "users"[0m
+  [1m[35m (11.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "high_schools" ENABLE TRIGGER ALL;ALTER TABLE "athletes" ENABLE TRIGGER ALL;ALTER TABLE "colleges" ENABLE TRIGGER ALL;ALTER TABLE "references" ENABLE TRIGGER ALL;ALTER TABLE "connections" ENABLE TRIGGER ALL;ALTER TABLE "notifications" ENABLE TRIGGER ALL;ALTER TABLE "quarterbacks" ENABLE TRIGGER ALL;ALTER TABLE "running_backs" ENABLE TRIGGER ALL;ALTER TABLE "wide_receivers" ENABLE TRIGGER ALL;ALTER TABLE "tight_ends" ENABLE TRIGGER ALL;ALTER TABLE "fullbacks" ENABLE TRIGGER ALL;ALTER TABLE "defensive_tackles" ENABLE TRIGGER ALL;ALTER TABLE "defensive_ends" ENABLE TRIGGER ALL;ALTER TABLE "nose_tackles" ENABLE TRIGGER ALL;ALTER TABLE "inside_linebackers" ENABLE TRIGGER ALL;ALTER TABLE "outside_linebackers" ENABLE TRIGGER ALL;ALTER TABLE "middle_linebackers" ENABLE TRIGGER ALL;ALTER TABLE "free_safeties" ENABLE TRIGGER ALL;ALTER TABLE "strong_safeties" ENABLE TRIGGER ALL;ALTER TABLE "punters" ENABLE TRIGGER ALL;ALTER TABLE "punt_returners" ENABLE TRIGGER ALL;ALTER TABLE "kickers" ENABLE TRIGGER ALL;ALTER TABLE "kick_returners" ENABLE TRIGGER ALL;ALTER TABLE "centers" ENABLE TRIGGER ALL;ALTER TABLE "guards" ENABLE TRIGGER ALL;ALTER TABLE "left_guards" ENABLE TRIGGER ALL;ALTER TABLE "right_guards" ENABLE TRIGGER ALL;ALTER TABLE "tackles" ENABLE TRIGGER ALL;ALTER TABLE "left_tackles" ENABLE TRIGGER ALL;ALTER TABLE "right_tackles" ENABLE TRIGGER ALL;ALTER TABLE "cornerbacks" ENABLE TRIGGER ALL;ALTER TABLE "addresses" ENABLE TRIGGER ALL;ALTER TABLE "articles" ENABLE TRIGGER ALL;ALTER TABLE "coaches" ENABLE TRIGGER ALL;ALTER TABLE "messages" ENABLE TRIGGER ALL;ALTER TABLE "conversations" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "stats" ENABLE TRIGGER ALL;ALTER TABLE "votes" ENABLE TRIGGER ALL;ALTER TABLE "highlights" ENABLE TRIGGER ALL;ALTER TABLE "phone_numbers" ENABLE TRIGGER ALL;ALTER TABLE "enrollments" ENABLE TRIGGER ALL;ALTER TABLE "affiliations" ENABLE TRIGGER ALL[0m
+  [1m[35m (8.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 127.0.0.1 at 2018-06-04 11:23:55 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (3.6ms)
+  Rendered application/_navbar.html.erb (0.7ms)
+  Rendered application/_header.html.erb (3.0ms)
+  Rendered application/_notices.html.erb (0.2ms)
+  Rendered application/_footer.html.erb (0.9ms)
+  Rendered application/_mobile_nav.html.erb (1.2ms)
+  Rendered application/_search.html.erb (0.2ms)
+Completed 200 OK in 5594ms (Views: 5584.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery-ui.self-f87e3d821a8eacd8a003780180ac638a8bc68cdf6fbb11c3be75ae79c0991541.css?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/select2.self-c6ac55e050e3e6db253b3e8c575de97675e07fade527056269d9fffdc88a988b.css?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/font-awesome.self-2a86d2017f4b74f22943750b3b50b9cb753581bab96cbdaaf2df53f4c04c995b.css?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/application.self-7caf96c24d39d6b0f05653ca56022d2dea33f68449eac433fb07209e2db07757.css?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/main.self-57819527f89a0b8b1cc11fa357f2de4a2818148a8e76857dd109b970552a2fbc.css?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/jquery.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/jquery-ui/jquery-ui.self-bac161e5cdca8c4d90a254b8a05bbf6fe02083b019e0ff9bf3d5602a918d6fbf.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/jquery-ui.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/select2.self-3d0dca634dc5f4aee8c2dddef05674d9a674214500fd7e89959dc9e7251bb717.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/turbolinks.self-2db6ec539b9190f75e1d477b305df53d12904d5cafdd47c7ffd91ba25cbec128.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/selects.self-26f91e8b3b775d2e662f73f2ca0b83c2c55ca5c07174e9973d10226870f59e47.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/countUp.self-ab4e7c5fa58adf513c9907783db431a6c42192ec98150a1a5ae08b666ba1bbdc.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/athletes.self-2d343ac90a123e63a7833662b8f0637517d50cf260f70cc5f4f04e1d4f2c6f66.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/action_cable.self-5454023407ffec0d29137c7110917e1e745525ae9afbc05f52104c4cd6597429.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/cable.self-e475a14c2de96c3e8b6ec198f31d9dce665cb56a1de35233ff6b6e4aed8af083.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/channels/conversation.self-86b77ddd370aa4613bae90dcdacdd889348c8e34a12e46925d0fc0812daa2e03.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/coaches.self-61dcc5a47d9e1992632e4def960b4723177fb7ee44ee518516219690c5b94199.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/conversations.self-1a507adeaf76f292887cae7bd687a8c48f8f44d38ddec371f5e61d983ade355b.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/messages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/enrollments.self-9f5e20e49034294870deb026739a03c8d3d61362cb239248b2bc5108e5e02c5e.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/realtime_forms.self-a4cae2744a42c23872520fee65015f6890c6dc4f38682013d563eff2bcb44cb4.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/schools.self-56581e938a0bb97e9cf964e5662e351591e047f772744ba5b716fe3417ffd9e6.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/rb_logo-d26956946f47c83481a7b6a875bf57af2bea15ec70dd85d5fdfb0a8e3b9aea13.png" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/application.self-774e0e1c4d75e96adabd354882148516e0d88179c44221bcf9d3e9c5bd621883.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/rb_logo_small-cc9c7cddf2cebfffb5d6c57b8cf5f661439532bdb78ce94f8e715b6bc06e32bb.png" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/rb_logo_small_black-6f1b59ea86401f8fdf9d230de140d332320c841f74e4b1d0d80e3dcf8b6d7e81.png" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/jquery/jquery.self-5af507e253c37e9c9dcf65064fc3f93795e6e28012780579975a4d709f4074ad.js?body=1" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/home/play.jpg" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/assets/home/hero.png" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:24:01 +0700
+Processing by HomeController#update_online_time as */*
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+[Rollbar] Reporting exception: undefined method `update_columns' for nil:NilClass
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=252d7782-3ffd-4305-aeb6-10a10405c275 (only available if report was successful)
+[Rollbar] Exception uuid saved in env: 252d7782-3ffd-4305-aeb6-10a10405c275
+  
+NoMethodError (undefined method `update_columns' for nil:NilClass):
+  
+app/controllers/home_controller.rb:20:in `update_online_time'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.6ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.4ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.4ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (12.5ms)
+Started GET "/highlights/search" for 127.0.0.1 at 2018-06-04 11:24:07 +0700
+Processing by Highlights::SearchesController#index as HTML
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms)
+
+
+[Rollbar] Reporting exception: Failed to open TCP connection to localhost:9200 (Connection refused - connect(2) for "localhost" port 9200)
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=e7042e6e-a511-4c74-b17b-38e9e39895f3 (only available if report was successful)
+[Rollbar] Exception uuid saved in env: e7042e6e-a511-4c74-b17b-38e9e39895f3
+  
+Faraday::ConnectionFailed (Failed to open TCP connection to localhost:9200 (Connection refused - connect(2) for "localhost" port 9200)):
+  
+app/models/highlight/search.rb:9:in `search'
+app/controllers/highlights/searches_controller.rb:3:in `index'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.1ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (15.6ms)
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:24:11 +0700
+Processing by HomeController#update_online_time as */*
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+[Rollbar] Reporting exception: undefined method `update_columns' for nil:NilClass
+Started GET "/" for 127.0.0.1 at 2018-06-04 11:24:11 +0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+  Rendered application/_navbar.html.erb (0.7ms)
+  Rendered application/_header.html.erb (3.1ms)
+  Rendered application/_notices.html.erb (1.2ms)
+  Rendered application/_footer.html.erb (1.0ms)
+  Rendered application/_mobile_nav.html.erb (0.7ms)
+  Rendered application/_search.html.erb (0.2ms)
+Completed 200 OK in 88ms (Views: 86.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home/play.jpg" for 127.0.0.1 at 2018-06-04 11:24:11 +0700
+Started GET "/assets/home/hero.png" for 127.0.0.1 at 2018-06-04 11:24:11 +0700
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:24:11 +0700
+Processing by HomeController#update_online_time as */*
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+[Rollbar] Reporting exception: undefined method `update_columns' for nil:NilClass
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=c2b45032-df48-4164-ae6c-3ea95f390985 (only available if report was successful)
+[Rollbar] Exception uuid saved in env: c2b45032-df48-4164-ae6c-3ea95f390985
+  
+NoMethodError (undefined method `update_columns' for nil:NilClass):
+  
+app/controllers/home_controller.rb:20:in `update_online_time'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.3ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.9ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.6ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (12.2ms)
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=57b28c4a-e464-45d8-8244-8b26214ad42e (only available if report was successful)
+[Rollbar] Exception uuid saved in env: 57b28c4a-e464-45d8-8244-8b26214ad42e
+  
+NoMethodError (undefined method `update_columns' for nil:NilClass):
+  
+app/controllers/home_controller.rb:20:in `update_online_time'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.5ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.5ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.5ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (14.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-06-04 11:24:48 +0700
+Processing by Accounts::RegistrationsController#new as HTML
+  Rendering accounts/registrations/new.html.erb within layouts/application
+  Rendered accounts/shared/_links.html.erb (1.1ms)
+  Rendered accounts/registrations/new.html.erb within layouts/application (18.8ms)
+  Rendered application/_navbar.html.erb (0.7ms)
+  Rendered application/_header.html.erb (5.0ms)
+  Rendered application/_notices.html.erb (0.3ms)
+  Rendered application/_footer.html.erb (0.9ms)
+  Rendered application/_mobile_nav.html.erb (0.8ms)
+  Rendered application/_search.html.erb (0.2ms)
+Completed 200 OK in 171ms (Views: 94.1ms | ActiveRecord: 18.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:24:48 +0700
+Processing by HomeController#update_online_time as */*
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/illustrations/green_game_01-7c6190f21fe89157bdcc91ff4f31c001bdc4b05452c1931995e1a706b43d33fb.jpg" for 127.0.0.1 at 2018-06-04 11:24:48 +0700
+[Rollbar] Reporting exception: undefined method `update_columns' for nil:NilClass
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=764de804-2364-46ce-975b-c71ca6d37295 (only available if report was successful)
+[Rollbar] Exception uuid saved in env: 764de804-2364-46ce-975b-c71ca6d37295
+  
+NoMethodError (undefined method `update_columns' for nil:NilClass):
+  
+app/controllers/home_controller.rb:20:in `update_online_time'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.3ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.3ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.5ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (11.4ms)
+Started POST "/users" for 127.0.0.1 at 2018-06-04 11:24:55 +0700
+Processing by Accounts::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wpr9PkOGJbOsI9oL2SeKLjL+tR90SyfBPJ2tEwCOQfNEPj3t5dPkRFz4VnYux4+0JAxfX/uN6VbXkCXHt8/+Cw==", "user"=>{"email"=>"huynhngoccanh9@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "huynhngoccanh9@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering accounts/registrations/new.html.erb within layouts/application
+  Rendered accounts/shared/_links.html.erb (0.6ms)
+  Rendered accounts/registrations/new.html.erb within layouts/application (3.0ms)
+  Rendered application/_navbar.html.erb (0.9ms)
+  Rendered application/_header.html.erb (7.1ms)
+  Rendered application/_notices.html.erb (0.4ms)
+  Rendered application/_footer.html.erb (1.0ms)
+  Rendered application/_mobile_nav.html.erb (1.4ms)
+  Rendered application/_search.html.erb (0.2ms)
+Completed 200 OK in 434ms (Views: 95.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:24:56 +0700
+Processing by HomeController#update_online_time as */*
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+[Rollbar] Reporting exception: undefined method `update_columns' for nil:NilClass
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=f04f68a4-8a7d-409f-9661-0692e0366c40 (only available if report was successful)
+[Rollbar] Exception uuid saved in env: f04f68a4-8a7d-409f-9661-0692e0366c40
+  
+NoMethodError (undefined method `update_columns' for nil:NilClass):
+  
+app/controllers/home_controller.rb:20:in `update_online_time'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.4ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.5ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.5ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (13.8ms)
+Started POST "/users" for 127.0.0.1 at 2018-06-04 11:25:04 +0700
+Processing by Accounts::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aT8IMzGeC98OOWjcbcVqnh8gp+VSejco+IyP3pQk4XLZVNGF7SsU2WnLQU8JZMjOHo4tlpVM4cyDYb9kcJq8Fw==", "user"=>{"email"=>"huynhngoccanh9@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "huynhngoccanh9@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "huynhngoccanh9@gmail.com"], ["encrypted_password", "$2a$10$X1OgtYqIZ71PLjtYXTOpb.TSEte74cTp99USlVZjZ9kmY4u2W8RoW"], ["created_at", "2018-06-04 04:25:04.236773"], ["updated_at", "2018-06-04 04:25:04.236773"]]
+  [1m[35m (16.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = $1, "current_sign_in_at" = $2, "last_sign_in_at" = $3, "current_sign_in_ip" = $4, "last_sign_in_ip" = $5, "updated_at" = $6 WHERE "users"."id" = $7[0m  [["sign_in_count", 1], ["current_sign_in_at", "2018-06-04 04:25:04.255524"], ["last_sign_in_at", "2018-06-04 04:25:04.255524"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["updated_at", "2018-06-04 04:25:04.256358"], ["id", 912547609]]
+  [1m[35m (4.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/athletes/registrations/new
+Completed 302 Found in 112ms (ActiveRecord: 23.2ms)
+
+
+Started GET "/athletes/registrations/new" for 127.0.0.1 at 2018-06-04 11:25:04 +0700
+Processing by Athletes::RegistrationsController#new as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  Rendering athletes/registrations/new.html.erb within layouts/application
+  Rendered athletes/registrations/new.html.erb within layouts/application (9.7ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "notifications" WHERE "notifications"."recipient_id" = 912547609 AND "notifications"."read_at" IS NULL[0m
+  Rendered navigation/_notification_badge.html.erb (4.7ms)
+  Rendered application/_navbar.html.erb (6.9ms)
+  Rendered application/_header.html.erb (10.5ms)
+  Rendered application/_notices.html.erb (0.4ms)
+  Rendered application/_footer.html.erb (2.5ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notifications" WHERE "notifications"."recipient_id" = 912547609 AND "notifications"."read_at" IS NULL[0m
+  Rendered navigation/_notification_badge.html.erb (0.6ms)
+  Rendered application/_mobile_nav.html.erb (2.1ms)
+  Rendered application/_search.html.erb (0.3ms)
+Completed 200 OK in 123ms (Views: 97.4ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/assets/dev/avatar-2123daa8fd90d76d590a3d281d51f63b0c87db8f18ac2072548008a29d049051.png" for 127.0.0.1 at 2018-06-04 11:25:04 +0700
+Started GET "/assets/icons/chevron-down.png" for 127.0.0.1 at 2018-06-04 11:25:04 +0700
+Started GET "/assets/fontawesome-webfont-2adefcbc041e7d18fcf2d417879dc5a09997aa64d675b7a3c4b6ce33da13f3fe.woff2" for 127.0.0.1 at 2018-06-04 11:25:04 +0700
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:25:04 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (9.3ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:25:04.509521' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 89ms (ActiveRecord: 11.2ms)
+
+
+Started POST "/athletes/registrations" for 127.0.0.1 at 2018-06-04 11:25:37 +0700
+Processing by Athletes::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"GLbokSFPQn/En2rj6VE6jtktzSpqzUlu0ITBJ0idUQ+o3TEn/fpdeaNtQ3CN8Jje2INHWa37n4qrafGdrCMMag==", "athlete"=>{"first_name"=>"canh", "last_name"=>"huynh", "primary_position"=>"DE", "jersey_number"=>"15", "class_of"=>"2019", "height"=>"72", "weight"=>"185", "gpa"=>"6200", "display_gpa"=>"0"}, "commit"=>"Create Profile"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "athletes" ("first_name", "last_name", "height", "weight", "primary_position", "jersey_number", "class_of", "created_at", "updated_at", "gpa", "display_gpa") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["first_name", "canh"], ["last_name", "huynh"], ["height", 72], ["weight", 185], ["primary_position", "DE"], ["jersey_number", 15], ["class_of", 2019], ["created_at", "2018-06-04 04:25:37.182776"], ["updated_at", "2018-06-04 04:25:37.182776"], ["gpa", "6200.0"], ["display_gpa", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 3.1ms)
+
+
+[Rollbar] Reporting exception: PG::NumericValueOutOfRange: ERROR:  numeric field overflow
+DETAIL:  A field with precision 3, scale 2 must round to an absolute value less than 10^1.
+: INSERT INTO "athletes" ("first_name", "last_name", "height", "weight", "primary_position", "jersey_number", "class_of", "created_at", "updated_at", "gpa", "display_gpa") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=e0756af3-7cd0-41b0-b613-2d5ed8ed0c18 (only available if report was successful)
+[Rollbar] Exception uuid saved in env: e0756af3-7cd0-41b0-b613-2d5ed8ed0c18
+  
+ActiveRecord::StatementInvalid (PG::NumericValueOutOfRange: ERROR:  numeric field overflow
+DETAIL:  A field with precision 3, scale 2 must round to an absolute value less than 10^1.
+: INSERT INTO "athletes" ("first_name", "last_name", "height", "weight", "primary_position", "jersey_number", "class_of", "created_at", "updated_at", "gpa", "display_gpa") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"):
+  
+app/controllers/athletes/registrations_controller.rb:25:in `create'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.7ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (16.4ms)
+Started GET "/highlights/search" for 127.0.0.1 at 2018-06-04 11:25:47 +0700
+Processing by Highlights::SearchesController#index as HTML
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 3.4ms)
+
+
+[Rollbar] Reporting exception: Failed to open TCP connection to localhost:9200 (Connection refused - connect(2) for "localhost" port 9200)
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=00a6953f-78d4-495b-9dd8-19a37bc8db37 (only available if report was successful)
+[Rollbar] Exception uuid saved in env: 00a6953f-78d4-495b-9dd8-19a37bc8db37
+  
+Faraday::ConnectionFailed (Failed to open TCP connection to localhost:9200 (Connection refused - connect(2) for "localhost" port 9200)):
+  
+app/models/highlight/search.rb:9:in `search'
+app/controllers/highlights/searches_controller.rb:3:in `index'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.5ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.4ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (16.0ms)
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:26:41 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:26:41.436910' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 84ms (ActiveRecord: 17.2ms)
+
+
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=ba6ea46c-941c-4288-b842-7941cc3f9e3f (only available if report was successful)
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:27:41 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (19.2ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:27:41.879334' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 118ms (ActiveRecord: 21.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:28:41 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:28:41.873260' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 82ms (ActiveRecord: 14.2ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:29:41 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (8.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:29:41.876119' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 102ms (ActiveRecord: 9.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:30:41 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:30:41.876238' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 109ms (ActiveRecord: 17.2ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:31:41 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (15.5ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:31:41.875387' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 88ms (ActiveRecord: 15.9ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:32:41 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (34.0ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:32:41.866304' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 125ms (ActiveRecord: 34.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:33:41 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (11.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:33:41.874991' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 79ms (ActiveRecord: 12.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:34:41 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (14.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:34:41.879174' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 104ms (ActiveRecord: 15.8ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:35:41 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.0ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:35:41.874618' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 95ms (ActiveRecord: 18.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:35:51 +0700
+Processing by HomeController#update_online_time as */*
+Started GET "/athletes/registrations/new" for 127.0.0.1 at 2018-06-04 11:35:51 +0700
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+Processing by Athletes::RegistrationsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  Rendering athletes/registrations/new.html.erb within layouts/application
+  Rendered athletes/registrations/new.html.erb within layouts/application (8.0ms)
+  [1m[35mSQL (10.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:35:51.842881' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 101ms (ActiveRecord: 11.8ms)
+
+
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "notifications" WHERE "notifications"."recipient_id" = 912547609 AND "notifications"."read_at" IS NULL[0m
+  Rendered navigation/_notification_badge.html.erb (1.3ms)
+  Rendered application/_navbar.html.erb (3.1ms)
+  Rendered application/_header.html.erb (7.1ms)
+  Rendered application/_notices.html.erb (0.3ms)
+  Rendered application/_footer.html.erb (0.9ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notifications" WHERE "notifications"."recipient_id" = 912547609 AND "notifications"."read_at" IS NULL[0m
+  Rendered navigation/_notification_badge.html.erb (0.5ms)
+  Rendered application/_mobile_nav.html.erb (1.4ms)
+  Rendered application/_search.html.erb (0.2ms)
+Completed 200 OK in 155ms (Views: 152.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/icons/chevron-down.png" for 127.0.0.1 at 2018-06-04 11:35:52 +0700
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:35:52 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (6.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:35:52.212004' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 97ms (ActiveRecord: 6.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:36:52 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.6ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:36:52.888696' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 110ms (ActiveRecord: 20.2ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:37:52 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (12.0ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:37:52.872994' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 89ms (ActiveRecord: 12.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:38:52 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (12.6ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:38:52.870358' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 84ms (ActiveRecord: 13.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:39:52 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (15.5ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:39:52.885349' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 150ms (ActiveRecord: 17.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:40:52 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (9.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:40:52.879310' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 103ms (ActiveRecord: 10.9ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:41:52 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:41:52.870839' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 94ms (ActiveRecord: 18.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:42:52 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (14.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:42:52.882487' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 181ms (ActiveRecord: 15.8ms)
+
+
+Started GET "/athletes/registrations/new" for 127.0.0.1 at 2018-06-04 11:42:59 +0700
+Processing by Athletes::RegistrationsController#new as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  Rendering athletes/registrations/new.html.erb within layouts/application
+  Rendered athletes/registrations/new.html.erb within layouts/application (11.3ms)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "notifications" WHERE "notifications"."recipient_id" = 912547609 AND "notifications"."read_at" IS NULL[0m
+  Rendered navigation/_notification_badge.html.erb (1.1ms)
+  Rendered application/_navbar.html.erb (2.8ms)
+  Rendered application/_header.html.erb (7.8ms)
+  Rendered application/_notices.html.erb (0.3ms)
+  Rendered application/_footer.html.erb (1.0ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notifications" WHERE "notifications"."recipient_id" = 912547609 AND "notifications"."read_at" IS NULL[0m
+  Rendered navigation/_notification_badge.html.erb (0.6ms)
+  Rendered application/_mobile_nav.html.erb (2.2ms)
+  Rendered application/_search.html.erb (0.2ms)
+Completed 200 OK in 96ms (Views: 90.0ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/icons/chevron-down.png" for 127.0.0.1 at 2018-06-04 11:43:00 +0700
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:43:00 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (41.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:43:00.210679' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 137ms (ActiveRecord: 41.8ms)
+
+
+Started POST "/athletes/registrations" for 127.0.0.1 at 2018-06-04 11:43:16 +0700
+Processing by Athletes::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KwOlEkDgljuHBX0D8WUWh1cptT2aR7udnPPfL9v8Sr+baHyknFWJPeD3VJCVxLTXVoc/Tl1xbXnnHu+VP0IX2g==", "athlete"=>{"first_name"=>"canh", "last_name"=>"huynh", "primary_position"=>"ILB", "jersey_number"=>"14", "class_of"=>"2019", "height"=>"72", "weight"=>"165", "gpa"=>"322132131", "display_gpa"=>"0"}, "commit"=>"Create Profile"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35m (3.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "athletes" ("first_name", "last_name", "height", "weight", "primary_position", "jersey_number", "class_of", "created_at", "updated_at", "gpa", "display_gpa") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["first_name", "canh"], ["last_name", "huynh"], ["height", 72], ["weight", 165], ["primary_position", "ILB"], ["jersey_number", 14], ["class_of", 2019], ["created_at", "2018-06-04 04:43:16.598604"], ["updated_at", "2018-06-04 04:43:16.598604"], ["gpa", "322132131.0"], ["display_gpa", "f"]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 4.4ms)
+
+
+[Rollbar] Reporting exception: PG::NumericValueOutOfRange: ERROR:  numeric field overflow
+DETAIL:  A field with precision 3, scale 2 must round to an absolute value less than 10^1.
+: INSERT INTO "athletes" ("first_name", "last_name", "height", "weight", "primary_position", "jersey_number", "class_of", "created_at", "updated_at", "gpa", "display_gpa") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=9bd2ef86-41a3-4153-b8ce-df905775c58f (only available if report was successful)
+[Rollbar] Exception uuid saved in env: 9bd2ef86-41a3-4153-b8ce-df905775c58f
+  
+ActiveRecord::StatementInvalid (PG::NumericValueOutOfRange: ERROR:  numeric field overflow
+DETAIL:  A field with precision 3, scale 2 must round to an absolute value less than 10^1.
+: INSERT INTO "athletes" ("first_name", "last_name", "height", "weight", "primary_position", "jersey_number", "class_of", "created_at", "updated_at", "gpa", "display_gpa") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"):
+  
+app/controllers/athletes/registrations_controller.rb:25:in `create'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.5ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (17.0ms)
+Started POST "/athletes/registrations" for 127.0.0.1 at 2018-06-04 11:43:27 +0700
+Processing by Athletes::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KwOlEkDgljuHBX0D8WUWh1cptT2aR7udnPPfL9v8Sr+baHyknFWJPeD3VJCVxLTXVoc/Tl1xbXnnHu+VP0IX2g==", "athlete"=>{"first_name"=>"canh", "last_name"=>"huynh", "primary_position"=>"ILB", "jersey_number"=>"14", "class_of"=>"2019", "height"=>"72", "weight"=>"165", "gpa"=>"322132131", "display_gpa"=>"1"}, "commit"=>"Create Profile"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (4.0ms)[0m  [1m[32mINSERT INTO "athletes" ("first_name", "last_name", "height", "weight", "primary_position", "jersey_number", "class_of", "created_at", "updated_at", "gpa", "display_gpa") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["first_name", "canh"], ["last_name", "huynh"], ["height", 72], ["weight", 165], ["primary_position", "ILB"], ["jersey_number", 14], ["class_of", 2019], ["created_at", "2018-06-04 04:43:27.535235"], ["updated_at", "2018-06-04 04:43:27.535235"], ["gpa", "322132131.0"], ["display_gpa", "t"]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 7.0ms)
+
+
+[Rollbar] Reporting exception: PG::NumericValueOutOfRange: ERROR:  numeric field overflow
+DETAIL:  A field with precision 3, scale 2 must round to an absolute value less than 10^1.
+: INSERT INTO "athletes" ("first_name", "last_name", "height", "weight", "primary_position", "jersey_number", "class_of", "created_at", "updated_at", "gpa", "display_gpa") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=d5be7035-d243-42fe-97c2-53b9ab3ba114 (only available if report was successful)
+[Rollbar] Exception uuid saved in env: d5be7035-d243-42fe-97c2-53b9ab3ba114
+  
+ActiveRecord::StatementInvalid (PG::NumericValueOutOfRange: ERROR:  numeric field overflow
+DETAIL:  A field with precision 3, scale 2 must round to an absolute value less than 10^1.
+: INSERT INTO "athletes" ("first_name", "last_name", "height", "weight", "primary_position", "jersey_number", "class_of", "created_at", "updated_at", "gpa", "display_gpa") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"):
+  
+app/controllers/athletes/registrations_controller.rb:25:in `create'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.8ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (15.7ms)
+Started GET "/" for 127.0.0.1 at 2018-06-04 11:50:55 +0700
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.7ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "notifications" WHERE "notifications"."recipient_id" = 912547609 AND "notifications"."read_at" IS NULL[0m
+  Rendered navigation/_notification_badge.html.erb (1.0ms)
+  Rendered application/_navbar.html.erb (2.7ms)
+  Rendered application/_header.html.erb (5.1ms)
+  Rendered application/_notices.html.erb (0.3ms)
+  Rendered application/_footer.html.erb (0.9ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notifications" WHERE "notifications"."recipient_id" = 912547609 AND "notifications"."read_at" IS NULL[0m
+  Rendered navigation/_notification_badge.html.erb (0.5ms)
+  Rendered application/_mobile_nav.html.erb (1.9ms)
+  Rendered application/_search.html.erb (0.2ms)
+Completed 200 OK in 72ms (Views: 68.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/home/play.jpg" for 127.0.0.1 at 2018-06-04 11:50:55 +0700
+Started GET "/assets/home/hero.png" for 127.0.0.1 at 2018-06-04 11:50:55 +0700
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:50:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:50:55.732810' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 107ms (ActiveRecord: 19.3ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2018-06-04 11:50:58 +0700
+Processing by SchoolsController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 1.4ms)
+
+
+[Rollbar] Reporting exception: Failed to open TCP connection to localhost:9200 (Connection refused - connect(2) for "localhost" port 9200)
+[Rollbar] Scheduling item
+[Rollbar] Sending item
+[Rollbar] Success
+[Rollbar] Details: https://rollbar.com/instance/uuid?uuid=912df5a1-4bfa-4494-83e5-972b7f2a5d37 (only available if report was successful)
+[Rollbar] Exception uuid saved in env: 912df5a1-4bfa-4494-83e5-972b7f2a5d37
+  
+Faraday::ConnectionFailed (Failed to open TCP connection to localhost:9200 (Connection refused - connect(2) for "localhost" port 9200)):
+  
+app/models/college/search.rb:9:in `search'
+app/controllers/schools_controller.rb:5:in `index'
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.1ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendering /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.5ms)
+  Rendered /home/mic-02/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (15.5ms)
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:51:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (12.6ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:51:55.888847' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 118ms (ActiveRecord: 13.7ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:52:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (14.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:52:55.876171' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 81ms (ActiveRecord: 14.7ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:53:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:53:55.869937' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 116ms (ActiveRecord: 18.9ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:54:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:54:55.869965' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 81ms (ActiveRecord: 17.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:55:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (11.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:55:55.873808' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 80ms (ActiveRecord: 11.5ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:56:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (12.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:56:55.870141' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 84ms (ActiveRecord: 13.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:57:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (10.6ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:57:55.870322' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 83ms (ActiveRecord: 11.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:58:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (14.6ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:58:55.874720' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 112ms (ActiveRecord: 15.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 11:59:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 04:59:55.870134' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 95ms (ActiveRecord: 17.5ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:00:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (19.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:00:55.875595' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 94ms (ActiveRecord: 20.2ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:01:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:01:55.875102' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 96ms (ActiveRecord: 18.7ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:02:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (9.5ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:02:55.872036' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 107ms (ActiveRecord: 9.8ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:03:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:03:55.872105' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 81ms (ActiveRecord: 17.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:04:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (14.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:04:55.872885' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 90ms (ActiveRecord: 15.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:05:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (12.0ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:05:55.873647' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 76ms (ActiveRecord: 12.5ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:06:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:06:55.876710' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 86ms (ActiveRecord: 17.5ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:07:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.5ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:07:55.874366' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 83ms (ActiveRecord: 18.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:08:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:08:55.873714' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 92ms (ActiveRecord: 16.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:09:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (26.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:09:55.873467' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 92ms (ActiveRecord: 27.2ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:10:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.3ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:10:55.872508' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 90ms (ActiveRecord: 13.7ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:11:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:11:55.877551' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 83ms (ActiveRecord: 17.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:12:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (8.5ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:12:55.873062' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 75ms (ActiveRecord: 8.9ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:13:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.5ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:13:55.873347' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 95ms (ActiveRecord: 18.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:14:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.5ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:14:55.880588' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 114ms (ActiveRecord: 19.5ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:15:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (15.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:15:55.872038' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 97ms (ActiveRecord: 16.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:16:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:16:55.872565' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 89ms (ActiveRecord: 14.4ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:17:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.5ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:17:55.871575' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 85ms (ActiveRecord: 13.9ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:18:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:18:55.875644' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 91ms (ActiveRecord: 18.5ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:19:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (10.0ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:19:55.872120' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 77ms (ActiveRecord: 10.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:20:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:20:55.874119' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 89ms (ActiveRecord: 17.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:21:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (63.2ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:21:55.873418' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 132ms (ActiveRecord: 64.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:22:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (15.0ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:22:55.872329' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 91ms (ActiveRecord: 15.7ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:23:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (11.2ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:23:55.874621' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 78ms (ActiveRecord: 12.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:24:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (21.2ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:24:55.873049' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 99ms (ActiveRecord: 21.7ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:25:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:25:55.874209' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 83ms (ActiveRecord: 18.8ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:26:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.2ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:26:55.877616' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 77ms (ActiveRecord: 13.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:27:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (25.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:27:55.874229' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 112ms (ActiveRecord: 25.4ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:28:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:28:55.871003' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 91ms (ActiveRecord: 16.5ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:29:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:29:55.871533' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 90ms (ActiveRecord: 14.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:30:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (9.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:30:55.873866' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 81ms (ActiveRecord: 10.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:31:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (20.2ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:31:55.871663' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 85ms (ActiveRecord: 20.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:32:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:32:55.871593' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 93ms (ActiveRecord: 18.9ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:33:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (25.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:33:55.872060' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 111ms (ActiveRecord: 26.4ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:34:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.3ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:34:55.872730' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 85ms (ActiveRecord: 13.7ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:35:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (12.6ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:35:55.871885' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 81ms (ActiveRecord: 13.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:36:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.0ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:36:55.875906' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 83ms (ActiveRecord: 17.4ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:37:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:37:55.873350' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 97ms (ActiveRecord: 18.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:38:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (7.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:38:55.871181' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 71ms (ActiveRecord: 7.8ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:39:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (24.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:39:55.872743' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 91ms (ActiveRecord: 25.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:40:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (14.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:40:55.871036' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 111ms (ActiveRecord: 14.8ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:41:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (8.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:41:55.874815' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 73ms (ActiveRecord: 9.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:42:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:42:55.874537' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 97ms (ActiveRecord: 17.8ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:43:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:43:55.872042' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 97ms (ActiveRecord: 18.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:44:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (14.5ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:44:55.873284' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 87ms (ActiveRecord: 14.9ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:45:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (14.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:45:55.871873' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 90ms (ActiveRecord: 14.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:46:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (9.6ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:46:55.874689' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 79ms (ActiveRecord: 10.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:47:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (14.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:47:55.877757' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 81ms (ActiveRecord: 15.2ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:48:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.0ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:48:55.874725' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 88ms (ActiveRecord: 16.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:49:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:49:55.871740' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 89ms (ActiveRecord: 17.3ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:50:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:50:55.873679' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 110ms (ActiveRecord: 13.8ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:51:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (12.3ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:51:55.872605' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 86ms (ActiveRecord: 12.8ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:52:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (21.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:52:55.871334' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 106ms (ActiveRecord: 22.4ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:53:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (24.0ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:53:55.877608' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 99ms (ActiveRecord: 24.5ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:54:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (16.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:54:55.872179' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 83ms (ActiveRecord: 17.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:55:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (15.3ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:55:55.871951' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 80ms (ActiveRecord: 15.8ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:56:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (12.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:56:55.872980' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 85ms (ActiveRecord: 13.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:57:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (22.2ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:57:55.871816' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 107ms (ActiveRecord: 22.7ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:58:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:58:55.874088' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 95ms (ActiveRecord: 19.0ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 12:59:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (8.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 05:59:55.871112' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 78ms (ActiveRecord: 9.4ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:00:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:00:55.874526' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 81ms (ActiveRecord: 14.2ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:01:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.7ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:01:55.877030' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 117ms (ActiveRecord: 19.8ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:02:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (11.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:02:55.872302' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 138ms (ActiveRecord: 12.7ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:03:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (24.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:03:55.878103' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 157ms (ActiveRecord: 25.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:04:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (26.3ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:04:55.875274' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 118ms (ActiveRecord: 26.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:05:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (19.3ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:05:55.869792' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 84ms (ActiveRecord: 19.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:06:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (17.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:06:55.879582' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 97ms (ActiveRecord: 18.2ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:07:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (18.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:07:55.866461' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 81ms (ActiveRecord: 19.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:08:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.8ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:08:55.879660' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 103ms (ActiveRecord: 15.4ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:09:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (13.1ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:09:55.877779' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 103ms (ActiveRecord: 14.1ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:10:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (30.2ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:10:55.879434' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 132ms (ActiveRecord: 31.6ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:11:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (10.5ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:11:55.877778' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 97ms (ActiveRecord: 11.9ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:12:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (15.9ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:12:55.870726' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 87ms (ActiveRecord: 16.5ms)
+
+
+Started GET "/update_online_time" for 127.0.0.1 at 2018-06-04 13:13:55 +0700
+Processing by HomeController#update_online_time as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 912547609], ["LIMIT", 1]]
+  [1m[35mSQL (11.4ms)[0m  [1m[33mUPDATE "users" SET "last_online_at" = '2018-06-04 06:13:55.873549' WHERE "users"."id" = $1[0m  [["id", 912547609]]
+No template found for HomeController#update_online_time, rendering head :no_content
+Completed 204 No Content in 80ms (ActiveRecord: 11.8ms)
+
+

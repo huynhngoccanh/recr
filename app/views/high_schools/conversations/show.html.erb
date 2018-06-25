@@ -1,0 +1,8 @@
+<p>Your conversation with <%= link_to @conversation.athlete.name, @conversation.athlete %></p>
+
+<%= render @conversation.messages %>
+
+<%= form_for [@high_school, @conversation, @conversation.messages.new] do |f| %>
+  <%= f.text_area :body %>
+  <%= f.submit "Send Message" %>
+<% end %>

@@ -1,0 +1,20 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "athletes/layout/jumbotron", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "athletes/layout/navigation/administration_links", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">My Messages</h3>
+<ul class="message-list">
+  <% unless @conversations&.any? %>
+    <p>Hey - looks like you don't have any conversations going.</p>
+    <p>How about <%= link_to "exploring some colleges?", schools_path %></p>
+  <% end %>
+  <% @conversations.each do |conversation| %>
+    <li>
+      <%= link_to "Conversation with #{conversation&.organization&.name}", athlete_conversation_path(@athlete, conversation) %>
+    </li>
+  <% end %>
+</ul>

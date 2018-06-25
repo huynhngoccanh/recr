@@ -1,0 +1,19 @@
+<div class="content center_text">
+
+<h1 class="max-width">Connect with your High School</h1>
+
+<%= form_tag high_schools_selection_path do %>
+  <%= text_field_tag :high_school_name, "", placeholder: "Find your high school", data: {behavior: "high-schools-autocomplete"} %>
+
+  <p data-behavior="show-high-schools">
+    View options
+  </p>
+
+  <%= submit_tag "Connect", :class => 'primary_btn' %>
+<% end %>
+
+<div class="form_links"><%= link_to "Skip this.", new_athlete_path %></div>
+
+<div class="anchor_image"><%= image_tag('illustrations/green_game_01.jpg') %></div>
+
+</div>

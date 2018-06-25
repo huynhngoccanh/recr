@@ -1,0 +1,587 @@
+form{
+    position:relative;
+    display:block;
+    width:100%;
+    max-width:400px;
+    margin:40px auto 0 auto !important;
+    text-align:center;
+    z-index:55;
+    .field{
+        margin-top:10px;
+    }
+    input{
+        width:100%;
+        padding:20px;
+        @include font-size(1.6);
+        border:none;
+        background:#eee;
+        @include transition(color 0.6s $easeOutExpo);
+    }
+    input:focus{
+        outline:none;
+        //border:1px solid $green;
+    }
+    input[type="url"]{
+        border:none;
+        color:#aaa;
+        font-weight:300;
+        background:#eee;
+        padding:15px 20px;
+        &:focus{
+            outline:none;
+            color:$black;
+        }
+    }
+    input[type="submit"]{
+        border:none;
+        margin-top:30px;
+    }
+    input[type="checkbox"]{
+      width: auto;
+    }
+    textarea{
+        width:100%;
+        max-width:100%;
+        border:none;
+        //resize:none;
+        font-size:16px;
+        line-height:20px;
+        font-weight:300;
+        color:#aaa;
+        background:#eee;
+        padding:15px 20px;
+        margin-top:8px;
+        &:focus{
+            outline:none;
+            color:$black;
+        }
+    }
+    textarea{
+        @include transition(color 0.6s $easeOutExpo);
+    }
+    em{
+        font-size:12px;
+        color:#999;
+    }
+    .col-1-3{
+        width:32%;
+        margin:0 2% 0 0 !important;
+        float:left;
+        &:last-child{
+            margin:0 1 0 0 !important;
+        }
+    }
+    .col-1-4{
+        min-width: 170px;
+        width:23.5%;
+        margin:0 2% 2% 0 !important;
+        float:left;
+        &:last-child{
+            margin:0 0 0 0 !important;
+        }
+    }
+    .select-style {
+        font-size:18px;
+        padding: 0;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        overflow: hidden;
+        background: #eee url("icons/chevron-down.png") no-repeat right 20px center;
+    }
+
+    .select-style select {
+        padding: 14.5px 20px;
+        width: 100%;
+        font-size:16px;
+        border: none;
+        box-shadow: none;
+        background-color: transparent;
+        background-image: none;
+        -webkit-appearance: none;
+           -moz-appearance: none;
+                appearance: none;
+    }
+
+    .select-style select:focus {
+        outline: none;
+    }
+    .remember_me{
+        text-indent:-16px;
+        margin-top:5px;
+        input{
+            width:auto;
+        }
+    }
+    #error_explanation{
+        margin-top:-15px;
+        h2{
+            display:none;
+        }
+        li{
+            display:block;
+            color:red;
+        }
+    }
+    .secondary_btn{
+        margin-top:30px;
+    }
+    &.edit_stat{
+        max-width:100%;
+        margin-top:5px !important;
+        input[type="text"]{
+            width:100%;
+            padding:0;
+            height:50px;
+            text-align:center;
+            background:#eee;
+            border:none;
+            &:focus{
+                outline:none;
+                color:$black;
+            }
+        }
+        .col-1-2, .col-1-5{
+            margin-bottom:3px;
+            background:#ebebeb;
+            .athleteStats_number{
+                color:#bbb;
+            }
+            .athleteStats_category{
+                color:black;
+            }
+            .athleteStats_number, .athleteStats_category{
+                line-height:10px;
+            }
+        }
+    }
+    &.edit_highlight{
+        max-width:100%;
+        margin-top:0px !important;
+        text-align:left;
+        input[type="text"]{
+            border:none;
+            font-size:18px;
+            font-weight:700;
+            color:#aaa;
+            background:#eee;
+            padding:15px 20px;
+            &:focus{
+                outline:none;
+                color:$black;
+            }
+        }
+        textarea{
+            width:100%;
+            border:none;
+            resize:none;
+            font-size:16px;
+            line-height:20px;
+            font-weight:300;
+            color:#aaa;
+            background:#eee;
+            padding:15px 20px;
+            margin-top:8px;
+            &:focus{
+                outline:none;
+                color:$black;
+            }
+        }
+        .delete_btn{
+            position:relative;
+            float:right;
+            top:0px;
+            margin-top:-32px;
+        }
+    }
+    &.new_highlight{
+        max-width:100%;
+        padding-bottom:50px;
+        border-bottom:1px solid #ddd;
+        input[type="text"]{
+            margin-bottom:10px;
+        }
+        select{
+            background:transparent !important;
+        }
+    }
+    &.new_connection{
+        position:static;
+        display:block;
+        width:100%;
+        max-width:400px;
+        margin:0 !important;
+        text-align:left;
+        z-index:55;
+        input{
+            width:auto;
+        }
+
+    }
+    &.new_message{
+        max-width:100%;
+        margin-top:20px !important;
+        .primary_btn{
+            margin-top:5px;
+        }
+    }
+    &.edit_connection{
+        margin-top:0px !important;
+        input{
+            display:inline;
+            width:auto;
+        }
+        .delete_btn{
+            top:15px;
+        }
+    }
+    &.edit_article{
+        max-width:100%;
+        margin-top:0px !important;
+        text-align:left;
+        input[type="text"]{
+            border:none;
+            font-size:24px;
+            line-height:28px;
+            font-weight:700;
+            color:#aaa;
+            background:#eee;
+            padding:15px 20px;
+            -webkit-font-smoothing:antialiased;
+            &:focus{
+                outline:none;
+                color:$black;
+            }
+        }
+        textarea{
+            width:100%;
+            border:none;
+            resize:none;
+            font-size:16px;
+            line-height:20px;
+            font-weight:300;
+            color:#aaa;
+            background:#eee;
+            padding:15px 20px;
+            margin-top:8px;
+            &:focus{
+                outline:none;
+                color:$black;
+            }
+        }
+        .delete_btn{
+            position:relative;
+            float:right;
+            top:0px;
+            margin-top:-32px;
+        }
+    }
+    &.new_article{
+        max-width:100%;
+        padding-bottom:50px;
+        border-bottom:1px solid #ddd;
+        input[type="text"]{
+            margin-bottom:10px;
+        }
+    }
+    &.edit_reference{
+        max-width:100%;
+        margin-top:0px !important;
+        text-align:left;
+        input[type="text"], input[type="email"]{
+            border:none;
+            font-size:16px;
+            line-height:20px;
+            font-weight:400;
+            color:#aaa;
+            background:#eee;
+            padding:15px 20px;
+            margin-bottom:8px;
+            &:focus{
+                outline:none;
+                color:$black;
+            }
+        }
+        .bold_input{
+            font-size:20px;
+            line-height:24px;
+            font-weight:700;
+        }
+        textarea{
+            width:100%;
+            border:none;
+            resize:none;
+            font-size:16px;
+            line-height:20px;
+            font-weight:300;
+            color:#aaa;
+            background:#eee;
+            padding:15px 20px;
+            &:focus{
+                outline:none;
+                color:$black;
+            }
+        }
+        .delete_btn{
+            position:relative;
+            float:right;
+            top:0px;
+            margin-top:-32px;
+        }
+    }
+    &.edit_college{
+        max-width:100%;
+        margin-top:0px !important;
+        text-align:left;
+        input[type="text"], input[type="email"]{
+            border:none;
+            font-size:16px;
+            line-height:20px;
+            font-weight:400;
+            color:#aaa;
+            background:#eee;
+            padding:15px 20px;
+            &:focus{
+                outline:none;
+                color:$black;
+            }
+        }
+        .delete_btn{
+            position:relative;
+            float:right;
+            top:0px;
+            margin-top:-32px;
+        }
+    }
+    &.new_reference{
+        max-width:100%;
+        padding-bottom:50px;
+        border-bottom:1px solid #ddd;
+        input[type="text"], input[type="email"]{
+            margin-bottom:10px;
+        }
+    }
+    &.edit_athlete{
+        max-width:100%;
+        text-align:left;
+        margin-top:22px !important;
+        label{
+            display:block;
+            padding:5px 0 0 0;
+            color:#999;
+            font-size:14px;
+        }
+        .primary_btn{
+            width:100%;
+        }
+    }
+    &.performance-stats{
+        margin-top:30px;
+    }
+    &.new_high_school{
+        margin-top:15px !important;
+    }
+}
+.form_links{
+    position:relative;
+    margin-top:30px;
+    z-index:55;
+    font-size:14px;
+    a{
+        color:$green;
+        padding-bottom:1px;
+        &:hover{
+            border-bottom:1px solid $green;
+        }
+    }
+}
+.select2-container--default .select2-selection--multiple{
+    border-radius:0;
+    padding: 20px;
+    font-size: 16px;
+    border: none;
+    background: #eee;
+}
+
+
+.performanceStats-form{
+    margin-top:80px;
+    .col-1-5{
+        width:20%;
+        background:#eee;
+        margin:0;
+        border-right:3px solid white;
+        text-align:center;
+        padding:15px 0;
+        &:last-child{
+            border:none;
+        }
+    }
+    .athleteStats_number{
+        line-height:18px !important;
+    }
+    .athleteStats_number input{
+       width:100%;
+       text-align:center;
+       font-size:18px;
+       font-weight:700;
+       padding:0;
+    }
+    label{
+        padding:0 !important;
+        font-size:12px !important;
+        margin-top:-5px;
+    }
+    .primary_btn{
+        margin-top:30px;
+    }
+}
+
+#new-user-form{
+    form.new_user{
+         max-width:100%;
+         padding-bottom:50px;
+         border-bottom:1px solid #ddd;
+         input[type="text"], input[type="email"]{
+            margin-bottom:10px;
+         }
+    }
+}
+#edit-user-form{
+    form.edit_user{
+        max-width:100%;
+        margin-top:0px !important;
+        text-align:left;
+        input[type="text"]{
+            border:none;
+            font-size:18px;
+            line-height:18px;
+            font-weight:400;
+            color:#aaa;
+            background:#eee;
+            padding:15px 20px;
+            margin-top:8px;
+            -webkit-font-smoothing:antialiased;
+            &:focus{
+                outline:none;
+                color:$black;
+            }
+        }
+        .select-style{
+            margin-top:8px;
+        }
+        .delete_btn{
+            position:relative;
+            float:right;
+            top:0px;
+            margin-top:-32px;
+        }
+    }
+}
+.form-image-thumb{
+    img{
+        max-width:60px;
+        padding-right:12px;
+    }
+}
+
+.form-section{
+    padding:30px 0;
+    h3{
+        font-size:18px;
+        font-family:'Lato';
+        font-weight:700;
+        text-transform:none;
+        color:#999;
+        letter-spacing:0;
+        margin-bottom:15px;
+    }
+}
+.is_outlined {
+  border: 1px solid #d3d3d3;
+}
+.f-right{
+    width:25%;
+    float:right;
+}
+
+/* ––––––––––––––––––––––––––––––––––
+SEARCH/FILTER FORM
+–––––––––––––––––––––––––––––––––– */
+.filter-form{
+    max-width:800px;
+    .col-1{
+        position:relative;
+        margin-bottom:1%;
+        &:last-child{
+            margin-bottom:0;
+        }
+        .col-1-3{
+            width:32.666666%;
+            margin:0 1% 0 0 !important;
+            //padding:5.5px 0;
+            &:last-child{
+                margin-right:0 !important;
+            }
+        }
+        input{
+            padding:15px 20px;
+            height:43px;
+        }
+
+    }
+    .col-1-2{
+        position:relative;
+        &:first-child{
+            padding-right:5px;
+        }
+        &:last-child{
+            padding-left:5px;
+        }
+        .col-1-2{
+            width:49%;
+            margin-right:2%;
+            //padding:5.5px 0;
+            &:last-child{
+                margin-right:0;
+            }
+        }
+        input{
+            padding:15px 20px;
+        }
+        .select-style{
+            padding:0.5px 0;
+        }
+    }
+    .search_btn{
+        position:absolute;
+        top:8px;
+        right:15px;
+        font-size:18px;
+        border:none;
+        background:transparent;
+        cursor:pointer;
+        @include transition(opacity 0.8s $easeOutExpo);
+        &:focus{
+            outline:none;
+        }
+        &:hover{
+            @include opacity(0.5); 
+        }
+    }
+}
+
+
+
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+    border:none !important;
+}
+.select2-container{
+    width:100% !important;
+}
+.select2-container--default .select2-selection--multiple{
+ 
+    padding:10px 15px;
+    margin-top:10px;
+
+}

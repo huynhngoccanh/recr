@@ -1,0 +1,7 @@
+athlete_and_college_connection:
+  athlete: athlete
+  college: college
+  athlete_approved: true
+  college_approved: true
+  letter_of_intent_signed: false
+  committed: false

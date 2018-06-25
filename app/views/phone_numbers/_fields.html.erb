@@ -1,0 +1,20 @@
+<% if phone_number_form.object.errors.any? %>
+  <ul>
+    <% phone_number_form.object.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="field">
+  <%= phone_number_form.text_field :digits, placeholder: '867-5309' %>
+</div>
+<div class="field">
+  <%= phone_number_form.text_field :info, placeholder: 'Cell, Home, Office' %>
+</div>
+<div class="field">
+  <% if phone_number_form.object.persisted? %>
+    <%= phone_number_form.check_box  :_destroy %>
+    <%= phone_number_form.label :_destroy, "delete this number", style: "display:inline" %>
+  <% end %>
+</div>

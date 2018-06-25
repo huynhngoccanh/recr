@@ -1,0 +1,23 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "athletes/layout/jumbotron", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "athletes/layout/navigation/administration_links", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">My Messages</h3>
+<!-- <h4 class="message-heading">You and <strong><%= @conversation.organization.name %></strong></h4> -->
+<%= link_to '<i class="fa fa-chevron-left"></i>&nbsp; Back'.html_safe, edit_athlete_conversations_path(@athlete), :class => 'add_btn' %>
+<div class='messages'>
+  <ul class="message-thread">
+    <%= render partial: "conversations/message", collection: @conversation.messages %>
+  </ul>
+</div>
+
+<%= form_for [@athlete, @conversation, @conversation.messages.new] do |f| %>
+  <%= f.text_area :body, placeholder: 'Type your reply here', id: 'message-body' %>
+  <%= button_tag "Send Message", :class => "primary_btn", id: 'send-msg', type: :button %>
+<% end %>
+
+<div id='frame' data-user-id="<%= current_user.id %>" data-conversation-id="<%= @conversation.id %>" class='hide'>

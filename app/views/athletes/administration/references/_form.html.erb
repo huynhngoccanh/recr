@@ -1,0 +1,22 @@
+<%= form_for [@athlete, :administration, reference], data: {remote: true} do |f| %>
+  <% if reference.persisted? %>
+    <%= link_to "Delete <i class='fa fa-close'></i>".html_safe, athlete_administration_reference_path(@athlete, reference), :class => 'delete_btn', method: :delete, data: { confirm: "Are you sure?", remote: true } %>
+  <% end %>
+  <ul>
+    <% reference.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  <%= f.text_field :name, placeholder: "Name", :class => 'bold_input' %>
+  <%= f.text_field :relationship, placeholder: "What's you're relationship?" %>
+  <p>
+    <%= f.label :contact_method, "Preferred Contact Method:" %>
+    <%= f.select :contact_method, options_for_select(Reference::CONTACT_METHODS, placeholder: "Preferred contact method") %>
+  </p>
+  <%= f.email_field :email, placeholder: "Email" %>
+  <%= f.fields_for :phone_numbers do |pnf| %>
+    <%= render partial: "phone_numbers/fields", locals: { phone_number_form: pnf} %>
+  <% end %>
+
+  <%= f.button "Update", :class => 'secondary_btn', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating..."} %>
+<% end %>

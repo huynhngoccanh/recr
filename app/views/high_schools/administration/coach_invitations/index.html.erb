@@ -1,0 +1,33 @@
+<div class="container">
+  <%= link_to "back to profile", high_school_administration_affiliations_path(@high_school), class: "delete_btn" %>
+
+  <h1>Invitations</h1>
+
+  <%= form_for [@high_school, :administration, @invitation], class: "form" do |f| %>
+    <table class="table">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+      </tr>
+
+      <% 3.times do %>
+        <%= render partial: "coach_invitation_fields" %>
+      <% end %>
+
+      <tr data-behavior="new-invite-button-row">
+        <td>
+          <%= link_to add_new_invite_field_high_school_administration_coach_invitations_path(@high_school), remote: true do %>
+            <%= fa_icon "plus", text: "Add Another User" %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+
+    <br />
+    <%= f.button "Save Changes", class: "primary_btn" %>
+    <br />
+    <%= link_to "cancel", high_school_administration_affiliations_path(@high_school)  %>
+  <% end %>
+</div>
+

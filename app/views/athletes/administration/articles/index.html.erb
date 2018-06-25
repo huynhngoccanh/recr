@@ -1,0 +1,29 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "athletes/layout/jumbotron", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "athletes/layout/navigation/administration_links", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">Edit News</h3>
+<%= link_to "New article <i class='fa fa-plus'></i>".html_safe, "#", :class => 'add_btn', data: { behavior: "revealer", target: "new-article-form" } %>
+
+<div id="new-article-form" style="<%= display_new_form?(@article) %>">
+  <%= form_for [@athlete, :administration, @article] do |f| %>
+    <ul>
+      <% @article.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <%= f.text_field :title, placeholder: "Title" %>
+    <%= f.text_field :description, placeholder: "Description" %>
+    <%= f.text_field :raw_url, placeholder: "Article URL" %>
+
+    <%= f.submit 'Add Article', :class => 'primary_btn' %>
+  <% end %>
+</div>
+
+<%= render partial: "form", collection: @articles, as: :article %>
+
+<%= paginate @articles if @articles %>

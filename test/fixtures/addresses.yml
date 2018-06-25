@@ -1,0 +1,17 @@
+college_address:
+  line1: 1 Selma Ave
+  city: Webster Groves
+  state: MO
+  country: USA
+  zip: 63119
+  formatted_address: 1 Selma Ave, Webster Groves, MO 63119
+  owner: college (College)
+
+high_school_address:
+  line1: 100 Selma Ave
+  city: Webster Groves
+  state: MO
+  country: USA
+  zip: 63119
+  formatted_address: 100 Selma Ave, Webster Groves, MO 63119
+  owner: high_school (HighSchool)

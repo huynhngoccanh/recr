@@ -1,0 +1,24 @@
+<% position.stat_attributes.in_groups_of(2, nil).each do |group| %>
+
+  <% if group.compact.count == 1 %>
+    <div class="row clearfix">
+      <div class="col-1">
+        <span class="athleteStats_number" id="<%= group.first %>" data-behavior="count-up" data-value="<%= position.send(group.first) %>"><%= position.send(group.first) %></span>
+        <span class="athleteStats_category"><%= group.first.titlecase %></span>
+      </div>
+    </div>
+  <% else %>
+    <div class="row clearfix">
+      <div class="col-1-2">
+        <span class="athleteStats_number" id="<%= group.first %>" data-behavior="count-up" data-value="<%= position.send(group.first) %>"><%= position.send(group.first) %></span>
+        <span class="athleteStats_category"><%= group.first.titlecase %></span>
+      </div>
+      <% unless group.last.nil? %>
+        <div class="col-1-2">
+          <span class="athleteStats_number" id="<%= group.second %>" data-behavior="count-up" data-value="<%= position.send(group.second) %>"><%= position.send(group.second) %></span>
+          <span class="athleteStats_category"><%= group.second.titlecase %></span>
+        </div>
+      <% end %>
+      </div>
+    <% end %>
+  <% end %>

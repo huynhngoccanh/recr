@@ -1,0 +1,38 @@
+<% avatar = current_user.try(:profile).try(:avatar).try(:url) || "dev/avatar.png" %>
+<nav>
+  <div class="appMenu">
+    <ul>
+      <li><%= link_to_unless_current "Athletes", athletes_path %></li>
+      <li><%= link_to_unless_current "Film Room", search_highlights_path %></li>
+      <li><%= link_to_unless_current "Schools", schools_path %></li>
+      <% if false %>
+        <li data-behavior="toggleSearch"><i class="fa fa-search search_btn"></i></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="accountMenu">
+    <% unless user_signed_in? %>
+      <ul>
+        <li><%= link_to "Sign Up", new_user_registration_path, :class => 'green_link' %></li>
+        <li><%= link_to "Sign In", new_user_session_path %></li>
+      </ul>
+    <% else %>
+      <ul>
+        <li class="userAvatar" data-behavior="toggleMenu">
+          <%= image_tag(avatar) %> <%= display_name(current_user) %>  <i class="fa fa-chevron-down"></i>
+          <%= render "navigation/notification_badge" %>
+          <div class="userMenu">
+            <div class="userMenu_arrow"></div>
+            <ul>
+              <%= render "navigation/#{current_user.profile.class.to_s.underscore}_links" if current_user.profiled? %>
+              <li> <%= link_to "Activity", notifications_path %> </li>
+              <%= render "navigation/admin_links" if current_user.admin? %>
+              <li><%= link_to "Account", edit_user_registration_path %></li>
+              <li class="light"><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    <%end %>
+  </div>
+</nav>

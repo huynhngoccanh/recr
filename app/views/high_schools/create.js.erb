@@ -1,0 +1,12 @@
+<% if @high_school.persisted? %>
+  $("#enrollment_high_school_id").append(
+    $('<option>', {value: <%= @high_school.id %>, text: '<%= @high_school.name %>'})
+  );
+  $("#enrollment_high_school_id").val("<%= @high_school.id %>");
+  $("#new_enrollment").submit()
+<% else %>
+  $("body, html").animate({
+    scrollTop: $("[data-behavior='athlete-enrollment-add-high-school']").offset().top
+  }, 600);
+  $("[data-behavior='athlete-enrollment-high-school-form']").html("<%= j render partial: "athletes/enrollments/high_school_form" %>");
+<% end %>

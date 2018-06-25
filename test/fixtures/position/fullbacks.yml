@@ -1,0 +1,19 @@
+ #Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+#one:
+  #season: 1
+  #receiving_yards: 1
+  #receiving_touchdowns: 1
+  #rushing_yards: 1
+  #rushing_touchdowns: 1
+  #pancakes: 1
+  #sacks_allowed: 1
+
+#two:
+  #season: 1
+  #receiving_yards: 1
+  #receiving_touchdowns: 1
+  #rushing_yards: 1
+  #rushing_touchdowns: 1
+  #pancakes: 1
+  #sacks_allowed: 1

@@ -1,0 +1,15 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "athletes/layout/jumbotron", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "athletes/layout/navigation/administration_links", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">Edit My Recruitment</h3>
+
+<%= render partial: "form", collection: @connections, as: :connection %>
+
+<% if @connections.none? %>
+  <p class="empty-section">You haven't connected with any schools yet. But don't worry, hold onto your seat!</p>
+<% end %>

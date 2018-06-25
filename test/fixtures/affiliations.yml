@@ -1,0 +1,11 @@
+high_school_coach_affiliation:
+  coach: high_school_coach
+  organization: high_school
+  organization_type: HighSchool
+  organization_approved: true
+
+college_coach_affiliation:
+  coach: college_coach
+  organization: college
+  organization_type: College
+  organization_approved: true

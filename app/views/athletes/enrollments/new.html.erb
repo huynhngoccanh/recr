@@ -1,0 +1,44 @@
+<% unless current_user.completed_registration? %>
+  <div class="field center_text">
+    <div class="col-1-3">
+      <p>1. Set up your profile</p>
+      <p><i class="fa fa-check-square-o fa-3x" aria-hidden="true"></i></p>
+    </div>
+    <div class="col-1-3">
+      <p>2. Get connected</p>
+      <p>
+      <i class="fa fa-square-o fa-3x" aria-hidden="true"></i>
+      </p>
+    </div>
+    <div class="col-1-3">
+      <p>3. Explore!</p>
+      <p>
+      <i class="fa fa-square-o fa-3x" aria-hidden="true"></i>
+      </p>
+    </div>
+  </div>
+<% end %>
+
+<div class="content center_text athletes_new">
+  <h1 class="max-width">Get Connected</h1>
+  <p>You need to be enrolled with a verified high school before colleges will trust your information. (but don't worry...*we* trust you!)</p>
+  <p>Don't see your High School? Add it below and and we'll get on it!</p>
+
+  <div data-behavior='athlete-enrollment-search'>
+    <%= form_for [@athlete, @enrollment] do |f| %>
+      <p>Select an option:</p>
+      <%= select_tag "enrollment[high_school_id]", nil, data: { behavior: "athlete-enrollment-select", url: high_schools_autocomplete_path}%>
+      <%= f.submit "Enroll" %>
+    <% end %>
+  </div>
+  <div data-behavior='athlete-enrollment-add-high-school' style="display:none;">
+    <%= link_to "#", data: {behavior: "athlete-enrollment-cancel"} do %>
+      <p>Cancel/Back to Search</p>
+    <% end %>
+    <br />
+    <h2>Add Your High School</h2>
+    <div data-behavior="athlete-enrollment-high-school-form">
+      <%= render partial: "high_school_form" %>
+    </div>
+  </div>
+</div>

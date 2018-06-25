@@ -1,0 +1,20 @@
+<h1>Your Enrollment</h1>
+
+<% if user.profile.high_school.present? %>
+  <p>Currently enrolled with <%= current_user.profile.high_school.name %></p>
+  <% if current_user.profile.enrollment.high_school_approved? %>
+    <p>Your enrollment has been approved.</p>
+  <% else %>
+    <p>Your enrollment is pending approval.</p>
+  <% end %>
+
+  <%= link_to athlete_enrollment_path(current_user.profile, current_user.profile.enrollment), method: :delete, data: {confirm: "Cancelling your enrollment isn't reversible. Are you sure?"} do %>
+    <p>
+      Cancel My Enrollment
+    </p>
+  <% end %>
+<% else %>
+  <p>You aren't currently enrolled in a high school. <%= link_to "Enroll Here", new_athlete_enrollment_path(user.profile) %></p>
+<% end %>
+
+<br />

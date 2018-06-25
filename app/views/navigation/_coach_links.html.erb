@@ -1,0 +1,10 @@
+<% if current_user.profile.school&.present? %>
+  <li><%= link_to "School Profile", current_user.profile.school %></li>
+<% end %>
+
+<li><%= link_to "Your Profile", edit_coach_path(current_user.profile) %></li>
+
+<% if current_user.college_coach? %>
+  <li><%#= link_to "Messages", [:edit, current_user.profile.conversable, :conversations] %></li>
+  <li><%= link_to "Messages", "/conversations" %></li>
+<% end %>

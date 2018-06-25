@@ -1,0 +1,5 @@
+<div data-id="<%= awesome_highlight.id %>">
+  <%= link_to "Edit", edit_athlete_administration_highlight_path(@high_school, :ad, awesome_highlight), remote: true %>
+  <%= link_to "Destroy", athlete_administration_highlight_path(@high_school, awesome_highlight), method: :delete, data: { confirm: "Are you sure?", remote: true } %>
+  <%= render partial: "highlight", locals: {awesome_highlight: awesome_highlight } %>
+</div>

@@ -1,0 +1,26 @@
+<div class="mobile-nav-btn-wrap">
+  <div id="mobile-nav-btn" data-behavior="openMobileMenu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<div class="mobile-nav">
+  <ul>
+    <% unless user_signed_in? %>
+      <li><%= link_to "Sign Up &nbsp; / &nbsp; ".html_safe, new_user_registration_path %> <%= link_to "Sign In", new_user_session_path %></li>
+    <% else %>
+      <%= render "navigation/notification_badge" %>
+      <%= render "navigation/#{current_user.profile.class.to_s.underscore}_links" if current_user.profiled? %>
+      <li><%= link_to "Activity", notifications_path %></li>
+      <%= render "navigation/admin_links" if current_user.admin? %>
+      <li><%= link_to "Account", edit_user_registration_path %></li>
+    <% end %>
+    <li><%= link_to_unless_current "Athletes", athletes_path %></li>
+    <li><%= link_to_unless_current "Film Room", search_highlights_path %></li>
+    <li><%= link_to_unless_current "Schools", schools_path %></li>
+    <% if user_signed_in? %>
+      <li class="light"><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+    <% end %>
+  </ul>
+</div>

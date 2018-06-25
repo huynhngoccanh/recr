@@ -1,0 +1,70 @@
+<% if @stat_board.new_position_allowed? %>
+  <%= link_to "Add Position <i class='fa fa-plus'></i>".html_safe, edit_athlete_stats_path(state: "add_position"), :class => 'add_btn', remote: true %>
+<% end %>
+
+<div class="athleteStats">
+    <div class="statsNavigation">
+        <ul class="statsNavigation_seasons"> <!-- Seasons stats navigation -->
+            <% @stat_board.seasons.each do |season| %>
+              <%= link_to edit_athlete_stats_path(@athlete, position: @stat_board.selected_position.name, season: season.year ), remote: true do %>
+                <li class="<%= season.status %>"><%= season.year %></li>
+              <% end %>
+            <% end %>
+        </ul>
+
+        <div class="statsNavigation_positions"> <!-- Positions stats navigation -->
+            <ul>
+                <% @stat_board.positions.each do | position | %>
+                  <%= link_to edit_athlete_stats_path(@athlete, position: position.name), remote: true do %>
+                    <li class="<%= "active" if position.active? %>">
+                        <%= position.abbreviation %>
+                    </li>
+                  <% end %>
+                <% end %>
+            </ul>
+            <%= link_to "Delete <i class='fa fa-close'></i>".html_safe, athlete_stat_path(id: @stat_board.position.position_name), method: :delete, :class => 'delete_btn', data: {confirm: "Are you sure you want to delete this position?", remote: true} %>
+        </div>
+    </div>
+
+    <!-- Load primary position stats by default -->
+    <div class="gameStats" data-behavior="resultsDisplay">
+      <%= render partial: "athletes/stats/form", locals: { stat: @stat_board.stat, position: @stat_board.position } %>
+    </div>
+
+
+
+  <div class="performanceStats-form ">
+    <!-- Strength and Speed stats -->
+
+    <%= form_for @athlete, remote: true do |f| %>
+    <div class="row clearfix small-stats">
+      <div class="col-1-5">    
+        <span class="athleteStats_number"><%= f.text_field :bench_press, min: 0, placeholder: "0"%></span>
+        <%= f.label :bench %>
+      </div>
+      <div class="col-1-5">
+        <span class="athleteStats_number"><%= f.text_field :deadlift, min: 0, placeholder: "0"%></span>
+        <%= f.label :deadlift%>
+      </div>
+      <div class="col-1-5">     
+        <span class="athleteStats_number"><%= f.text_field :squat, min: 0, placeholder: "0"%></span>
+        <%= f.label :squat %>
+      </div>
+      <div class="col-1-5">
+        <span class="athleteStats_number"><%= f.text_field :forty_yard_dash, min: 0, step: "any", placeholder: "0"%></span>
+        <%= f.label '40 yd' %>
+      </div>
+      <div class="col-1-5">
+        <span class="athleteStats_number"><%= f.text_field :hundred_yard_dash, min: 0, step: "any", placeholder: "0"%></span>
+        <%= f.label '100 yd' %>
+      </div>
+    </div><!-- end row -->
+    <%= f.button "Update Physical Stats", class: "primary_btn", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Updating..."} %>
+  <% end %>
+
+</div>
+
+
+</div><!-- End .athleteStats -->
+
+

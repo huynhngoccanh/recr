@@ -1,0 +1,21 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "high_schools/layout/jumbotron", locals: {presenter: @high_school_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "high_schools/layout/navigation/administration_links", locals: {presenter: @high_school_profile_presenter} %>
+<% end %>
+
+<h1>Recent Invitations</h1>
+<p><i>Summary of the last 5 invitations:</i></p>
+<ul>
+  <% @high_school.invited_users.last(5).each do |user| %>
+    <% if user.invitation_accepted_at.present? %>
+      <li><%= user.name %> accepted an invitation <%= time_ago_in_words(user.invitation_accepted_at) %> ago </li>
+    <% else %>
+      <li>Invited <%= user.name %> <%= time_ago_in_words(user.invitation_created_at) %> ago </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to "+ Add People", [@high_school, :administration, :athlete_invitations], class: "primary_btn" %>

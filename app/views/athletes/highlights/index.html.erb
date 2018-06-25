@@ -1,0 +1,16 @@
+<%= content_for :jumbotron do %>
+  <%= render partial: "athletes/layout/jumbotron", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<%= content_for :navigation_links do %>
+  <%= render partial: "athletes/layout/navigation/public_links", locals: {presenter: @athlete_profile_presenter} %>
+<% end %>
+
+<h3 class="dashboard_section-title">Highlights</h3>
+<% if @highlights.none? %>
+  <p class="empty-section">No videos have been added yet, but stay tuned!</p>
+<% end %>
+
+<%= render partial: "highlight", collection: @highlights, as: :awesome_highlight %>
+
+<%= paginate @highlights %>

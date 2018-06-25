@@ -1,0 +1,7 @@
+<div>
+  <%= select_tag "new_position_select", options_for_select(Position.abbreviated_options), data: {behavior: "load-position-form" }%>
+</div>
+
+<div data-behavior="position-form">
+  <%= render "athletes/positions/quarterbacks/form" %>
+</div>

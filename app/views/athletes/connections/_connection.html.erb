@@ -1,0 +1,22 @@
+<div data-id="<%= connection.id %>" class="athlete_connection flex-center-v">
+  <div class="athlete_connection-thumb">
+    <%= link_to connection.college do %>
+      <%= image_tag connection.college.logo %>
+    <% end %>
+  </div>
+  <div class="athlete_connection-name">
+    <span><%= connection.college.name %></span>
+    <div class="athlete_connection-level">
+      <ul>
+        <li>
+          <%= label_tag "committed" %>
+          <%= check_box_tag "committed", "committed", connection.committed, disabled: true %>
+        </li>
+        <li>
+          <%= label_tag "LOI Signed" %>
+          <%= check_box_tag "LOI signed", "letter_of_intent_signed", connection.letter_of_intent_signed, disabled: true %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

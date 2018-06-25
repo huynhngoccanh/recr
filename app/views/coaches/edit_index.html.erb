@@ -1,0 +1,7 @@
+<% if @school.coaches.count > 1 %>
+  <p>Drag and drop to change the order displayed</p>
+<% end %>
+
+<div data-behavior="orderable" data-order-url="<%= order_coaches_path%>">
+  <%= render partial: "preview", collection: @coaches, as: :coach %>
+</div>
